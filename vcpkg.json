@@ -5,7 +5,11 @@
     "features": {
       "interface": {
         "description": "Build interface library",
-        "dependencies": ["boost-header"]
+        "dependencies": [
+          "boost-headers",
+          "boost-asio",
+          "boost-interprocess"
+        ]
       },
       "tools": {
         "description": "Build GUI and driver daemons",
