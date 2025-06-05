@@ -1,0 +1,25 @@
+/*
+ * Copyright 2025 Ingemar Hedvall
+ * SPDX-License-Identifier: MIT
+ */
+/**
+\mainpage Bus Message Interface Library
+
+##Summary
+The C++ library defines message interface to the most common automotive
+bus messages.
+The library defines a class interface against each message and how to
+serialize the message to a byte array.
+These byte arrays can then be sent through shared memory or TCP/IP.
+
+The library defines messages for the following buses.
+- CAN
+- LIN
+- FlexRay
+- MOST
+- ETH (Ethernet)
+
+*/
+
+
+

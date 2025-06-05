@@ -1,0 +1,15 @@
+{
+  "name": "bus-message-lib",
+  "version": "1.0",
+  "dependencies": [],
+    "features": {
+      "interface": {
+        "description": "Build interface library",
+        "dependencies": ["boost-header"]
+      },
+      "tools": {
+        "description": "Build GUI and driver daemons",
+        "dependencies": ["wxwidgets"]
+      }
+  }
+}
