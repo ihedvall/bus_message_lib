@@ -8,9 +8,12 @@ project(TestBusMessage
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(test-bus-message
-        test_ibusmessage.cpp
-        test_ibusmessagequeue.cpp
-        test_ibusmessagebroker.cpp)
+        src/test_ibusmessage.cpp
+        src/test_ibusmessagequeue.cpp
+        src/test_ibusmessagebroker.cpp
+        src/test_buslogstream.cpp
+        src/test_simulatebroker.cpp
+        src/test_littlebuffer.cpp)
 
 target_include_directories(test-bus-message PRIVATE
         ../src ../include

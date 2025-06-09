@@ -5,6 +5,7 @@
 
 #pragma once
 #include <cstdint>
+#include <memory>
 #include <vector>
 
 
@@ -50,6 +51,8 @@ public:
   IBusMessage() = default;
   explicit IBusMessage(BusMessageType type);
   virtual ~IBusMessage() = default;
+
+  static std::shared_ptr<IBusMessage> Create(BusMessageType type);
 
   virtual void ToRaw(std::vector<uint8_t>& dest) const;
   virtual void FromRaw(const std::vector<uint8_t>& source);

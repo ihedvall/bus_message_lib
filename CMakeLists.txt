@@ -63,6 +63,12 @@ add_library(bus-message-lib
         include/bus/ibusmessagequeue.h
         src/ibusmessagebroker.cpp
         include/bus/ibusmessagebroker.h
+        src/simulatebroker.cpp
+        include/bus/simulatebroker.h
+        src/simulatequeue.cpp
+        src/simulatequeue.h
+        src/buslogstream.cpp
+        include/bus/buslogstream.h
 )
 
 target_include_directories(bus-message-lib PUBLIC

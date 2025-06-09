@@ -5,6 +5,9 @@
 #include <thread>
 
 #include "bus/ibusmessagequeue.h"
+#include "bus/buslogstream.h"
+
+#include "littlebuffer.h"
 
 namespace bus {
 
@@ -21,6 +24,21 @@ void IBusMessageQueue::Push(const std::shared_ptr<IBusMessage>& message) {
     queue_.push(message);
   }
   std::this_thread::yield();
+}
+
+void IBusMessageQueue::Push(const std::vector<uint8_t>& message_buffer) {
+
+  // Convert to byte array to message
+  IBusMessage header;
+  header.FromRaw(message_buffer);
+  auto message = IBusMessage::Create(header.Type());
+  if (!message) {
+    BUS_ERROR() << "Unknown IBusMessage header type "
+        << static_cast<int>(header.Type());
+    return;
+  }
+  message->FromRaw(message_buffer);
+  Push(message);
 }
 
 std::shared_ptr<IBusMessage> IBusMessageQueue::Pop() {
@@ -52,6 +70,9 @@ bool IBusMessageQueue::Empty() const {
   std::lock_guard<std::mutex> queue_lock(queue_mutex_);
   return queue_.empty();
 }
+
+void IBusMessageQueue::Start() {}
+void IBusMessageQueue::Stop() {}
 
 void IBusMessageQueue::Clear() {
   while (!Empty()) {

@@ -18,8 +18,8 @@ public:
   IBusMessageBroker() = default;
   virtual ~IBusMessageBroker() = default;
 
-  [[nodiscard]] std::shared_ptr<IBusMessageQueue> CreatePublisher();
-  [[nodiscard]] std::shared_ptr<IBusMessageQueue> CreateSubscriber();
+  virtual [[nodiscard]] std::shared_ptr<IBusMessageQueue> CreatePublisher();
+  virtual [[nodiscard]] std::shared_ptr<IBusMessageQueue> CreateSubscriber();
 
   void DetachPublisher(const std::shared_ptr<IBusMessageQueue>& publisher);
   void DetachSubscriber(const std::shared_ptr<IBusMessageQueue>& subscriber);
@@ -27,8 +27,8 @@ public:
   [[nodiscard]] size_t NofPublishers() const;
   [[nodiscard]] size_t NofSubscribers() const;
 
-  void Start();
-  void Stop();
+  virtual void Start();
+  virtual void Stop();
 
 protected:
   std::vector<std::shared_ptr<IBusMessageQueue>> publishers_;

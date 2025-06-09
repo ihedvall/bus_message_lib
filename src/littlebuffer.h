@@ -5,11 +5,10 @@
 
 #pragma once
 
-#include <cstddef>
 #include <cstdint>
-#include <cstring>
 #include <vector>
 #include <array>
+#include <bit>
 
 namespace bus {
 
@@ -39,7 +38,8 @@ class LittleBuffer {
 
 template <typename T>
 LittleBuffer<T>::LittleBuffer(const T& value) {
-  if (constexpr int num = 1;*(char*) &num == 0) { // Computer uses big endian
+  if (constexpr bool big_endian = std::endian::native == std::endian::big;
+    big_endian) { // Computer uses big endian
     std::array<uint8_t, sizeof(T)> temp = {0};
     memcpy(temp.data(), &value, sizeof(T));
     for (size_t index = sizeof(T); index > 0; --index) {
@@ -53,7 +53,7 @@ LittleBuffer<T>::LittleBuffer(const T& value) {
 template <typename T>
 LittleBuffer<T>::LittleBuffer(const std::vector<uint8_t>& buffer,
                               size_t offset) {
-    memcpy(buffer_.data(), buffer.data() + offset, sizeof(T));
+  memcpy(buffer_.data(), buffer.data() + offset, sizeof(T));
 }
 
 template <typename T>
@@ -72,9 +72,10 @@ size_t LittleBuffer<T>::size() const {
 
 template <typename T>
 T LittleBuffer<T>::value() const {
-  std::array<uint8_t, sizeof(T)> temp = {0};
-  if (constexpr int num = 1; *(char*) &num == 0) {
 
+  std::array<uint8_t, sizeof(T)> temp = {0};
+  if (  constexpr bool big_endian = std::endian::native == std::endian::big;
+    big_endian) {
     for (size_t index = sizeof(T); index > 0; --index) {
       temp[sizeof(T) - index] = buffer_[index - 1];
     }

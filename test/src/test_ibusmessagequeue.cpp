@@ -105,7 +105,6 @@ TEST(IBusMessageQueue, TestOneInTenOut) {
     subscriber = std::thread(&ReadMessage);
   }
   auto publisher = std::thread(&WriteMessage);
-  ;
 
   size_t timeout = 0;
   while (kNofMessages < kMaxMessage && timeout < 100) {
@@ -122,7 +121,6 @@ TEST(IBusMessageQueue, TestOneInTenOut) {
 }
 
 TEST(IBusMessageQueue, TestTenInTenOut) {
-
   kNofMessages= 0;
   kStopTread = false;
 

@@ -2,6 +2,7 @@
 * Copyright 2025 Ingemar Hedvall
 * SPDX-License-Identifier: MIT
  */
+
 #include <chrono>
 
 #include <gtest/gtest.h>

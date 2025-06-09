@@ -18,6 +18,7 @@ public:
   virtual ~IBusMessageQueue();
 
   void Push(const std::shared_ptr<IBusMessage>& message);
+  void Push(const std::vector<uint8_t>& message_buffer);
 
   std::shared_ptr<IBusMessage> Pop();
 
@@ -26,6 +27,9 @@ public:
   [[nodiscard]] size_t Size() const;
 
   [[nodiscard]] bool Empty() const;
+
+  virtual void Start();
+  virtual void Stop();
 
   void Clear();
 private:
