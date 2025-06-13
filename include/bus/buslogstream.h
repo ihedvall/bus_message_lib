@@ -8,6 +8,7 @@
 #include <cstdint>
 #include <string_view>
 #include <string>
+#include <atomic>
 #include <sstream>
 #include <source_location>
 #include <functional>
@@ -72,8 +73,6 @@ private:
                         BusLogSeverity severity,
                         const std::string& text);
 };
-
-
 
 } // bus
 
