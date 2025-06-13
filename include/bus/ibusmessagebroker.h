@@ -27,8 +27,8 @@ public:
   void MemorySize(uint32_t size) {memory_size_ = size;}
   [[nodiscard]] uint32_t MemorySize() const { return memory_size_;}
 
-  virtual [[nodiscard]] std::shared_ptr<IBusMessageQueue> CreatePublisher();
-  virtual [[nodiscard]] std::shared_ptr<IBusMessageQueue> CreateSubscriber();
+  [[nodiscard]] virtual std::shared_ptr<IBusMessageQueue> CreatePublisher();
+  [[nodiscard]] virtual std::shared_ptr<IBusMessageQueue> CreateSubscriber();
 
   void DetachPublisher(const std::shared_ptr<IBusMessageQueue>& publisher);
   void DetachSubscriber(const std::shared_ptr<IBusMessageQueue>& subscriber);
