@@ -22,9 +22,8 @@ class SimulateQueue;
 
 class SimulateBroker : public IBusMessageBroker {
 public:
-  SimulateBroker() = delete;
-  explicit SimulateBroker(uint32_t max_memory);
-  ~SimulateBroker() override;
+  SimulateBroker();
+   ~SimulateBroker() override;
 
   [[nodiscard]] std::shared_ptr<IBusMessageQueue> CreatePublisher() override;
   [[nodiscard]] std::shared_ptr<IBusMessageQueue> CreateSubscriber() override;

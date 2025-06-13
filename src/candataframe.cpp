@@ -3,8 +3,12 @@
 * SPDX-License-Identifier: MIT
  */
 #include <array>
+#include <stdexcept>
 
 #include "bus/candataframe.h"
+#include "bus/buslogstream.h"
+
+#include "../include/bus/littlebuffer.h"
 
 namespace {
 
@@ -24,13 +28,33 @@ constexpr size_t kR1Bit          = 9;
 constexpr std::array<size_t,16> kDataLengthCode =
     {0,1,2,3,4,5,6,7,8,12,16,20,24,32,48,64};
 
+constexpr uint32_t kCanDataFrameSize = 34;
+
 } // end namespace
 
 namespace bus {
 
-CanDataFrame::CanDataFrame() :
-IBusMessage(BusMessageType::CAN_DataFrame) {
+CanDataFrame::CanDataFrame() : IBusMessage(BusMessageType::CAN_DataFrame) {
+  Size(kCanDataFrameSize);
+}
 
+CanDataFrame::CanDataFrame(const std::shared_ptr<IBusMessage>& message)
+  : CanDataFrame() {
+  if (!message) {
+    BUS_ERROR() << "NULL message pointer. Invalid use of function.";
+    Valid(false);
+    return;
+  }
+
+  const auto* msg = dynamic_cast<const CanDataFrame*>(message.get());
+  if (msg == nullptr) {
+    BUS_ERROR() << "Invalid message pointer. Invalid use of function.";
+    Valid(false);
+    return;
+  }
+  if (this != msg) {
+    *this = *msg;;
+  }
 }
 
 void CanDataFrame::MessageId(uint32_t msg_id) {
@@ -42,6 +66,15 @@ void CanDataFrame::MessageId(uint32_t msg_id) {
 }
 
 uint32_t CanDataFrame::MessageId() const { return message_id_; }
+
+void CanDataFrame::CanId(uint32_t can_id) {
+  can_id &= ~kExtendedBit;
+  message_id_ &= kExtendedBit;
+  message_id_ |= can_id;
+  if (can_id > k11BitMask) {
+    message_id_ |= kExtendedBit;
+  }
+}
 
 uint32_t CanDataFrame::CanId() const { return message_id_ & ~kExtendedBit; }
 
@@ -81,6 +114,7 @@ void CanDataFrame::DataBytes(const std::vector<uint8_t>& data) {
   for (size_t index = 0; index < data.size() && index < data_bytes_.size(); ++index) {
     data_bytes_[index] = data[index];
   }
+  Size(kCanDataFrameSize + data_bytes_.size());
 }
 
 const std::vector<uint8_t>& CanDataFrame::DataBytes() const {
@@ -166,7 +200,7 @@ void CanDataFrame::R1(bool flag) {
 bool CanDataFrame::R1() const {
   return flags_.test(kR1Bit);
 }
-
+/*
 void CanDataFrame::BitPosition(uint16_t position) {
   bit_position_ = position;
 }
@@ -182,7 +216,7 @@ void CanDataFrame::ErrorType(CanErrorType error_type) {
 CanErrorType CanDataFrame::ErrorType() const {
   return error_type_;
 }
-
+*/
 void CanDataFrame::FrameDuration(uint32_t length) {
   frame_duration_ = length;
 }
@@ -196,143 +230,98 @@ size_t CanDataFrame::DlcToLength(uint8_t dlc) {
 }
 
 void CanDataFrame::ToRaw(std::vector<uint8_t>& dest) const {
-  size_t record_size = 0;
-  /*
-    case MessageType::CAN_DataFrame:
-      record_size = mandatory_only ? 23 - 8 : 28 - 8;
-      record_size += save_index ? 8 : max_data_length;
-      if (record.size() != record_size) {
-        record.resize(record_size);
-      }
-      record[8] = BusChannel();
-      MdfHelper::UnsignedToRaw(true, 0, 32, MessageId(), record.data() + 9);
-      record[13] =  Dlc();
-      record[14] = static_cast<uint8_t>(DataLength());
-      if (mandatory_only) {
-        if (save_index) {
-          // The data index have in reality not been updated at this point, but
-          // it will be updated when the sample buffer is written to the disc.
-          // We need to save the data bytes to a temp buffer (VLSD data).
-          sample.vlsd_data = true;
-          sample.vlsd_buffer = data_bytes_;
-          MdfHelper::UnsignedToRaw(true, 0, 64, data_index, record.data() + 15);
-        } else {
-          sample.vlsd_data = false;
-          sample.vlsd_buffer.clear();
-          sample.vlsd_buffer.shrink_to_fit();
-          for (size_t index = 0; index < max_data_length; ++index) {
-            record[15 + index] =
-                index < data_bytes_.size() ? data_bytes_[index] : 0xFF;
-          }
-        }
-        break;
-      }
-      record[13] |= (Dir() ? 0x01 : 0x00) << 4;
-      record[13] |= (Srr() ? 0x01 : 0x00) << 5;
-      record[13] |= (Edl() ? 0x01 : 0x00) << 6;
-      record[13] |= (Brs() ? 0x01 : 0x00) << 7;
-      record[15] = Esi() ? 0x01 : 0x00;
-      record[15] |= (WakeUp() ? 0x01 : 0x00) << 1;
-      record[15] |= (SingleWire() ? 0x01 : 0x00) << 2;
-      record[15] |= (R0() ? 0x01 : 0x00) << 3;
-      record[15] |= (R1() ? 0x01 : 0x00) << 4;
-      MdfHelper::UnsignedToRaw(true, 0, 32, FrameDuration(), record.data() + 16);
-
-      if (save_index) {
-        // The data index have in reality not been updated at this point, but
-        // it will be updated when the sample buffer is written to the disc.
-        // We need to save the data bytes to a temp buffer (VLSD data).
-        sample.vlsd_data = true;
-        sample.vlsd_buffer = data_bytes_;
-        MdfHelper::UnsignedToRaw(true, 0, 64, data_index, record.data() + 20);
-      } else {
-        sample.vlsd_data = false;
-        sample.vlsd_buffer.clear();
-        sample.vlsd_buffer.shrink_to_fit();
-        for (size_t index = 0; index < max_data_length; ++index) {
-          record[20 + index] =
-              index < data_bytes_.size() ? data_bytes_[index] : 0xFF;
-        }
-      }
-      break;
-
-    case MessageType::CAN_RemoteFrame:
-      record_size = mandatory_only ? 15 : 20 ;
-      if (record.size() != record_size) {
-        record.resize(record_size);
-      }
-      record[8] = BusChannel();
-      MdfHelper::UnsignedToRaw(true, 0, 32, MessageId(), record.data() + 9);
-      record[13] = Dlc() & 0x0F;
-      record[14] = static_cast<uint8_t>(DataLength());
-      if (mandatory_only) {
-        break;
-      }
-      record[13] |= (Dir() ? 0x01 : 0x00) << 4;
-      record[13] |= (Srr() ? 0x01 : 0x00) << 5;
-      record[13] |= (WakeUp() ? 0x01 : 0x00) << 6;
-      record[13] |= (SingleWire() ? 0x01 : 0x00) << 7;
-      record[15] = R0() ? 0x01 : 0x00;
-      record[15] |= (R1() ? 0x01 : 0x00) << 1;
-      MdfHelper::UnsignedToRaw(true, 0, 32, FrameDuration(), record.data() + 16);
-      break;
-
-    case MessageType::CAN_ErrorFrame:
-      record_size = 30 - 8;
-      record_size += save_index ? 8 : max_data_length;
-      if (record.size() < record_size) {
-        record.resize(record_size);
-      }
-      record[8] = BusChannel();
-      MdfHelper::UnsignedToRaw(true, 0, 32, MessageId(), record.data() + 9);
-      record[13] = Dlc() & 0x0F;
-      record[14] = DataLength();
-      record[13] |= (Dir() ? 0x01 : 0x00) << 4;
-      record[13] |= (Srr() ? 0x01 : 0x00) << 5;
-      record[13] |= (Edl() ? 0x01 : 0x00) << 6;
-      record[13] |= (Brs() ? 0x01 : 0x00) << 7;
-      record[15] = Esi() ? 0x01 : 0x00;
-      record[15] |= (WakeUp() ? 0x01 : 0x00) << 1;
-      record[15] |= (SingleWire() ? 0x01 : 0x00) << 2;
-      record[15] |= (R0() ? 0x01 : 0x00) << 3;
-      record[15] |= (R1() ? 0x01 : 0x00) << 4;
-      record[15] |= (static_cast<uint8_t>(ErrorType()) & 0x07) << 5;
-      MdfHelper::UnsignedToRaw(true, 0, 32, FrameDuration(), record.data() + 16);
-      MdfHelper::UnsignedToRaw(true, 0, 16, BitPosition(), record.data() + 20);
-
-      if (save_index) {
-        // The data index have in reality not been updated at this point, but
-        // it will be updated when the sample buffer is written to the disc.
-        // We need to save the data bytes to a temp buffer (VLSD data).
-        sample.vlsd_data = true;
-        sample.vlsd_buffer = data_bytes_;
-        MdfHelper::UnsignedToRaw(true, 0, 64, data_index, record.data() + 22);
-      } else {
-        sample.vlsd_data = false;
-        sample.vlsd_buffer.clear();
-        sample.vlsd_buffer.shrink_to_fit();
-        for (size_t index = 0; index < max_data_length; ++index) {
-          record[22 + index] =
-              index < data_bytes_.size() ? data_bytes_[index] : 0xFF;
-        }
-      }
-      break;
-
-
-    case MessageType::CAN_OverloadFrame:
-      record_size = 10;
-      if (record.size() != record_size) {
-        record.resize(record_size);
-      }
-      record[8] = BusChannel();
-      record[9] = Dir() ? 0x01 : 0x00;
-      break;
-
-    default:
-      break;
+  Valid(true);
+  Size(kCanDataFrameSize + DataLength());
+  IBusMessage::ToRaw(dest);
+  if (dest.size() != Size() || !Valid()) {
+    BUS_ERROR() << "Allocation or size mismatch. Size: " << Size() << "/"
+                << dest.size();
+    Valid(false);
+    return;
   }
-  */
+
+  LittleBuffer<uint32_t> message_id(MessageId());
+  std::copy_n(message_id.cbegin(), message_id.size(), dest.begin() + 18);
+
+  dest[22] = Dlc();
+  dest[23] = DataLength();
+
+  LittleBuffer<uint32_t> crc(Crc());
+  std::copy_n(crc.cbegin(), crc.size(), dest.begin() + 24);
+
+  dest[28] = Dir() ? 0x01 : 0x00;
+  dest[28] |= (Srr() ? 0x01 : 0x00) << 1;
+  dest[28] |= (Edl() ? 0x01 : 0x00) << 2;
+  dest[28] |= (Brs() ? 0x01 : 0x00) << 3;
+  dest[28] |= (Esi() ? 0x01 : 0x00) << 4;
+  dest[28] |= (Rtr() ? 0x01 : 0x00) << 5;
+  dest[28] |= (R0() ? 0x01 : 0x00) << 6;
+  dest[28] |= (R1() ? 0x01 : 0x00) << 7;
+
+  dest[29] = WakeUp() ? 0x01 : 0x00;
+  dest[29] |= (SingleWire() ? 0x01 : 0x00) << 8;
+
+  LittleBuffer<uint32_t> frame_duration(FrameDuration());
+  std::copy_n(frame_duration.cbegin(), frame_duration.size(),
+  dest.begin() + 30);
+
+  if (!data_bytes_.empty()) {
+    std::copy_n(data_bytes_.cbegin(), data_bytes_.size(),
+      dest.begin() + 34);
+  }
+
+}
+void CanDataFrame::FromRaw(const std::vector<uint8_t>& source) {
+  try {
+
+    Size(source.size());
+    if (Size() < kCanDataFrameSize) {
+     std::ostringstream error;
+     error << "CAN Data Frame message is to small. Size :"
+        << kCanDataFrameSize << "/" << Size();
+      throw std::runtime_error(error.str());
+    }
+
+    // Parse the header
+    Valid(true);
+    IBusMessage::FromRaw(source);
+
+    if (!Valid()) {
+      throw std::runtime_error("Message is not valid");
+    }
+
+    LittleBuffer<uint32_t> message_id(source, 18);
+    MessageId(message_id.value());
+
+    Dlc(source[22]);
+    DataLength(source[23]);
+
+    LittleBuffer<uint32_t> crc(source, 24);
+    Crc(crc.value());
+
+    Dir(source[28] & 0x01 != 0);
+    Srr(source[28] & 0x02 != 0);
+    Edl(source[28] & 0x04 != 0);
+    Brs(source[28] & 0x08 != 0);
+    Esi(source[28] & 0x10 != 0);
+    Rtr(source[28] & 0x20 != 0);
+    R0(source[28] & 0x40 != 0);
+    R1(source[28] & 0x80 != 0);
+
+    WakeUp(source[29] & 0x01 != 0);
+    SingleWire(source[29] & 0x02 != 0);
+
+    LittleBuffer<uint32_t> duration(source, 30);
+    FrameDuration(duration.value());
+
+    data_bytes_.resize(DataLength());
+    std::copy_n(source.cbegin() + 34, DataLength(),
+      data_bytes_.begin());
+  } catch (const std::exception& err) {
+    BUS_ERROR() << "Deserialization error. Error: " << err.what();
+    Valid(false);
+  }
 }
 
 
-}  // namespace mdf
+}  // namespace mdf  LittleBuffer<uint32_t> crc(source, 24);

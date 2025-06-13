@@ -4,7 +4,7 @@
  */
 #include <gtest/gtest.h>
 
-#include "littlebuffer.h"
+#include "../../include/bus/littlebuffer.h"
 
 namespace bus {
 TEST(LittleBuffer, TEST_UNIT32) {

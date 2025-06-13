@@ -38,12 +38,12 @@ enum class BusMessageType : uint16_t {
  * byte order.
  * <table>
  * <caption id="IBusMessageLayout">Bus Message Header</caption>
- * <tr><th>Byte (Bits) Offset</th><th>Size</th><th>Description</th></tr>
- * <tr><td>0</td><td>uint16_t</td><td>Type of Message (enumerate)</td></tr>
- * <tr><td>2</td><td>uint16_t</td><td>Version Number</td></tr>
- * <tr><td>4</td><td>uint32_t</td><td>Length of the message</td></tr>
- * <tr><td>8</td><td>uint64_t</td><td>Timestamp ns since 1970</td></tr>
- * <tr><td>16</td><td>uint16_t</td><td>Bus Channel</td></tr>
+ * <tr><th>Byte (Bits) Offset</th><th>Description</th><th>Size</th></tr>
+ * <tr><td>0</td><td>Type of Message (enumerate)</td><td>uint16_t</td></tr>
+ * <tr><td>2</td><td>Version Number</td><td>uint16_t</td></tr>
+ * <tr><td>4</td><td>Length of the message</td><td>uint32_t</td></tr>
+ * <tr><td>8</td><td>Timestamp ns since 1970</td><td>uint64_t</td></tr>
+ * <tr><td>16</td><td>Bus Channel</td><td>uint16_t</td></tr>
  * </table>
  */
 class IBusMessage {
@@ -63,6 +63,7 @@ public:
   [[nodiscard]] uint16_t Version() const { return version_; }
 
   [[nodiscard]] uint32_t Size() const { return size_;};
+  [[nodiscard]] bool Valid() const { return valid_;};
 
   void Timestamp(uint64_t timestamp) { timestamp_ = timestamp; }
   [[nodiscard]] uint64_t Timestamp() const { return timestamp_; }
@@ -71,15 +72,17 @@ public:
   [[nodiscard]] uint16_t BusChannel() const { return bus_channel_; }
 
 protected:
-  void Size(uint32_t size) {size_ = size;}
-
+  void Size(uint32_t size) const {size_ = size;}
+  void Valid(bool valid) const { valid_ = valid;}
 
 private:
   uint64_t timestamp_ = 0;
   BusMessageType type_ = BusMessageType::Unknown;
   uint16_t version_ = 0;
   uint8_t bus_channel_ = 0;
-  uint32_t size_ = 18;
+
+  mutable uint32_t size_ = 18;
+  mutable bool valid_ = true;
 
 };
 

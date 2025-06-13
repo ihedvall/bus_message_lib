@@ -13,7 +13,10 @@ add_executable(test-bus-message
         src/test_ibusmessagebroker.cpp
         src/test_buslogstream.cpp
         src/test_simulatebroker.cpp
-        src/test_littlebuffer.cpp)
+        src/test_littlebuffer.cpp
+        src/test_candataframe.cpp
+        src/test_factory.cpp
+        src/test_sharedmemorybroker.cpp)
 
 target_include_directories(test-bus-message PRIVATE
         ../src ../include
@@ -26,6 +29,7 @@ elseif (MSVC)
 endif ()
 
 target_link_libraries(test-bus-message PRIVATE bus-message-lib)
+target_link_libraries(test-bus-message PRIVATE bus-message-interface)
 target_link_libraries(test-bus-message PRIVATE GTest::gtest GTest::gtest_main)
 
 include(GoogleTest)

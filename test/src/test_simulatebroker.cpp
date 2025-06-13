@@ -9,6 +9,7 @@
 
 #include "bus/simulatebroker.h"
 #include "bus/buslogstream.h"
+#include "bus/candataframe.h"
 
 using namespace std::chrono_literals;
 
@@ -16,7 +17,8 @@ namespace bus {
 
 TEST(SimulateBroker, TestProperties) {
   BusLogStream::UserLogFunction = BusLogStream::BusConsoleLogFunction;
-  SimulateBroker broker(16'000);
+  SimulateBroker broker;
+  broker.MemorySize(16'000);
 
   EXPECT_EQ(broker.NofPublishers(), 0);
   EXPECT_EQ(broker.NofSubscribers(), 0);
@@ -51,7 +53,8 @@ TEST(SimulateBroker, TestOneInOneOut) {
   BusLogStream::ResetErrorCount();
   constexpr size_t max_messages = 100'000;
 
-  SimulateBroker broker(16'000);
+  SimulateBroker broker;
+  broker.MemorySize(16'000);
 
   auto publisher = broker.CreatePublisher();
   auto subscriber = broker.CreateSubscriber();
@@ -83,7 +86,8 @@ TEST(SimulateBroker, TestOneInTenOut) {
   BusLogStream::ResetErrorCount();
   constexpr size_t max_messages = 100'000;
 
-  SimulateBroker broker(16'000);
+  SimulateBroker broker;
+  broker.MemorySize(16'000);
 
   auto publisher = broker.CreatePublisher();
   std::array<std::shared_ptr<IBusMessageQueue>, 10> subscribers;
@@ -121,7 +125,8 @@ TEST(SimulateBroker, TestTenInTenOut) {
   BusLogStream::ResetErrorCount();
   constexpr size_t max_messages = 10'000;
 
-  SimulateBroker broker(16'000);
+  SimulateBroker broker;
+  broker.MemorySize(16'000);
 
   std::array<std::shared_ptr<IBusMessageQueue>, 10> publishers;
   for (auto& publisher : publishers) {
@@ -162,7 +167,62 @@ TEST(SimulateBroker, TestTenInTenOut) {
   for (auto& subscriber : subscribers) {
     EXPECT_EQ(subscriber->Size(), max_messages * publishers.size()) << channel_index++;
   }
+}
 
+TEST(SimulateBroker, TestDiffrentMessages) {
+  BusLogStream::UserLogFunction = BusLogStream::BusConsoleLogFunction;
+  BusLogStream::ResetErrorCount();
+
+  SimulateBroker broker;
+  broker.MemorySize(16'000);
+
+  auto publisher = broker.CreatePublisher();
+  auto subscriber = broker.CreateSubscriber();
+
+  broker.Start();
+  constexpr size_t max_messages = 2;
+  {
+    auto msg = std::make_shared<IBusMessage>();
+    publisher->Push(msg);
+  }
+  {
+    auto msg = std::make_shared<CanDataFrame>();
+    publisher->Push(msg);
+  }
+
+  size_t timeout = 0;
+  while (subscriber->Size() < max_messages && timeout < 100) {
+    std::this_thread::sleep_for(100ms);
+    ++timeout;
+  }
+  broker.Stop();
+
+  std::cout << "Time:[ms]" << timeout * 100 << std::endl;
+
+  EXPECT_EQ(publisher->Size(), 0);
+  EXPECT_EQ(subscriber->Size(), max_messages);
+
+  for (size_t index = 0; index < max_messages; ++index) {
+    const auto msg = subscriber->Pop();
+    ASSERT_TRUE(msg);
+    EXPECT_TRUE(msg->Valid());
+
+    switch (index) {
+      case 1: {
+        CanDataFrame msg1(msg);
+        EXPECT_TRUE(msg1.Valid());
+        break;
+        }
+
+      case 0:
+      default:
+        EXPECT_EQ(msg->Type(), BusMessageType::Unknown);
+        break;
+    }
+  }
+
+  EXPECT_EQ(BusLogStream::ErrorCount(), 0);
+  BusLogStream::UserLogFunction = BusLogStream::BusNoLogFunction;
 }
 
 }

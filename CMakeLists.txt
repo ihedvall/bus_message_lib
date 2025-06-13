@@ -29,7 +29,7 @@ endif()
 
 project(bus_message_lib
         VERSION 1.0
-        DESCRIPTION "Bus Message Interface Library"
+        DESCRIPTION "Bus MessageLibrary"
         LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 23)
@@ -76,7 +76,6 @@ target_include_directories(bus-message-lib PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
        )
 target_include_directories(bus-message-lib PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
-#target_include_directories(a2l PRIVATE ${Boost_INCLUDE_DIRS})
 
 cmake_print_properties(TARGETS bus-message-lib PROPERTIES INCLUDE_DIRECTORIES)
 
@@ -88,6 +87,10 @@ endif ()
 if (BUS_TEST)
     enable_testing()
     add_subdirectory(test)
+endif ()
+
+if (BUS_INTERFACE)
+    add_subdirectory(interface)
 endif ()
 
 if (DOXYGEN_FOUND AND BUS_DOC)

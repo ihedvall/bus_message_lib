@@ -4,12 +4,16 @@
  */
 
 #include <gtest/gtest.h>
-#include "bus/ibusmessage.h"
 
+#include "bus/ibusmessage.h"
+#include "bus/buslogstream.h"
 
 namespace bus {
 
 TEST(IBusMessage, TestProperties) {
+  BusLogStream::UserLogFunction = BusLogStream::BusConsoleLogFunction;
+  BusLogStream::ResetErrorCount();
+
   IBusMessage msg(BusMessageType::Unknown);
   EXPECT_EQ(msg.Type(), BusMessageType::Unknown);
 
@@ -23,9 +27,15 @@ TEST(IBusMessage, TestProperties) {
 
   msg.BusChannel(23);
   EXPECT_EQ(msg.BusChannel(), 23);
+
+  EXPECT_EQ(BusLogStream::ErrorCount(), 0);
+  BusLogStream::UserLogFunction = BusLogStream::BusNoLogFunction;
 }
 
 TEST(IBusMessage, TestSerialize) {
+  BusLogStream::UserLogFunction = BusLogStream::BusConsoleLogFunction;
+  BusLogStream::ResetErrorCount();
+
   std::vector<uint8_t> buffer;
   {
     IBusMessage msg(BusMessageType::Unknown);
@@ -47,5 +57,36 @@ TEST(IBusMessage, TestSerialize) {
     EXPECT_EQ(msg1.Timestamp(), 1234567);
     EXPECT_EQ(msg1.BusChannel(), 23);
   }
+
+  EXPECT_EQ(BusLogStream::ErrorCount(), 0);
+  BusLogStream::UserLogFunction = BusLogStream::BusNoLogFunction;
 }
+
+TEST(IBusMessage, TestValid) {
+  BusLogStream::UserLogFunction = BusLogStream::BusConsoleLogFunction;
+  BusLogStream::ResetErrorCount();
+
+  std::vector<uint8_t> buffer;
+  {
+    IBusMessage msg(BusMessageType::Unknown);
+    msg.Version(33);
+    msg.Timestamp(1234567);
+    msg.BusChannel(23);
+
+    msg.ToRaw(buffer);
+  }
+
+  buffer.resize(17); // Generate an invalid length
+
+  {
+    IBusMessage msg1;
+    msg1.FromRaw(buffer);
+
+    EXPECT_FALSE(msg1.Valid());
+  }
+
+  EXPECT_EQ(BusLogStream::ErrorCount(), 1);
+  BusLogStream::UserLogFunction = BusLogStream::BusNoLogFunction;
+}
+
 }

@@ -5,6 +5,7 @@
 
 #pragma once
 
+#include <cstring>
 #include <cstdint>
 #include <vector>
 #include <array>
@@ -18,7 +19,7 @@ class LittleBuffer {
   LittleBuffer() = default;
   explicit LittleBuffer(const T& value);
   LittleBuffer(const std::vector<uint8_t>& buffer, size_t offset);
-
+  LittleBuffer(const uint8_t* buffer, size_t offset);
 
   [[nodiscard]] auto cbegin() const {
     return buffer_.cbegin();
@@ -46,14 +47,22 @@ LittleBuffer<T>::LittleBuffer(const T& value) {
       buffer_[sizeof(T) - index] = temp[index - 1];
     }
   } else {
-    memcpy(buffer_.data(), &value, sizeof(T));
+    std::memcpy(buffer_.data(), &value, sizeof(T));
   }
 }
 
 template <typename T>
 LittleBuffer<T>::LittleBuffer(const std::vector<uint8_t>& buffer,
                               size_t offset) {
-  memcpy(buffer_.data(), buffer.data() + offset, sizeof(T));
+  std::memcpy(buffer_.data(), buffer.data() + offset, sizeof(T));
+}
+
+template <typename T>
+LittleBuffer<T>::LittleBuffer(const uint8_t* buffer,
+                              size_t offset) {
+  if (buffer != nullptr) {
+      std::memcpy(buffer_.data(), buffer + offset, sizeof(T));
+  }
 }
 
 template <typename T>
@@ -80,7 +89,7 @@ T LittleBuffer<T>::value() const {
       temp[sizeof(T) - index] = buffer_[index - 1];
     }
   } else {
-    memcpy(temp.data(), buffer_.data(), sizeof(T));
+    std::memcpy(temp.data(), buffer_.data(), sizeof(T));
   }
   const T* val = reinterpret_cast<const T*>(temp.data());
   return *val;

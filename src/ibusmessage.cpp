@@ -5,10 +5,12 @@
 #include <algorithm>
 #include <stdexcept>
 
+
 #include "bus/ibusmessage.h"
 #include "bus/buslogstream.h"
+#include "bus/candataframe.h"
 
-#include "littlebuffer.h"
+#include "../include/bus/littlebuffer.h"
 
 namespace bus {
 
@@ -17,7 +19,11 @@ IBusMessage::IBusMessage(BusMessageType type) : type_(type) {}
 std::shared_ptr<IBusMessage> IBusMessage::Create(BusMessageType type) {
   std::shared_ptr<IBusMessage> message;
   switch (type) {
+    case BusMessageType::CAN_DataFrame:
+      message = std::make_shared<CanDataFrame>();
+      break;
 
+    case BusMessageType::Unknown:
     default:
       message = std::make_shared<IBusMessage>(type);
       break;
@@ -26,11 +32,13 @@ std::shared_ptr<IBusMessage> IBusMessage::Create(BusMessageType type) {
 }
 
 void IBusMessage::ToRaw(std::vector<uint8_t>& dest) const {
+
   try {
     if (Size() < 18) {
       throw std::runtime_error(
           "IBusMessage::ToRaw() called with invalid length");
     }
+
     dest.resize(Size());
 
     LittleBuffer type(static_cast<uint16_t>(type_));
@@ -46,6 +54,7 @@ void IBusMessage::ToRaw(std::vector<uint8_t>& dest) const {
     std::copy_n(channel.cbegin(), channel.size(), dest.begin() + 16);
   } catch (const std::exception& err) {
     BUS_ERROR() << "Message serialization errror. Error: " << err.what();
+    Valid(false);
   }
 }
 
@@ -69,6 +78,7 @@ void IBusMessage::FromRaw(const std::vector<uint8_t>& source) {
 
   } catch (const std::exception& err) {
     BUS_ERROR() << "Message deserialization errror. Error: " << err.what();
+    Valid(false);
   }
 }
 

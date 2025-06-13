@@ -4,6 +4,11 @@
 */
 
 #pragma once
+
+#include <cstdint>
+#include <atomic>
+#include <thread>
+
 #include "bus/ibusmessagequeue.h"
 
 namespace bus {

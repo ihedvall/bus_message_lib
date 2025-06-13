@@ -14,6 +14,12 @@ namespace bus {
 
 TEST(IBusMessageBroker, TestProperties) {
   IBusMessageBroker broker;
+  broker.MemorySize(31'000);
+  EXPECT_EQ(broker.MemorySize(), 31'000);
+
+  broker.Name("Olle");
+  EXPECT_EQ(broker.Name(), "Olle");
+
   EXPECT_EQ(broker.NofPublishers(), 0);
   EXPECT_EQ(broker.NofSubscribers(), 0);
 

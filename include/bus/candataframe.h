@@ -11,7 +11,7 @@
  */
 #pragma once
 
-#include <bitset>
+ #include <bitset>
 #include <cstdint>
 
 #include "bus/ibusmessage.h"
@@ -38,16 +38,31 @@ enum class CanErrorType : uint8_t {
  * byte order.
  * <table>
  * <caption id="CanDataFrameLayout">CAN Data Frame Message Layout</caption>
- * <tr><th>Byte (Bits) Offset</th><th>Size</th><th>Description</th></tr>
- * <tr><td>0</td><td>uint16_t</td><td>Type of Message (enumerate)</td></tr>
- * <tr><td>2</td><td>uint16_t</td><td>Version Number</td></tr>
- * <tr><td></td><td>uint16_t</td><td>Version Number</td></tr>
+ * <tr><th>Byte (Bits) Offset</th><th>Description</th><th>Size</th></tr>
+ * <tr><td>0-17</td><td>Type of Message (enumerate)</td><td>18 bytes</td></tr>
+ * <tr><td>18</td><td>Message ID (CAN Id + IDE)</td><td>uint32_t</td></tr>
+ * <tr><td>22</td><td>DLC</td><td>uint8_t</td></tr>
+ * <tr><td>23</td><td>Data Length</td><td>uint8_t</td></tr>
+ * <tr><td>24</td><td>CRC</td><td>uint32_t</td></tr>
+ * <tr><td>28:0</td><td>Direction (Rx=0, Tx=1)</td><td>1-bit</td></tr>
+ * <tr><td>28:1</td><td>SRR</td><td>1-bit</td></tr>
+ * <tr><td>28:2</td><td>EDL</td><td>1-bit</td></tr>
+ * <tr><td>28:3</td><td>BRS</td><td>1-bit</td></tr>
+ * <tr><td>28:4</td><td>ESI</td><td>1-bit</td></tr>
+ * <tr><td>28:5</td><td>RTR</td><td>1-bit</td></tr>
+ * <tr><td>28:6</td><td>R0</td><td>1-bit</td></tr>
+ * <tr><td>28:7</td><td>R1</td><td>1-bit</td></tr>
+ * <tr><td>29:0</td><td>Wake Up</td><td>1-bit</td></tr>
+ * <tr><td>29:1</td><td>Single Wire</td><td>1-bit</td></tr>
+ * <tr><td>30</td><td>Frame Duration (ns)/td><td>uint32_t</td></tr>
+ * <tr><td>34</td><td>Data Bytes</td><td>Data Length bytes</td></tr>
  * </table>
  */
 class CanDataFrame : public IBusMessage  {
  public:
     CanDataFrame();
-
+    explicit CanDataFrame(CanErrorType type) = delete;
+    explicit CanDataFrame(const std::shared_ptr<IBusMessage>& message);
   /** \brief DBC message ID. Note that bit 31 indicate extended ID.
    *
    * The message ID is the CAN ID + highest bit 31 set if the CAN ID
@@ -64,6 +79,8 @@ class CanDataFrame : public IBusMessage  {
    * @return DBC message ID.
    */
   [[nodiscard]] uint32_t MessageId() const;
+
+  void CanId(uint32_t can_id);
 
   /** \brief 29/11 bit CAN message ID. Note that bit 31 is not used.
    *
@@ -160,13 +177,13 @@ class CanDataFrame : public IBusMessage  {
 
   void R1(bool flag); ///< Optional R1 flag.
   [[nodiscard]] bool R1() const; ///< Optional R1 flag
-
+/*
   void BitPosition(uint16_t position); ///< Error bit position (error frame).
   [[nodiscard]] uint16_t BitPosition() const; ///< Error bit position.
 
   void ErrorType(CanErrorType error_type); ///< Type of error.
   [[nodiscard]] CanErrorType ErrorType() const; ///< Type of error.
-
+*/
   void FrameDuration(uint32_t duration); ///< Frame duration in nano-seconds.
   [[nodiscard]] uint32_t FrameDuration() const; ///< Frame duration in nano-seconds.
 
@@ -174,6 +191,7 @@ class CanDataFrame : public IBusMessage  {
 
   /** \brief Creates an MDF sample record. Used primarily internally. */
   void ToRaw(std::vector<uint8_t>& dest) const override;
+  void FromRaw(const std::vector<uint8_t>& source) override;
  private:
   uint32_t message_id_ = 0; ///< Message ID with bit 31 set if extended ID.
   uint8_t  dlc_ = 0; ///< Data length code.

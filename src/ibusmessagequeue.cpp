@@ -7,21 +7,26 @@
 #include "bus/ibusmessagequeue.h"
 #include "bus/buslogstream.h"
 
-#include "littlebuffer.h"
+#include "bus/littlebuffer.h"
 
 namespace bus {
 
 IBusMessageQueue::~IBusMessageQueue() {
   std::lock_guard<std::mutex> queue_lock(queue_mutex_);
-  while (!queue_.empty() ) {
-    queue_.pop();
-  }
+  queue_.clear();
 }
 
 void IBusMessageQueue::Push(const std::shared_ptr<IBusMessage>& message) {
   {
     std::lock_guard<std::mutex> queue_lock(queue_mutex_);
-    queue_.push(message);
+    queue_.emplace_back(message);
+  }
+  std::this_thread::yield();
+}
+void IBusMessageQueue::PushFront(const std::shared_ptr<IBusMessage>& message) {
+  {
+    std::lock_guard<std::mutex> queue_lock(queue_mutex_);
+    queue_.emplace_front(message);
   }
   std::this_thread::yield();
 }
@@ -48,7 +53,7 @@ std::shared_ptr<IBusMessage> IBusMessageQueue::Pop() {
   }
 
   auto message_ptr = std::move(queue_.front());
-  queue_.pop();
+  queue_.pop_front();
   return message_ptr;
 }
 
@@ -75,9 +80,8 @@ void IBusMessageQueue::Start() {}
 void IBusMessageQueue::Stop() {}
 
 void IBusMessageQueue::Clear() {
-  while (!Empty()) {
-    Pop();
-  }
+  std::lock_guard<std::mutex> queue_lock(queue_mutex_);
+  queue_.clear();
 }
 
 } // bus

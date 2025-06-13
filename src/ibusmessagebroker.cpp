@@ -13,6 +13,14 @@ using namespace std::chrono;
 
 namespace bus {
 
+void IBusMessageBroker::Name(std::string name) {
+  name_ = std::move(name);
+}
+
+const std::string& IBusMessageBroker::Name() const {
+  return name_;
+}
+
 std::shared_ptr<IBusMessageQueue> IBusMessageBroker::CreatePublisher() {
   auto publisher =
     std::make_shared<IBusMessageQueue>();

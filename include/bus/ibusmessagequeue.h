@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include <queue>
+#include <deque>
 #include <memory>
 #include <mutex>
 #include "bus/ibusmessage.h"
@@ -19,7 +19,7 @@ public:
 
   void Push(const std::shared_ptr<IBusMessage>& message);
   void Push(const std::vector<uint8_t>& message_buffer);
-
+  void PushFront(const std::shared_ptr<IBusMessage>& message);
   std::shared_ptr<IBusMessage> Pop();
 
   [[nodiscard]] size_t MessageSize() const;
@@ -33,7 +33,7 @@ public:
 
   void Clear();
 private:
-  std::queue<std::shared_ptr<IBusMessage>> queue_;
+  std::deque<std::shared_ptr<IBusMessage>> queue_;
   mutable std::mutex queue_mutex_;
 };
 

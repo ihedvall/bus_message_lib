@@ -13,24 +13,16 @@
 
 #include "bus/simulatebroker.h"
 #include "simulatequeue.h"
-#include "littlebuffer.h"
+#include "../include/bus/littlebuffer.h"
 
 
 using namespace std::chrono_literals;
 
 namespace bus {
 
-SimulateBroker::SimulateBroker(uint32_t max_memory)
+SimulateBroker::SimulateBroker()
   : IBusMessageBroker() {
-  if (max_memory < 1'000) {
-    BUS_INFO() << "Very small memory allocated. Memory: " << max_memory;
-    max_memory = 0x10000;
-  }
-  try {
-    buffer_.resize(max_memory);
-  } catch (const std::exception& err) {
-    BUS_ERROR() << "Allocation error. Error: " << err.what();
-  }
+
 }
 
 SimulateBroker::~SimulateBroker() {
@@ -52,11 +44,25 @@ std::shared_ptr<IBusMessageQueue> SimulateBroker::CreateSubscriber() {
 }
 
 void SimulateBroker::Start() {
-  Stop();
+  Stop(); // Stop on-going threads
+
+  // Reset the channels in/out indexes.
   std::ranges::for_each(channels_, [] (Channel& channel) ->void {
     channel.used = false;
     channel.queue_index = 0;
   });
+
+  // Set up the simulated shared memory.
+  if (MemorySize() < 1'000) {
+    BUS_INFO() << "Very small memory allocated. Memory: " << MemorySize();
+    MemorySize( 0x10000);
+  }
+  try {
+    buffer_.resize(MemorySize());
+  } catch (const std::exception& err) {
+    BUS_ERROR() << "Allocation error. Error: " << err.what();
+    return;
+  }
 
   // Allocate the first array item for the publishers.
   // The other array items are used for the subscribers.
@@ -200,7 +206,7 @@ bool SimulateBroker::SubscriberPoll(SimulateQueue& queue) {
           << static_cast<int>(out_channel.queue_index)
           << ", Length: " << message_length
           << ", Size: " << buffer_.size();
-      out_channel.queue_index = buffer_.size();
+      out_channel.queue_index = in_channel.queue_index;
       return false;
     }
 
@@ -212,7 +218,7 @@ bool SimulateBroker::SubscriberPoll(SimulateQueue& queue) {
 
     } catch (const std::exception& err) {
       BUS_ERROR() << "Message copy failure. Error: " << err.what();
-      out_channel.queue_index = buffer_.size();
+      out_channel.queue_index = in_channel.queue_index;
       return false;
     }
   }
@@ -269,10 +275,6 @@ void SimulateBroker::HandleBufferFull() {
       ResetChannels();
     }
   }
-
-  if (timeout_ > 100) {
-
-  }
 }
 
 void SimulateBroker::ResetChannels() {
@@ -283,4 +285,5 @@ void SimulateBroker::ResetChannels() {
   buffer_full_= false;
   timeout_ = 0;
 }
+
 } // bus

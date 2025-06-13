@@ -4,10 +4,13 @@
 */
 
 #pragma once
+
+#include <cstdint>
 #include <memory>
 #include <vector>
 #include <atomic>
 #include <thread>
+#include <string>
 
 #include "ibusmessagequeue.h"
 
@@ -17,6 +20,12 @@ class IBusMessageBroker {
 public:
   IBusMessageBroker() = default;
   virtual ~IBusMessageBroker() = default;
+
+  void Name(std::string name);
+  [[nodiscard]] const std::string& Name() const;
+
+  void MemorySize(uint32_t size) {memory_size_ = size;}
+  [[nodiscard]] uint32_t MemorySize() const { return memory_size_;}
 
   virtual [[nodiscard]] std::shared_ptr<IBusMessageQueue> CreatePublisher();
   virtual [[nodiscard]] std::shared_ptr<IBusMessageQueue> CreateSubscriber();
@@ -39,6 +48,8 @@ protected:
 
   void Poll(IBusMessageQueue& queue) const;
 private:
+  std::string name_;
+  uint32_t memory_size_ = 16'000;
   void InprocessThread();
 };
 
