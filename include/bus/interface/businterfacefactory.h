@@ -16,6 +16,7 @@ enum class BrokerType : int {
   SimulateBrokerType,
   SharedMemoryBrokerType,
   TcpBrokerType,
+  TcpClientType
 };
 
 class BusInterfaceFactory {

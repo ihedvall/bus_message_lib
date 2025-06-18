@@ -89,9 +89,11 @@ void SimulateBroker::Start() {
       std::this_thread::yield();
     }
   });
+  connected_ = true;
 }
 
 void SimulateBroker::Stop() {
+  connected_ = false;
   // Stop all publishers
   std::ranges::for_each(publishers_, [] (auto& publisher) -> void {
     if (publisher) {

@@ -68,19 +68,21 @@ void SharedMemoryBroker::Start() {
     // array at startup.
     shm_->channels[0].used = true;
     shm_->initialized = true;
-    BUS_INFO() << "Shared memory initialized. Name: " << Name();
   } catch (std::exception &err) {
-    BUS_ERROR() << "Failed to create the shared memory. Name: " << Name();
+    BUS_ERROR() << "Failed to create the shared memory. Name: " << Name()
+      << " Error: " << err.what();
     shared_memory_object::remove(Name().c_str());
     return;
   }
 
   stop_master_task_ = false;
   master_task_ = std::thread(&SharedMemoryBroker::BrokerMasterTask, this);
+  connected_ = true;
   std::this_thread::yield();
 }
 
 void SharedMemoryBroker::Stop() {
+  connected_ = false;
   if (shm_ == nullptr) {
     return;
   }
@@ -101,9 +103,7 @@ std::shared_ptr<IBusMessageQueue> SharedMemoryBroker::CreatePublisher() {
   std::shared_ptr<IBusMessageQueue> pub;
   if (!Name().empty()) {
     auto shm = std::make_shared<SharedMemoryQueue>(Name(), true);
-    if (shm) {
-      pub = shm;
-    }
+    pub = std::move(shm);
   }
   // No need to add the message queue to a list;
   return pub;
@@ -113,9 +113,7 @@ std::shared_ptr<IBusMessageQueue> SharedMemoryBroker::CreateSubscriber() {
   std::shared_ptr<IBusMessageQueue> sub;
   if (!Name().empty()) {
     auto shm = std::make_shared<SharedMemoryQueue>(Name(), false);
-    if (shm) {
-      sub = shm;
-    }
+    sub = std::move(shm);
   }
   // No need to add the message queue to a list;
   return sub;
@@ -124,13 +122,14 @@ std::shared_ptr<IBusMessageQueue> SharedMemoryBroker::CreateSubscriber() {
 void SharedMemoryBroker::BrokerMasterTask() {
   while (!stop_master_task_ || shm_ == nullptr) {
     scoped_lock lock(shm_->memory_mutex);
-    shm_->buffer_full_condition.wait_for(lock, 1000ms, [&] () -> bool {
+    shm_->buffer_full_condition.wait_for(lock, 100ms, [&] () -> bool {
       return stop_master_task_.load() || shm_->buffer_full.load();
     } );
-    if (!stop_master_task_ && shm_->buffer_full) {
+    if (stop_master_task_) {
+      return;
+    }
+    if (shm_->buffer_full) {
       HandleBufferFull();
-    } else {
-      std::this_thread::sleep_for(100ms);
     }
   }
 }
@@ -140,13 +139,12 @@ void SharedMemoryBroker::HandleBufferFull() {
     return;
   }
   const uint32_t ref_index  = shm_->channels[0].queue_index;
-  uint32_t out_index  = 0;
+
   bool all_index_ok = std::ranges::all_of( shm_->channels,
     [&] (const Channel& channel)-> bool {
       if (!channel.used) {
         return true;
       }
-       out_index = channel.queue_index;
       return channel.queue_index == ref_index;
     });
 

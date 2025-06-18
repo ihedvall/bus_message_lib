@@ -21,8 +21,9 @@ namespace bus {
 
 SharedMemoryQueue::SharedMemoryQueue(const std::string& shared_memory_name,
   bool publisher )
-  : shared_memory_name_(shared_memory_name),
-    publisher_(publisher) {
+  : publisher_(publisher),
+    shared_memory_name_(shared_memory_name) {
+
 }
 
 SharedMemoryQueue::~SharedMemoryQueue() {
@@ -31,13 +32,15 @@ SharedMemoryQueue::~SharedMemoryQueue() {
 
 void SharedMemoryQueue::Start() {
   Stop();
+  state_ = SharedMemoryState::WaitOnSharedMemory;
+  operable_ = true;
+
+  IBusMessageQueue::Start();
   stop_thread_ = false;
   if (publisher_) {
-    operable_ = false;
     thread_ = std::thread(&SharedMemoryQueue::PublisherTask, this);
   } else {
     GetChannel();
-    operable_ = true;
     thread_ = std::thread(&SharedMemoryQueue::SubscriberTask, this);
   }
 }
@@ -47,61 +50,66 @@ void SharedMemoryQueue::Stop() {
   if (thread_.joinable()) {
     thread_.join();
   }
+  shm_ = nullptr;
+  region_.reset();
+  shared_memory_.reset();
+  state_ = SharedMemoryState::WaitOnSharedMemory;
+  operable_ = false;
+
+  IBusMessageQueue::Stop();
   stop_thread_ = false;
 }
 
 void SharedMemoryQueue::PublisherTask() {
   while (!stop_thread_ ) {
-    if (!Empty()) {
-      // Connect to shared memory
-      // Transfer messages
-      // Disconnect
-      try {
-        shared_memory_object shared_mem(open_only, shared_memory_name_.c_str(),
-          read_write);
-        mapped_region region(shared_mem, read_write);
-        if (region.get_address() == nullptr) {
-          throw std::runtime_error("No shared memory found");
-        }
-        auto *shm = static_cast<SharedMemoryObjects *>(region.get_address());
-        if (!shm->initialized) {
-          std::ostringstream err;
-          err << "Shared memory not initialized. Name: " << shared_memory_name_;
-          throw std::runtime_error(err.str());
-        }
-        if (!operable_) {
-          // The connection is back again.
-          BUS_INFO() << "The shared memory is connected. Name: " << shared_memory_name_;
-          operable_ = true;
-          // Create a delay so subscribers can allocate its channels.
-          std::this_thread::sleep_for(1000ms);
-        }
-        while (!stop_thread_ && !Empty() && !shm->buffer_full) {
-          auto msg = Pop();
-          if (!msg) {
-            continue;
-          }
-          bool message_sent;
-          {
-            scoped_lock lock(shm->memory_mutex);
-            message_sent = PublisherPoll(*shm, *msg);
-          }
-          if (!message_sent) {
-            PushFront(msg);
-          }
-        }
-        if (shm->buffer_full) {
-          shm->buffer_full_condition.notify_all();
-        }
-      } catch (const std::exception &err) {
-        if (operable_) {
-          BUS_ERROR() << "Shared memory failure. Error: " << err.what();
-          operable_ = false;
-        }
-      }
+    switch (state_) {
+      case SharedMemoryState::HandleMessages:
+        break;
+
+      case SharedMemoryState::WaitOnSharedMemory:
+      default:
+        ConnectToSharedMemory();
+        break;
+    }
+    if (state_ == SharedMemoryState::WaitOnSharedMemory) {
+      std::this_thread::sleep_for(1000ms);
+      continue;
     }
 
-    std::this_thread::sleep_for(10ms);
+    EmptyWait(10ms);
+    if (Empty()) {
+      continue;
+    }
+
+    // Connect to shared memory
+    // Transfer messages
+    // Disconnect
+    try {
+      while (!stop_thread_ && shm_ != nullptr && !Empty() && !shm_->buffer_full) {
+        auto msg = Pop();
+        if (!msg) {
+          continue;
+        }
+        bool message_sent;
+        {
+          scoped_lock lock(shm_->memory_mutex);
+          message_sent = PublisherPoll(*shm_, *msg);
+        }
+        if (!message_sent) {
+          PushFront(msg);
+        }
+      }
+      if (shm_->buffer_full) {
+        shm_->buffer_full_condition.notify_all();
+      }
+    } catch (const std::exception &err) {
+      if (operable_) {
+        BUS_ERROR() << "Shared memory failure. Name: "
+        << shared_memory_name_ << ", Error: " << err.what();
+        operable_ = false;
+      }
+      state_ = SharedMemoryState::WaitOnSharedMemory;
+    }
   }
 }
 
@@ -113,43 +121,40 @@ void SharedMemoryQueue::SubscriberTask() {
       continue;
     }
 
+    switch (state_) {
+      case SharedMemoryState::HandleMessages:
+        break;
+
+      case SharedMemoryState::WaitOnSharedMemory:
+      default:
+        ConnectToSharedMemory();
+        break;
+    }
+    if (state_ == SharedMemoryState::WaitOnSharedMemory) {
+      std::this_thread::sleep_for(1000ms);
+      continue;
+    }
+
     try {
-      shared_memory_object shared_mem(open_only, shared_memory_name_.c_str(),
-  read_write);
-      mapped_region region(shared_mem, read_write);
-      if (region.get_address() == nullptr) {
-        throw std::runtime_error("No shared memory found");
-      }
-      auto *shm = static_cast<SharedMemoryObjects *>(region.get_address());
-      if (!shm->initialized) {
-        std::ostringstream err;
-        err << "Shared memory not initialized. Name: " << shared_memory_name_;
-        throw std::runtime_error(err.str());
-      }
-      size_t no_activity = 0;
-      while(!stop_thread_ && no_activity < 100) {
-        bool more = true;
-        std::vector<uint8_t> message_buffer;
-        while (more && !stop_thread_) {
-          {
-            scoped_lock lock(shm->memory_mutex);
-            more = SubscriberPoll(*shm, message_buffer);
-          }
-          if (more && !message_buffer.empty()) {
-            Push(message_buffer);
-            no_activity = 0;
-          }
+      std::vector<uint8_t> message_buffer;
+      bool more = true;
+      while ( more && !stop_thread_) {
+        {
+          scoped_lock lock(shm_->memory_mutex);
+          more = SubscriberPoll(*shm_, message_buffer);
         }
-        ++no_activity;        ;
-        std::this_thread::sleep_for(10ms);
+        if (more && !message_buffer.empty()) {
+          Push(message_buffer);
+        }
       }
     } catch (const std::exception &err) {
       if (operable_) {
         BUS_ERROR() << "Shared memory failure. Error: " << err.what();
       }
       operable_ = false;
+      state_ = SharedMemoryState::WaitOnSharedMemory;
     }
-    std::this_thread::sleep_for(operable_ ? 10ms : 1000ms);
+    std::this_thread::sleep_for(10ms);
   }
 }
 
@@ -297,5 +302,47 @@ bool SharedMemoryQueue::SubscriberPoll(SharedMemoryObjects& shm,
 
   return true;
 }
+
+void SharedMemoryQueue::ConnectToSharedMemory() {
+  try {
+    shm_ = nullptr;
+    region_.reset();
+    shared_memory_.reset();
+
+    shared_memory_ = std::make_unique<shared_memory_object>(
+      open_only, shared_memory_name_.c_str(), read_write);
+    if (!shared_memory_) {
+      throw std::runtime_error("Shared memory allocation error (null)");
+    }
+    region_ = std::make_unique<mapped_region>(*shared_memory_, read_write);
+    if (!shared_memory_) {
+      throw std::runtime_error("Mapped region allocation error (null)");
+    }
+    if (region_->get_address() == nullptr) {
+      throw std::runtime_error("No shared memory found");
+    }
+    shm_ = static_cast<SharedMemoryObjects *>(region_->get_address());
+    if (!shm_->initialized) {
+      std::ostringstream err;
+      err << "Shared memory not initialized. Name: " << shared_memory_name_;
+      throw std::runtime_error(err.str());
+    }
+    if (!operable_) {
+      // The connection is back again.
+      BUS_INFO() << "Shared memory connected. Name: " << shared_memory_name_;
+      operable_ = true;
+    }
+    state_ = SharedMemoryState::HandleMessages;
+  } catch (const std::exception& err) {
+    if (operable_) {
+      // The connection is back again.
+      BUS_ERROR() << "Cannot connect to shared memory. Name: "
+        << shared_memory_name_ << ", Error: " << err.what();
+      operable_ = false;
+      state_ = SharedMemoryState::WaitOnSharedMemory;
+    }
+  }
+}
+
 
 } // bus

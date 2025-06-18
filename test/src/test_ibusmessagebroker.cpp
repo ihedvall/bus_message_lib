@@ -54,6 +54,7 @@ TEST(IBusMessageBroker, TestOneInOneOut) {
 
   broker.Start();
 
+
   for (size_t index = 0; index < max_messages; ++index) {
     auto msg = std::make_shared<IBusMessage>();
     publisher->Push(msg);
@@ -63,6 +64,8 @@ TEST(IBusMessageBroker, TestOneInOneOut) {
     std::this_thread::sleep_for(100ms);
     ++timeout;
   }
+  EXPECT_TRUE(broker.IsConnected());
+
   broker.Stop();
 
   std::cout << "Time:[ms]" << timeout * 100 << std::endl;

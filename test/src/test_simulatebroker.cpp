@@ -70,6 +70,7 @@ TEST(SimulateBroker, TestOneInOneOut) {
     std::this_thread::sleep_for(100ms);
     ++timeout;
   }
+  EXPECT_TRUE(broker.IsConnected());
   broker.Stop();
 
   std::cout << "Time:[ms]" << timeout * 100 << std::endl;

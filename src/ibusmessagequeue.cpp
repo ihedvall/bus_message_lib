@@ -5,6 +5,9 @@
 #include <thread>
 
 #include "bus/ibusmessagequeue.h"
+
+#include <queue>
+
 #include "bus/buslogstream.h"
 
 #include "bus/littlebuffer.h"
@@ -20,15 +23,17 @@ void IBusMessageQueue::Push(const std::shared_ptr<IBusMessage>& message) {
   {
     std::lock_guard<std::mutex> queue_lock(queue_mutex_);
     queue_.emplace_back(message);
+    queue_size_ = queue_.size();
   }
-  std::this_thread::yield();
+  queue_not_empty_.notify_one();
 }
 void IBusMessageQueue::PushFront(const std::shared_ptr<IBusMessage>& message) {
   {
     std::lock_guard<std::mutex> queue_lock(queue_mutex_);
     queue_.emplace_front(message);
+    queue_size_ = queue_.size();
   }
-  std::this_thread::yield();
+  queue_not_empty_.notify_one();
 }
 
 void IBusMessageQueue::Push(const std::vector<uint8_t>& message_buffer) {
@@ -47,14 +52,19 @@ void IBusMessageQueue::Push(const std::vector<uint8_t>& message_buffer) {
 }
 
 std::shared_ptr<IBusMessage> IBusMessageQueue::Pop() {
-  std::lock_guard<std::mutex> queue_lock(queue_mutex_);
-  if (queue_.empty()) {
-    return {};
-  }
+  std::shared_ptr<IBusMessage> message;
+  {
+    std::lock_guard<std::mutex> queue_lock(queue_mutex_);
+    if (!queue_.empty()) {
+      message = std::move(queue_.front());
+      queue_.pop_front();
+      queue_size_ = queue_.size();
+    } else {
+      queue_size_ = 0;
+    }
 
-  auto message_ptr = std::move(queue_.front());
-  queue_.pop_front();
-  return message_ptr;
+  }
+  return message;
 }
 
 size_t IBusMessageQueue::MessageSize() const {
@@ -67,21 +77,27 @@ size_t IBusMessageQueue::MessageSize() const {
 }
 
 size_t IBusMessageQueue::Size() const {
-  std::lock_guard<std::mutex> queue_lock(queue_mutex_);
-  return queue_.size();
+  return queue_size_;
 }
 
 bool IBusMessageQueue::Empty() const {
-  std::lock_guard<std::mutex> queue_lock(queue_mutex_);
-  return queue_.empty();
+  return queue_size_ == 0;
 }
 
-void IBusMessageQueue::Start() {}
-void IBusMessageQueue::Stop() {}
+void IBusMessageQueue::Start() {
+  std::lock_guard<std::mutex> queue_lock(queue_mutex_);
+  queue_.clear();
+  queue_size_ = 0;
+}
+
+void IBusMessageQueue::Stop() {
+  queue_not_empty_.notify_all(); // Just releases any waiting call
+}
 
 void IBusMessageQueue::Clear() {
   std::lock_guard<std::mutex> queue_lock(queue_mutex_);
   queue_.clear();
+  queue_size_ = 0;
 }
 
 } // bus

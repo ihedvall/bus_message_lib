@@ -19,13 +19,24 @@ add_library(bus-message-interface
         src/sharedmemorybroker.cpp
         src/sharedmemorybroker.h
         src/sharedmemoryqueue.cpp
-        src/sharedmemoryqueue.h)
+        src/sharedmemoryqueue.h
+        src/tcpmessagebroker.cpp
+        src/tcpmessagebroker.h
+        src/tcpmessageconnection.cpp
+        src/tcpmessageconnection.h
+        src/tcpmessageclient.cpp
+        src/tcpmessageclient.h
+)
 
 target_include_directories(bus-message-interface PUBLIC
         $<INSTALL_INTERFACE:include>
         $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>)
 
 target_include_directories(bus-message-interface PRIVATE ${Boost_INCLUDE_DIRS} )
+
+if (MSVC)
+  target_compile_definitions(bus-message-interface PRIVATE _WIN32_WINNT=0x0A00)
+endif ()
 
 cmake_print_properties(TARGETS bus-message-interface PROPERTIES INCLUDE_DIRECTORIES)
 cmake_print_variables(Boost_INCLUDE_DIRS Boost_INCLUDE_DIR)

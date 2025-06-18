@@ -69,6 +69,7 @@ TEST(SharedMemoryBroker, TestOneInOneOut) {
     BrokerType::SharedMemoryBrokerType);
   ASSERT_TRUE(broker);
   broker->Name("BusMemTest");
+  EXPECT_FALSE(broker->IsConnected());
   broker->Start();
 
   auto publisher = broker->CreatePublisher();
@@ -97,11 +98,20 @@ TEST(SharedMemoryBroker, TestOneInOneOut) {
     std::this_thread::sleep_for(100ms);
     ++timeout;
   }
+  EXPECT_TRUE(broker->IsConnected());
+
+  broker->Stop();
+  publisher->Stop();
+  subscriber->Stop();
 
   std::cout << "Time:[ms]" << timeout * 100 << std::endl;
 
   EXPECT_EQ(publisher->Size(), 0);
   EXPECT_EQ(subscriber->Size(), max_messages);
+
+  broker.reset();
+  publisher.reset();
+  subscriber.reset();
 
   EXPECT_EQ(BusLogStream::ErrorCount(), 0);
   BusLogStream::UserLogFunction = BusLogStream::BusNoLogFunction;

@@ -4,6 +4,8 @@
 */
 #include <chrono>
 #include <algorithm>
+#include <mutex>
+#include <vector>
 
 #include "bus/ibusmessagebroker.h"
 
@@ -21,46 +23,59 @@ const std::string& IBusMessageBroker::Name() const {
   return name_;
 }
 
+void IBusMessageBroker::Address(std::string address) {
+  address_ = std::move(address);
+}
+
+const std::string& IBusMessageBroker::Address() const {
+  return address_;
+}
+
+bool IBusMessageBroker::IsConnected() const {
+  return connected_;
+}
+
 std::shared_ptr<IBusMessageQueue> IBusMessageBroker::CreatePublisher() {
-  auto publisher =
-    std::make_shared<IBusMessageQueue>();
+  auto publisher = std::make_shared<IBusMessageQueue>();
+
+  std::lock_guard queue_lock(queue_mutex_);
   publishers_.emplace_back(publisher);
+
   return publisher;
 }
 
 std::shared_ptr<IBusMessageQueue> IBusMessageBroker::CreateSubscriber() {
   auto subscriber = std::make_shared<IBusMessageQueue>();
+
+  std::lock_guard queue_lock(queue_mutex_);
   subscribers_.emplace_back(subscriber);
+
   return subscriber;
 }
 
 void IBusMessageBroker::DetachPublisher(
     const std::shared_ptr<IBusMessageQueue>& publisher) {
-  auto itr = std::ranges::find_if(publishers_,
-    [&] (const auto& pub) -> bool {
-      return pub == publisher;
+  std::lock_guard queue_lock(queue_mutex_);
+  std::erase_if(publishers_,[&] (const auto& pub) -> bool {
+      return pub.get() == publisher.get();
     });
-  if (itr != publishers_.end()) {
-    publishers_.erase(itr);
-  }
 }
 
 void IBusMessageBroker::DetachSubscriber(
     const std::shared_ptr<IBusMessageQueue>& subscriber) {
-  auto itr = std::ranges::find_if(subscribers_,
-    [&] (const auto& sub) -> bool {
-      return sub == subscriber;
+  std::lock_guard queue_lock(queue_mutex_);
+  std::erase_if (subscribers_, [&] (const auto& sub) -> bool {
+      return sub.get() == subscriber.get();
     });
-  if (itr != subscribers_.end()) {
-    subscribers_.erase(itr);
-  }
 }
 
 size_t IBusMessageBroker::NofPublishers() const {
+  std::lock_guard queue_lock(queue_mutex_);
   return publishers_.size();
 }
 
 size_t IBusMessageBroker::NofSubscribers() const {
+  std::lock_guard queue_lock(queue_mutex_);
   return subscribers_.size();
 }
 
@@ -72,10 +87,11 @@ void IBusMessageBroker::Start() {
   // Start the working thread
   stop_thread_ = false;
   thread_ = std::thread(&IBusMessageBroker::InprocessThread, this);
-
+  connected_ = true;
 }
 
 void IBusMessageBroker::Stop() {
+  connected_ = false;
   stop_thread_ = true;
   if (thread_.joinable()) {
     thread_.join();
@@ -96,13 +112,16 @@ void IBusMessageBroker::Poll(IBusMessageQueue& queue) const {
   }
 }
 
-void IBusMessageBroker::InprocessThread() {
+void IBusMessageBroker::InprocessThread() const {
   while (!stop_thread_) {
-    for (auto& publisher : publishers_) {
-      if (stop_thread_ || !publisher) {
-        continue;
+    {
+      std::scoped_lock queue_lock(queue_mutex_);
+      for (auto& publisher : publishers_) {
+        if (stop_thread_ || !publisher) {
+          continue;
+        }
+        Poll(*publisher);
       }
-      Poll(*publisher);
     }
     sleep_for( 10ms);
   }

@@ -11,6 +11,7 @@
 
 #include <gtest/gtest.h>
 
+#include "bus/candataframe.h"
 #include "bus/ibusmessagequeue.h"
 
 using namespace std::chrono_literals;
@@ -18,24 +19,23 @@ using namespace std::chrono_literals;
 namespace {
 
 bus::IBusMessageQueue kQueue;
-constexpr size_t kMaxMessage = 10'000;
+constexpr size_t kMaxMessage = 100'000;
 std::atomic<size_t> kNofMessages = 0;
 std::atomic<bool> kStopTread = true;
 
 void WriteMessage() {
   for (size_t index = 0; index < kMaxMessage; ++index) {
-    auto msg = std::make_shared<bus::IBusMessage>();
+    auto msg = std::make_shared<bus::CanDataFrame>();
     kQueue.Push(msg);
+    std::this_thread::yield();
   }
 }
 
 void ReadMessage() {
   while (!kStopTread) {
-    auto msg = kQueue.Pop();
+    auto msg = kQueue.PopWait(100ms);
     if (msg) {
       ++kNofMessages;
-    } else {
-      std::this_thread::yield();
     }
   }
 }

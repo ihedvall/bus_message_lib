@@ -16,7 +16,8 @@ add_executable(test-bus-message
         src/test_littlebuffer.cpp
         src/test_candataframe.cpp
         src/test_factory.cpp
-        src/test_sharedmemorybroker.cpp)
+        src/test_sharedmemorybroker.cpp
+        src/test_tcpmessagebroker.cpp)
 
 target_include_directories(test-bus-message PRIVATE
         ../src ../include

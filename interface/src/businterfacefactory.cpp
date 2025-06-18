@@ -8,6 +8,8 @@
 #include "bus/simulatebroker.h"
 #include "bus/buslogstream.h"
 #include "sharedmemorybroker.h"
+#include "tcpmessagebroker.h"
+#include "tcpmessageclient.h"
 
 namespace bus {
 
@@ -16,6 +18,18 @@ std::unique_ptr<IBusMessageBroker> BusInterfaceFactory::CreateBroker(
   std::unique_ptr<IBusMessageBroker> broker;
 
   switch (type) {
+    case BrokerType::TcpClientType: {
+      auto tcp_client = std::make_unique<TcpMessageClient>();
+      broker = std::move(tcp_client);
+      break;
+    }
+
+    case BrokerType::TcpBrokerType: {
+      auto tcp_broker = std::make_unique<TcpMessageBroker>();
+      broker = std::move(tcp_broker);
+      break;
+    }
+
     case BrokerType::SimulateBrokerType: {
       auto simulate_broker = std::make_unique<SimulateBroker>();
       broker = std::move(simulate_broker);
