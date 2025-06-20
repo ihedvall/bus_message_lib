@@ -6,7 +6,6 @@
 #pragma once
 
 #include <memory>
-#include <cstdint>
 
 #include "bus/ibusmessagebroker.h"
 
@@ -15,8 +14,11 @@ namespace bus {
 enum class BrokerType : int {
   SimulateBrokerType,
   SharedMemoryBrokerType,
+  SharedMemoryServerType,
+  SharedMemoryClientType,
   TcpBrokerType,
-  TcpClientType
+  TcpServerType,
+  TcpClientType,
 };
 
 class BusInterfaceFactory {

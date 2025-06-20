@@ -26,6 +26,14 @@ add_library(bus-message-interface
         src/tcpmessageconnection.h
         src/tcpmessageclient.cpp
         src/tcpmessageclient.h
+        src/sharedmemoryserver.cpp
+        src/sharedmemoryserver.h
+        src/sharedmemorytxrxqueue.cpp
+        src/sharedmemorytxrxqueue.h
+        src/sharedmemoryclient.cpp
+        src/sharedmemoryclient.h
+        src/tcpmessageserver.cpp
+        src/tcpmessageserver.h
 )
 
 target_include_directories(bus-message-interface PUBLIC

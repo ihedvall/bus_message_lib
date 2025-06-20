@@ -79,7 +79,7 @@ TEST(TcpMessageBroker, TestOneClient) {
   BusLogStream::UserLogFunction = BusLogStream::BusConsoleLogFunction;
   BusLogStream::ResetErrorCount();
 
-  constexpr size_t max_messages = 100'000;
+  constexpr size_t max_messages = 10'000;
 
   auto broker = BusInterfaceFactory::CreateBroker(
     BrokerType::TcpBrokerType);

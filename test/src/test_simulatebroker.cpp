@@ -170,7 +170,7 @@ TEST(SimulateBroker, TestTenInTenOut) {
   }
 }
 
-TEST(SimulateBroker, TestDiffrentMessages) {
+TEST(SimulateBroker, TestDifferentMessages) {
   BusLogStream::UserLogFunction = BusLogStream::BusConsoleLogFunction;
   BusLogStream::ResetErrorCount();
 

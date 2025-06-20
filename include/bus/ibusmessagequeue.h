@@ -5,7 +5,9 @@
 
 #pragma once
 
+#include <cstdint>
 #include <deque>
+#include <vector>
 #include <memory>
 #include <mutex>
 #include <atomic>

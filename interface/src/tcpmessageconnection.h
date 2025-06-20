@@ -15,11 +15,14 @@
 namespace bus {
 
 class TcpMessageBroker;
+class TcpMessageServer;
 
 class TcpMessageConnection {
  public:
   TcpMessageConnection() = delete;
-  TcpMessageConnection(TcpMessageBroker& broker_,
+  TcpMessageConnection(TcpMessageBroker& broker,
+                         std::unique_ptr<boost::asio::ip::tcp::socket>& socket);
+  TcpMessageConnection(TcpMessageServer& server,
                          std::unique_ptr<boost::asio::ip::tcp::socket>& socket);
   virtual ~TcpMessageConnection();
 
@@ -27,7 +30,7 @@ class TcpMessageConnection {
 
  private:
 
-  TcpMessageBroker& broker_;
+  // TcpMessageBroker& broker_;
   std::unique_ptr<boost::asio::ip::tcp::socket> socket_;
 
   std::atomic<bool> stop_connection_thread_ = true;

@@ -17,6 +17,11 @@
 
 namespace bus {
 
+struct Channel {
+  bool used = false;
+  uint32_t queue_index = 0;
+};
+
 class IBusMessageBroker {
 public:
   IBusMessageBroker() = default;

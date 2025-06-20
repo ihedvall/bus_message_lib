@@ -17,11 +17,6 @@
 
 namespace bus {
 
-struct Channel {
-  bool used = false;
-  uint32_t queue_index = 0;
-};
-
 struct SharedMemoryObjects {
   std::atomic<bool> initialized = false; // Indicate that shared memory ready
   boost::interprocess::interprocess_mutex memory_mutex;
@@ -45,8 +40,6 @@ private:
   std::atomic<bool> stop_master_task_ = true;
   std::thread master_task_;
   std::time_t timeout_ = 0;
-
-  // Defines the shared memory objects
 
   SharedMemoryObjects* shm_ = nullptr;
   std::unique_ptr<boost::interprocess::shared_memory_object>  shared_memory_;

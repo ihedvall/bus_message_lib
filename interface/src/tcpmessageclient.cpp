@@ -37,6 +37,12 @@ void TcpMessageClient::Start() {
   DoSendMessage();
   client_thread_ = std::thread(&TcpMessageClient::ClientThread, this);
 
+  for (size_t timeout = 0; timeout < 20; timeout++) {
+    if (IsConnected()) {
+      break;
+    }
+    std::this_thread::sleep_for(100ms);
+  }
 }
 
 void TcpMessageClient::Stop() {

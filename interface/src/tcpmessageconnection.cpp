@@ -6,6 +6,7 @@
 
 #include "tcpmessageconnection.h"
 #include "tcpmessagebroker.h"
+#include "tcpmessageserver.h"
 #include "bus/buslogstream.h"
 #include "bus/littlebuffer.h"
 
@@ -15,16 +16,15 @@ using namespace boost::system;
 
 namespace bus {
 
-TcpMessageConnection::TcpMessageConnection(TcpMessageBroker& broker_,
+TcpMessageConnection::TcpMessageConnection(TcpMessageBroker& broker,
     std::unique_ptr<boost::asio::ip::tcp::socket>& socket)
-: broker_(broker_),
-  socket_(std::move(socket)) {
-  publisher_ = std::move(broker_.CreatePublisher());
+      : socket_(std::move(socket)) {
+  publisher_ = std::move(broker.CreatePublisher());
   if (publisher_) {
     publisher_->Start();
   }
 
-  subscriber_ = std::move(broker_.CreateSubscriber());
+  subscriber_ = std::move(broker.CreateSubscriber());
   if (subscriber_) {
     subscriber_->Start();
   }
@@ -34,6 +34,23 @@ TcpMessageConnection::TcpMessageConnection(TcpMessageBroker& broker_,
   connection_thread_ = std::thread(&TcpMessageConnection::ConnectionThread, this);
 }
 
+TcpMessageConnection::TcpMessageConnection(TcpMessageServer& server,
+    std::unique_ptr<boost::asio::ip::tcp::socket>& socket)
+      : socket_(std::move(socket)) {
+  publisher_ = std::move(server.IBusMessageBroker::CreatePublisher());
+  if (publisher_) {
+    publisher_->Start();
+  }
+
+  subscriber_ = std::move(server.IBusMessageBroker::CreateSubscriber());
+  if (subscriber_) {
+    subscriber_->Start();
+  }
+
+  DoReadSize();
+  stop_connection_thread_ = false;
+  connection_thread_ = std::thread(&TcpMessageConnection::ConnectionThread, this);
+}
 TcpMessageConnection::~TcpMessageConnection() {
   if (publisher_) {
     publisher_->Stop();
@@ -128,7 +145,6 @@ void TcpMessageConnection::ConnectionThread() {
         std::copy_n(length.cbegin(), length.size(), send_data_.data());
         std::copy_n(data.cbegin(), data.size(),
           send_data_.data() + length.size());
-        error_code error;
         socket_->send(buffer(send_data_));
 
       } catch (const std::exception& err) {

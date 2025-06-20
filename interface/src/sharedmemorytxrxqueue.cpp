@@ -2,52 +2,48 @@
 * Copyright 2025 Ingemar Hedvall
 * SPDX-License-Identifier: MIT
 */
-
 #include <chrono>
-#include <sstream>
-#include <utility>
 
-#include <boost/interprocess/mapped_region.hpp>
-#include <boost/interprocess/shared_memory_object.hpp>
-#include <boost/interprocess/sync/scoped_lock.hpp>
-
-
-#include "sharedmemoryqueue.h"
-#include "sharedmemorybroker.h"
+#include "sharedmemorytxrxqueue.h"
+#include "sharedmemoryserver.h"
 #include "bus/buslogstream.h"
 #include "bus/littlebuffer.h"
+
 using namespace std::chrono_literals;
 using namespace boost::interprocess;
 
 namespace bus {
 
-SharedMemoryQueue::SharedMemoryQueue(std::string  shared_memory_name,
-  bool publisher )
-  : publisher_(publisher),
+SharedMemoryTxRxQueue::SharedMemoryTxRxQueue(std::string shared_memory_name,
+  bool tx_queue, bool publisher )
+  : tx_queue_(tx_queue),
+    publisher_(publisher),
     shared_memory_name_(std::move(shared_memory_name)) {
-
 }
 
-SharedMemoryQueue::~SharedMemoryQueue() {
-  SharedMemoryQueue::Stop();
+SharedMemoryTxRxQueue::~SharedMemoryTxRxQueue() {
+  SharedMemoryTxRxQueue::Stop();
 }
 
-void SharedMemoryQueue::Start() {
+void SharedMemoryTxRxQueue::Start() {
   Stop();
   state_ = SharedMemoryState::WaitOnSharedMemory;
   operable_ = true;
+  if (shared_memory_name_.empty()) {
+    BUS_ERROR() << "the share memory has no name. Invalid use of function.";
+    return;
+  }
 
   IBusMessageQueue::Start();
   stop_thread_ = false;
   if (publisher_) {
-    thread_ = std::thread(&SharedMemoryQueue::PublisherTask, this);
+    thread_ = std::thread(&SharedMemoryTxRxQueue::PublisherThread, this);
   } else {
-    GetChannel();
-    thread_ = std::thread(&SharedMemoryQueue::SubscriberTask, this);
+    thread_ = std::thread(&SharedMemoryTxRxQueue::SubscriberThread, this);
   }
 }
 
-void SharedMemoryQueue::Stop() {
+void SharedMemoryTxRxQueue::Stop() {
   stop_thread_ = true;
   if (thread_.joinable()) {
     thread_.join();
@@ -62,10 +58,13 @@ void SharedMemoryQueue::Stop() {
   stop_thread_ = false;
 }
 
-void SharedMemoryQueue::PublisherTask() {
+void SharedMemoryTxRxQueue::PublisherThread() {
   while (!stop_thread_ ) {
     switch (state_) {
       case SharedMemoryState::HandleMessages:
+        if (shm_ == nullptr) {
+          state_ = SharedMemoryState::WaitOnSharedMemory;
+        }
         break;
 
       case SharedMemoryState::WaitOnSharedMemory:
@@ -78,53 +77,37 @@ void SharedMemoryQueue::PublisherTask() {
       continue;
     }
 
-    EmptyWait(10ms);
-    if (Empty()) {
+
+    if (const bool buffer_full = tx_queue_ ? shm_->tx_full : shm_->rx_full;
+        buffer_full) {
+      std::this_thread::sleep_for(10ms);
       continue;
     }
+    EmptyWait(10ms); // Signalled if a message been added
+    auto msg = Pop();
+    if (!msg) {
+      continue;
+    }
+    bool message_sent;
+    {
+      scoped_lock lock(shm_->memory_mutex);
+      message_sent = PublisherPoll(*shm_, *msg);
+    }
 
-    // Connect to shared memory
-    // Transfer messages
-    // Disconnect
-    try {
-      while (!stop_thread_ && shm_ != nullptr && !Empty() && !shm_->buffer_full) {
-        auto msg = Pop();
-        if (!msg) {
-          continue;
-        }
-        bool message_sent;
-        {
-          scoped_lock lock(shm_->memory_mutex);
-          message_sent = PublisherPoll(*shm_, *msg);
-        }
-        if (!message_sent) {
-          PushFront(msg);
-        }
-      }
-      if (shm_->buffer_full) {
-        shm_->buffer_full_condition.notify_all();
-      }
-    } catch (const std::exception &err) {
-      if (operable_) {
-        BUS_ERROR() << "Shared memory failure. Name: "
-        << shared_memory_name_ << ", Error: " << err.what();
-        operable_ = false;
-      }
-      state_ = SharedMemoryState::WaitOnSharedMemory;
+    if (!message_sent) {
+      // The buffer should be flagged full
+      PushFront(msg);
     }
   }
 }
 
-void SharedMemoryQueue::SubscriberTask() {
+void SharedMemoryTxRxQueue::SubscriberThread() {
   while (!stop_thread_ ) {
-    if (channel_ == 0) {
-      GetChannel();
-      std::this_thread::sleep_for(1000ms);
-      continue;
-    }
-
     switch (state_) {
       case SharedMemoryState::HandleMessages:
+        if (shm_ == nullptr) {
+          state_ = SharedMemoryState::WaitOnSharedMemory;
+        }
         break;
 
       case SharedMemoryState::WaitOnSharedMemory:
@@ -137,80 +120,65 @@ void SharedMemoryQueue::SubscriberTask() {
       continue;
     }
 
-    try {
-      std::vector<uint8_t> message_buffer;
-      bool more = true;
-      while ( more && !stop_thread_) {
-        {
-          scoped_lock lock(shm_->memory_mutex);
-          more = SubscriberPoll(*shm_, message_buffer);
-        }
-        if (more && !message_buffer.empty()) {
-          Push(message_buffer);
-        }
-      }
-    } catch (const std::exception &err) {
-      if (operable_) {
-        BUS_ERROR() << "Shared memory failure. Error: " << err.what();
-      }
-      operable_ = false;
-      state_ = SharedMemoryState::WaitOnSharedMemory;
+    if (channel_ == 0) {
+      GetChannel();
     }
+    if (channel_ == 0) {
+      std::this_thread::sleep_for(1000ms);
+      continue;
+    }
+
+    std::vector<uint8_t> message_buffer;
+    bool more = true;
+    while ( more && !stop_thread_) {
+      {
+        scoped_lock lock(shm_->memory_mutex);
+        more = SubscriberPoll(*shm_, message_buffer);
+      }
+      if (more && !message_buffer.empty()) {
+        Push(message_buffer);
+      }
+    }
+      // Trig a reset of channels as the in/out indexes should point on the
+      // same indexies.
+    auto& condition = tx_queue_ ? shm_->tx_full_condition : shm_->rx_full_condition;
+    condition.notify_all();
     std::this_thread::sleep_for(10ms);
   }
 }
 
-void SharedMemoryQueue::GetChannel() {
-  try {
-    shared_memory_object shared_mem(open_only, shared_memory_name_.c_str(),
-      read_write);
-    mapped_region region(shared_mem, read_write);
-    if (region.get_address() == nullptr) {
-      std::ostringstream err;
-      err << "No shared memory found. Name: " << shared_memory_name_;
-      throw std::runtime_error(err.str());
+void SharedMemoryTxRxQueue::GetChannel() {
+  if (shm_ == nullptr) {
+    return;
+  }
+  scoped_lock lock(shm_->memory_mutex);
+  auto& channels = tx_queue_ ? shm_->tx_channels : shm_->rx_channels;
+  for (size_t index = 1; index < channels.size(); ++index) {
+    if (channels[index].used) {
+      continue;
     }
-    auto *shm = static_cast<SharedMemoryObjects *>(region.get_address());
-    if (!shm->initialized) {
-      std::ostringstream err;
-      err << "Shared memory not initialized. Name: " << shared_memory_name_;
-      throw std::runtime_error(err.str());
-    }
-    if (!operable_) {
-      BUS_INFO() << "Shared memory connected. Name: " << shared_memory_name_;
-      operable_ = true;
-    }
-
-    scoped_lock lock(shm->memory_mutex);
-    for (size_t index = 1; index < shm->channels.size(); ++index) {
-      if (shm->channels[index].used) {
-        continue;
-      }
-      channel_ = index;
-      shm->channels[index].used = true;
-      break;
-    }
-  } catch (const std::exception &err) {
-    if (operable_) {
-      BUS_ERROR() << "Shared memory error. Name: " << shared_memory_name_
-        << ", Error: " << err.what();
-      operable_ = false;
-    }
+    channel_ = index;
+    channels[index].used = true;
+    break;
   }
 }
 
-bool SharedMemoryQueue::PublisherPoll(SharedMemoryObjects& shm,
-  const IBusMessage& message) {
-  auto& channel = shm.channels[0];
+bool SharedMemoryTxRxQueue::PublisherPoll(SharedServerObjects& shm,
+  const IBusMessage& message) const {
+  auto& channel = tx_queue_ ? shm.tx_channels[0] : shm.rx_channels[0];
   const uint32_t message_size = message.Size();
-
-  auto bytes_left = static_cast<int64_t>(shm.buffer.size());
+  auto& buffer = tx_queue_ ? shm.tx_buffer : shm.rx_buffer;
+  auto bytes_left = static_cast<int64_t>(buffer.size());
   bytes_left -= channel.queue_index;
   bytes_left -= message_size;
   bytes_left -= 4;
 
   if (bytes_left < 0 ) {
-    shm.buffer_full = true;
+    if (tx_queue_) {
+      shm.tx_full = true;
+    } else {
+      shm.rx_full = true;
+    }
     return false;
   }
 
@@ -225,39 +193,41 @@ bool SharedMemoryQueue::PublisherPoll(SharedMemoryObjects& shm,
 
   const LittleBuffer length(message_size);
   std::copy_n(length.cbegin(), length.size(),
-  shm.buffer.begin() + channel.queue_index );
+  buffer.begin() + channel.queue_index );
   channel.queue_index += length.size();
 
   std::copy_n(msg_buffer.begin(), msg_buffer.size(),
-  shm.buffer.begin() + channel.queue_index );
+  buffer.begin() + channel.queue_index );
   channel.queue_index += msg_buffer.size();
   return true;
 }
 
-bool SharedMemoryQueue::SubscriberPoll(SharedMemoryObjects& shm,
-    std::vector<uint8_t>& msg_buffer ) const {
+bool SharedMemoryTxRxQueue::SubscriberPoll(SharedServerObjects& shm,
+    std::vector<uint8_t>& msg_buffer ) {
   msg_buffer.clear();
-  uint8_t out_index = channel_;
-  if (out_index == 0) {
+  if (channel_ == 0) {
     BUS_ERROR() << "Invalid subscriber channel index. Index: " <<
-      static_cast<int>(out_index);
+      static_cast<int>(channel_);
     return false;
   }
 
-  auto& out_channel = shm.channels[out_index];
-  const auto& in_channel = shm.channels[0];
+  const auto& buffer = tx_queue_ ? shm.tx_buffer : shm.rx_buffer;
+  auto& out_channel = tx_queue_ ?
+    shm.tx_channels[channel_] : shm.rx_channels[channel_];
+  const auto& in_channel = tx_queue_ ? shm.tx_channels[0] : shm.rx_channels[0];
+
   if (!out_channel.used) {
     // Probably reconnected to the shared memory.
-    out_index = 0; // Trigger a new channel
+    BUS_ERROR() << "Channel suddenly unused. Channel: "
+          << static_cast<int>(channel_);
+    channel_ = 0; // Trigger a new channel
     operable_ = false;
-    BUS_ERROR() << "Channel suddennly unused. Channel: "
-      << static_cast<int>(out_index);
     return false;
   }
 
   if (in_channel.queue_index < out_channel.queue_index) {
     BUS_ERROR() << "Invalid channel indexes. Channel: "
-      << static_cast<int>(out_index)
+      << static_cast<int>(channel_)
       << ", Index: " << in_channel.queue_index
       << "/" << out_channel.queue_index;
     out_channel.queue_index = in_channel.queue_index;
@@ -265,37 +235,36 @@ bool SharedMemoryQueue::SubscriberPoll(SharedMemoryObjects& shm,
   }
 
   if (out_channel.queue_index == in_channel.queue_index) {
+    // No message to send
     return false;
   }
 
-  if (out_channel.queue_index + 4 > shm.buffer.size()) {
+  if (out_channel.queue_index + 4 > buffer.size()) {
     BUS_ERROR() << "Length out-of-boound. Index: "
       << static_cast<int>(out_channel.queue_index)
-      << "/" << shm.buffer.size();
+      << "/" << buffer.size();
     out_channel.queue_index = in_channel.queue_index;
     return false;
   }
 
-  LittleBuffer<uint32_t> length(shm.buffer.data(),out_channel.queue_index);
+  LittleBuffer<uint32_t> length(buffer.data(),out_channel.queue_index);
   out_channel.queue_index += length.size();
   const uint32_t message_length = length.value();
 
-  if (out_channel.queue_index + message_length > shm.buffer.size()) {
+  if (out_channel.queue_index + message_length > buffer.size()) {
     BUS_ERROR() << "Data out-of-boound. Index: "
         << static_cast<int>(out_channel.queue_index)
         << ", Length: " << message_length
-        << ", Size: " << shm.buffer.size();
+        << ", Size: " << buffer.size();
     out_channel.queue_index = in_channel.queue_index;
     return false;
   }
 
   try {
     msg_buffer.resize(message_length);
-    std::copy_n(shm.buffer.cbegin() + out_channel.queue_index,
+    std::copy_n(buffer.cbegin() + out_channel.queue_index,
       message_length, msg_buffer.begin());
     out_channel.queue_index += message_length;
-
-
   } catch (const std::exception& err) {
     BUS_ERROR() << "Message copy failure. Error: " << err.what();
     out_channel.queue_index = in_channel.queue_index;
@@ -305,7 +274,7 @@ bool SharedMemoryQueue::SubscriberPoll(SharedMemoryObjects& shm,
   return true;
 }
 
-void SharedMemoryQueue::ConnectToSharedMemory() {
+void SharedMemoryTxRxQueue::ConnectToSharedMemory() {
   try {
     shm_ = nullptr;
     region_.reset();
@@ -323,7 +292,7 @@ void SharedMemoryQueue::ConnectToSharedMemory() {
     if (region_->get_address() == nullptr) {
       throw std::runtime_error("No shared memory found");
     }
-    shm_ = static_cast<SharedMemoryObjects *>(region_->get_address());
+    shm_ = static_cast<SharedServerObjects *>(region_->get_address());
     if (!shm_->initialized) {
       std::ostringstream err;
       err << "Shared memory not initialized. Name: " << shared_memory_name_;
@@ -345,6 +314,5 @@ void SharedMemoryQueue::ConnectToSharedMemory() {
     }
   }
 }
-
 
 } // bus

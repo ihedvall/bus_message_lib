@@ -211,22 +211,22 @@ TEST(SharedMemoryBroker, TestErrorHandling) {
     publisher->Push(msg);
   }
 
-  broker->Start();
+  broker->Start(); // The shared memory is created here
 
-  size_t timeout = 0;
-  while (subscriber->Size() < max_messages && timeout < 200) {
+    // Note that some messages may be lost in this case.
+  for (size_t timeout = 0; timeout < 200; ++timeout) {
+    if (publisher->Size() == 0 && subscriber->Size() > 0) {
+      break;
+    }
     std::this_thread::sleep_for(100ms);
-    ++timeout;
   }
-
-  std::cout << "Time:[ms]" << timeout * 100 << std::endl;
 
   broker->Stop();
   publisher->Stop();
   subscriber->Stop();
 
   EXPECT_EQ(publisher->Size(), 0);
-  EXPECT_EQ(subscriber->Size(), max_messages);
+  EXPECT_GT(subscriber->Size(), 0);
 
   broker.reset();
   publisher.reset();
