@@ -2,7 +2,13 @@
 * Copyright 2025 Ingemar Hedvall
 * SPDX-License-Identifier: MIT
 */
+#include <cstdint>
 #include <chrono>
+#include <thread>
+#include <vector>
+#include <algorithm>
+
+#include <boost/interprocess/sync/scoped_lock.hpp>
 
 #include "sharedmemorytxrxqueue.h"
 #include "sharedmemoryserver.h"

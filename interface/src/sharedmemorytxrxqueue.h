@@ -10,6 +10,7 @@
 #include <string>
 #include <atomic>
 #include <thread>
+#include <vector>
 
 #include <boost/interprocess/mapped_region.hpp>
 #include <boost/interprocess/shared_memory_object.hpp>
