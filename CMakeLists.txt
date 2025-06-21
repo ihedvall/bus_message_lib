@@ -104,7 +104,8 @@ if (DOXYGEN_FOUND AND BUS_DOC)
     set(DOXYGEN_DISABLE_INDEX YES)
     set(DOXYGEN_GENERATE_TREEVIEW YES)
     set(DOXYGEN_FULL_SIDEBAR YES)
-    set(DOXYGEN_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/docs)
+    set(DOXYGEN_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+    set(DOXYGEN_HTML_OUTPUT "docs")
     doxygen_add_docs(bus-message-doc ALL
             include/bus doxygen
             COMMENT "Bus Message Interface Library generating documentation")
