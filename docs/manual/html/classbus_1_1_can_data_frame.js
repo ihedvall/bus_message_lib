@@ -1,7 +1,5 @@
 var classbus_1_1_can_data_frame =
 [
-    [ "BitPosition", "classbus_1_1_can_data_frame.html#aa61832f8d7d403dc24bb44259bb2152a", null ],
-    [ "BitPosition", "classbus_1_1_can_data_frame.html#af611eb1195689d3d28a3a58a9876fd1d", null ],
     [ "Brs", "classbus_1_1_can_data_frame.html#a64044961759bec7e58f09e444d83412f", null ],
     [ "Brs", "classbus_1_1_can_data_frame.html#a3067fc55aa85f22fb1c9347d47d638a5", null ],
     [ "CanId", "classbus_1_1_can_data_frame.html#a21ebe79db1f1e3e6933c907c7ef1b7f3", null ],
@@ -15,8 +13,6 @@ var classbus_1_1_can_data_frame =
     [ "Dlc", "classbus_1_1_can_data_frame.html#a383a3d72e6e1e0f7e8faf9fc4f422ab6", null ],
     [ "Edl", "classbus_1_1_can_data_frame.html#ab2b2b200cbb7df09eee60f88de1f3ee9", null ],
     [ "Edl", "classbus_1_1_can_data_frame.html#a2d7e53bf13255de9de1f49f524ce1c13", null ],
-    [ "ErrorType", "classbus_1_1_can_data_frame.html#af96710cb458b84bb42daf5d488f632e5", null ],
-    [ "ErrorType", "classbus_1_1_can_data_frame.html#ae432d06c3fa7f2c6d3567f1c96a555ca", null ],
     [ "Esi", "classbus_1_1_can_data_frame.html#a33259955c3a0eac45e87295cd6879223", null ],
     [ "Esi", "classbus_1_1_can_data_frame.html#af246e301832f0261663aa5842ef28c87", null ],
     [ "ExtendedId", "classbus_1_1_can_data_frame.html#aba485aadf9aef7567ae21f46346f90f0", null ],

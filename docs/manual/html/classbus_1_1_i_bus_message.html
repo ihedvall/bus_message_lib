@@ -130,10 +130,10 @@ BusMessageType&#160;</td><td class="memItemRight" valign="bottom"><b>Type</b> ()
 void&#160;</td><td class="memItemRight" valign="bottom"><b>Version</b> (uint16_t version)</td></tr>
 <tr class="memitem:a60db90e3f1f62a01ce99adbd98987f29" id="r_a60db90e3f1f62a01ce99adbd98987f29"><td class="memItemLeft" align="right" valign="top"><a id="a60db90e3f1f62a01ce99adbd98987f29" name="a60db90e3f1f62a01ce99adbd98987f29"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>Version</b> () const</td></tr>
-<tr class="memitem:a243e9374d9d09877f0dbe676d89c7e9c" id="r_a243e9374d9d09877f0dbe676d89c7e9c"><td class="memItemLeft" align="right" valign="top"><a id="a243e9374d9d09877f0dbe676d89c7e9c" name="a243e9374d9d09877f0dbe676d89c7e9c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>ExpectedLength</b> (uint32_t length)</td></tr>
-<tr class="memitem:a30b4e4d48b5b80533c12a7b4adefd1bc" id="r_a30b4e4d48b5b80533c12a7b4adefd1bc"><td class="memItemLeft" align="right" valign="top"><a id="a30b4e4d48b5b80533c12a7b4adefd1bc" name="a30b4e4d48b5b80533c12a7b4adefd1bc"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>ExpectedLength</b> () const</td></tr>
+<tr class="memitem:ad67338a3de773af63dd6b1cc3781bed9" id="r_ad67338a3de773af63dd6b1cc3781bed9"><td class="memItemLeft" align="right" valign="top"><a id="ad67338a3de773af63dd6b1cc3781bed9" name="ad67338a3de773af63dd6b1cc3781bed9"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>Size</b> () const</td></tr>
+<tr class="memitem:a15b0e40f93ad1e41dd02939655b17624" id="r_a15b0e40f93ad1e41dd02939655b17624"><td class="memItemLeft" align="right" valign="top"><a id="a15b0e40f93ad1e41dd02939655b17624" name="a15b0e40f93ad1e41dd02939655b17624"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>Valid</b> () const</td></tr>
 <tr class="memitem:aad9d68ef55ea99898bad4166a9718d43" id="r_aad9d68ef55ea99898bad4166a9718d43"><td class="memItemLeft" align="right" valign="top"><a id="aad9d68ef55ea99898bad4166a9718d43" name="aad9d68ef55ea99898bad4166a9718d43"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>Timestamp</b> (uint64_t timestamp)</td></tr>
 <tr class="memitem:a0f44ca6c39dd0447f5672ca4e7dce180" id="r_a0f44ca6c39dd0447f5672ca4e7dce180"><td class="memItemLeft" align="right" valign="top"><a id="a0f44ca6c39dd0447f5672ca4e7dce180" name="a0f44ca6c39dd0447f5672ca4e7dce180"></a>
@@ -142,6 +142,18 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>Timestamp</b> () 
 void&#160;</td><td class="memItemRight" valign="bottom"><b>BusChannel</b> (uint16_t channel)</td></tr>
 <tr class="memitem:acaa0e893aefc72787cf4c6fddfd89c92" id="r_acaa0e893aefc72787cf4c6fddfd89c92"><td class="memItemLeft" align="right" valign="top"><a id="acaa0e893aefc72787cf4c6fddfd89c92" name="acaa0e893aefc72787cf4c6fddfd89c92"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>BusChannel</b> () const</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a2e2d49fbaf5a8598ff80f45e7f0bc8bd" id="r_a2e2d49fbaf5a8598ff80f45e7f0bc8bd"><td class="memItemLeft" align="right" valign="top"><a id="a2e2d49fbaf5a8598ff80f45e7f0bc8bd" name="a2e2d49fbaf5a8598ff80f45e7f0bc8bd"></a>
+static std::shared_ptr&lt; <a class="el" href="classbus_1_1_i_bus_message.html">IBusMessage</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>Create</b> (BusMessageType type)</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a9ef01cad6c2ca127cb9c7e1005a70802" id="r_a9ef01cad6c2ca127cb9c7e1005a70802"><td class="memItemLeft" align="right" valign="top"><a id="a9ef01cad6c2ca127cb9c7e1005a70802" name="a9ef01cad6c2ca127cb9c7e1005a70802"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>Size</b> (uint32_t size) const</td></tr>
+<tr class="memitem:a42bc667ac5ba527e2efd200dfa10d4a9" id="r_a42bc667ac5ba527e2efd200dfa10d4a9"><td class="memItemLeft" align="right" valign="top"><a id="a42bc667ac5ba527e2efd200dfa10d4a9" name="a42bc667ac5ba527e2efd200dfa10d4a9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>Valid</b> (bool valid) const</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This abstract base class is used to implement generic bus messages. A message must have a specific type and a version. The type and version, defines how the message is serialized. The serialization are done with the ToRaw() and FromRaw() functions. These functions are abstract and have to be implemented by the derived class.</p>
@@ -149,17 +161,17 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>BusChannel</b> ()
 <table class="doxtable">
 <caption>Bus Message Header</caption>
 <tr>
-<th>Byte (Bits) Offset</th><th>Size</th><th>Description</th></tr>
+<th>Byte (Bits) Offset</th><th>Description</th><th>Size</th></tr>
 <tr>
-<td>0</td><td>uint16_t</td><td>Type of Message (enumerate)</td></tr>
+<td>0</td><td>Type of Message (enumerate)</td><td>uint16_t</td></tr>
 <tr>
-<td>2</td><td>uint16_t</td><td>Version Number</td></tr>
+<td>2</td><td>Version Number</td><td>uint16_t</td></tr>
 <tr>
-<td>4</td><td>uint32_t</td><td>Length of the message</td></tr>
+<td>4</td><td>Length of the message</td><td>uint32_t</td></tr>
 <tr>
-<td>8</td><td>uint64_t</td><td>Timestamp ns since 1970</td></tr>
+<td>8</td><td>Timestamp ns since 1970</td><td>uint64_t</td></tr>
 <tr>
-<td>16</td><td>uint16_t</td><td>Bus Channel</td></tr>
+<td>16</td><td>Bus <a class="el" href="structbus_1_1_channel.html">Channel</a></td><td>uint16_t</td></tr>
 </table>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="ae831184e1c1dd6776034bac184d8e2c1" name="ae831184e1c1dd6776034bac184d8e2c1"></a>

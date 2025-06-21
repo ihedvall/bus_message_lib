@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['candataframe_0',['CanDataFrame',['../classbus_1_1_can_data_frame.html',1,'bus']]]
+  ['businterfacefactory_0',['BusInterfaceFactory',['../classbus_1_1_bus_interface_factory.html',1,'bus']]],
+  ['buslogstream_1',['BusLogStream',['../classbus_1_1_bus_log_stream.html',1,'bus']]]
 ];
