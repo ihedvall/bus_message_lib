@@ -13,3 +13,4 @@ The following communication buses are supported:
 
 The main library handles the serialization and bus message definition, while the sub-library
 defines the shared memory and TCP/IP interfaces.
+Updated
