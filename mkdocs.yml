@@ -2,6 +2,8 @@ site_name: Bus Message Library
 site_description: Bus messages serialization library
 site_author: Ingemar Hedvall
 copyright: Copyright (c) Ingemar Hedvall 2025
+docs_dir: mkdocs
+site_dir: docs
 
 repo_url: https://github.com/ihedvall/bus_message_lib
  
