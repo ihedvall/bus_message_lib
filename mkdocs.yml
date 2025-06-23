@@ -1,17 +1,67 @@
 site_name: Bus Message Library
 site_description: Bus messages serialization library
 site_author: Ingemar Hedvall
-copyright: Copyright (c) Ingemar Hedvall 2025
+copyright: Copyright &copy Ingemar Hedvall 2025
 docs_dir: mkdocs
 site_dir: docs
 
 repo_url: https://github.com/ihedvall/bus_message_lib
- 
+repo_name: ihedvall/bus_message_lib
+
 theme:
-    name: mkdocs
-    color_mode: auto
-    user_color_mode_toggle: true
-    nav_style: dark
+    name: material
+    logo: img/logo.png
+    favicon: img/favicon.ico
+    palette:
+
+        # Palette toggle for automatic mode
+        - media: "(prefers-color-scheme)"
+          toggle:
+              icon: material/brightness-auto
+              name: Switch to light mode
+
+        # Palette toggle for light mode
+        - media: "(prefers-color-scheme: light)"
+          scheme: default
+
+
+          toggle:
+              icon: material/brightness-7
+              name: Switch to dark mode
+
+        # Palette toggle for dark mode
+        - media: "(prefers-color-scheme: dark)"
+          scheme: slate
+          toggle:
+              icon: material/brightness-4
+              name: Switch to system preference
+
+
+    features:
+        - navigation.instant
+        - search.highlight
+        # - navigation.footer
+
+    plugins:
+        - search
+        - tags
+
+extra:
+    social:
+        - icon: fontawesome/brands/github
+          link: https://github.com/ihedvall
+          name: Ingemar Hedvall on GitHub
+
+        - icon: fontawesome/brands/linkedin
+          link: https://www.linkedin.com/in/ingemar-hedvall-904871258/
+          name: Ingemar Hedvall Linkedin Page
+
+markdown_extensions:
+    - pymdownx.superfences:
+          custom_fences:
+              - name: mermaid
+                class: mermaid
+                format: !!python/name:pymdownx.superfences.fence_code_format
 
 nav:
     - Home: index.md

@@ -49,6 +49,7 @@ endif()
 
 if (BUS_DOC)
     include(script/doxygen.cmake)
+    include(script/mkdocs.cmake)
 endif()
 
 set(BUS_HEADERS
@@ -93,7 +94,11 @@ if (BUS_INTERFACE)
     add_subdirectory(interface)
 endif ()
 
-if (DOXYGEN_FOUND AND BUS_DOC)
+if (BUS_DOC)
+
+    execute_process( COMMAND mkdocs build
+                     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+
     set(DOXYGEN_RECURSIVE YES)
     set(DOXYGEN_REPEAT_BRIEF NO)
     set(DOXYGEN_PROJECT_NAME "Bus Messages")

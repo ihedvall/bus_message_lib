@@ -1,4 +1,17 @@
 # Welcome to MkDocs
+``` mermaid
+graph TB
+  A[Start] --> B{Error?};
+  B -->|Yes| C[Hmm...];
+  C --> D[Debug];
+  D --> B;
+  B ---->|No| E[Yay!];
+```
+```c++
+class A {
+}
+```
+
 
 For full documentation visit [mkdocs.org](https://www.mkdocs.org).
 
