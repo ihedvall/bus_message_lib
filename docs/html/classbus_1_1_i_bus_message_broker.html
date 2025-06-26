@@ -6,6 +6,7 @@
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Bus Messages: bus::IBusMessageBroker Class Reference</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
@@ -30,6 +31,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
    <div id="projectname">Bus Messages<span id="projectnumber">&#160;1.0</span>
    </div>
@@ -99,74 +101,519 @@ $(function(){initNavTree('classbus_1_1_i_bus_message_broker.html','','classbus_1
   <div class="headertitle"><div class="title">bus::IBusMessageBroker Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Inheritance diagram for bus::IBusMessageBroker:</div>
-<div class="dyncontent">
-<div class="center"><img src="classbus_1_1_i_bus_message_broker__inherit__graph.png" border="0" usemap="#abus_1_1_i_bus_message_broker_inherit__map" loading="lazy" alt="Inheritance graph"/></div>
-<map name="abus_1_1_i_bus_message_broker_inherit__map" id="abus_1_1_i_bus_message_broker_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,5,174,32"/>
-<area shape="rect" href="classbus_1_1_simulate_broker.html" title=" " alt="" coords="20,80,159,107"/>
-<area shape="poly" title=" " alt="" coords="92,48,92,80,87,80,87,48"/>
-</map>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+
+<p>Defines an interface to a broker, server or client.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="ibusmessagebroker_8h_source.html">ibusmessagebroker.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a98a784f63b00c4a7831ad35b82e611a4" id="r_a98a784f63b00c4a7831ad35b82e611a4"><td class="memItemLeft" align="right" valign="top"><a id="a98a784f63b00c4a7831ad35b82e611a4" name="a98a784f63b00c4a7831ad35b82e611a4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Name</b> (std::string name)</td></tr>
-<tr class="memitem:a87e1a49fd130746111fba4bbacbcf4cb" id="r_a87e1a49fd130746111fba4bbacbcf4cb"><td class="memItemLeft" align="right" valign="top"><a id="a87e1a49fd130746111fba4bbacbcf4cb" name="a87e1a49fd130746111fba4bbacbcf4cb"></a>
-const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>Name</b> () const</td></tr>
-<tr class="memitem:ad99f32c5fa9d1460e6c1fc61b35cd84b" id="r_ad99f32c5fa9d1460e6c1fc61b35cd84b"><td class="memItemLeft" align="right" valign="top"><a id="ad99f32c5fa9d1460e6c1fc61b35cd84b" name="ad99f32c5fa9d1460e6c1fc61b35cd84b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>MemorySize</b> (uint32_t size)</td></tr>
-<tr class="memitem:ae37f0eb9fa20d0c24bf053a2240cfa79" id="r_ae37f0eb9fa20d0c24bf053a2240cfa79"><td class="memItemLeft" align="right" valign="top"><a id="ae37f0eb9fa20d0c24bf053a2240cfa79" name="ae37f0eb9fa20d0c24bf053a2240cfa79"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>MemorySize</b> () const</td></tr>
-<tr class="memitem:a7800d80bffc1507e5b5f99c2dc01527a" id="r_a7800d80bffc1507e5b5f99c2dc01527a"><td class="memItemLeft" align="right" valign="top"><a id="a7800d80bffc1507e5b5f99c2dc01527a" name="a7800d80bffc1507e5b5f99c2dc01527a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Address</b> (std::string address)</td></tr>
-<tr class="memitem:a5529534b58a1171c1ede704716e10385" id="r_a5529534b58a1171c1ede704716e10385"><td class="memItemLeft" align="right" valign="top"><a id="a5529534b58a1171c1ede704716e10385" name="a5529534b58a1171c1ede704716e10385"></a>
-const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>Address</b> () const</td></tr>
-<tr class="memitem:aa1cab095cabb19304504d726379fe60f" id="r_aa1cab095cabb19304504d726379fe60f"><td class="memItemLeft" align="right" valign="top"><a id="aa1cab095cabb19304504d726379fe60f" name="aa1cab095cabb19304504d726379fe60f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Port</b> (uint16_t port)</td></tr>
-<tr class="memitem:ad0be3ab4d0528173e58ea90dc17addda" id="r_ad0be3ab4d0528173e58ea90dc17addda"><td class="memItemLeft" align="right" valign="top"><a id="ad0be3ab4d0528173e58ea90dc17addda" name="ad0be3ab4d0528173e58ea90dc17addda"></a>
-uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>Port</b> () const</td></tr>
-<tr class="memitem:ad2761c146a2f42afb5392f458dc5ec7a" id="r_ad2761c146a2f42afb5392f458dc5ec7a"><td class="memItemLeft" align="right" valign="top"><a id="ad2761c146a2f42afb5392f458dc5ec7a" name="ad2761c146a2f42afb5392f458dc5ec7a"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsConnected</b> () const</td></tr>
-<tr class="memitem:a954ac1ba7817daef47b2254ef0b8c2d2" id="r_a954ac1ba7817daef47b2254ef0b8c2d2"><td class="memItemLeft" align="right" valign="top"><a id="a954ac1ba7817daef47b2254ef0b8c2d2" name="a954ac1ba7817daef47b2254ef0b8c2d2"></a>
-virtual std::shared_ptr&lt; <a class="el" href="classbus_1_1_i_bus_message_queue.html">IBusMessageQueue</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>CreatePublisher</b> ()</td></tr>
-<tr class="memitem:a2078e0ee7febf22bbcf838ffa880beab" id="r_a2078e0ee7febf22bbcf838ffa880beab"><td class="memItemLeft" align="right" valign="top"><a id="a2078e0ee7febf22bbcf838ffa880beab" name="a2078e0ee7febf22bbcf838ffa880beab"></a>
-virtual std::shared_ptr&lt; <a class="el" href="classbus_1_1_i_bus_message_queue.html">IBusMessageQueue</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>CreateSubscriber</b> ()</td></tr>
-<tr class="memitem:a24062c02c8245407e9bf099598b67414" id="r_a24062c02c8245407e9bf099598b67414"><td class="memItemLeft" align="right" valign="top"><a id="a24062c02c8245407e9bf099598b67414" name="a24062c02c8245407e9bf099598b67414"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>DetachPublisher</b> (const std::shared_ptr&lt; <a class="el" href="classbus_1_1_i_bus_message_queue.html">IBusMessageQueue</a> &gt; &amp;publisher)</td></tr>
-<tr class="memitem:a74ada6d8bfdc0409a62374e9113bcff1" id="r_a74ada6d8bfdc0409a62374e9113bcff1"><td class="memItemLeft" align="right" valign="top"><a id="a74ada6d8bfdc0409a62374e9113bcff1" name="a74ada6d8bfdc0409a62374e9113bcff1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>DetachSubscriber</b> (const std::shared_ptr&lt; <a class="el" href="classbus_1_1_i_bus_message_queue.html">IBusMessageQueue</a> &gt; &amp;subscriber)</td></tr>
-<tr class="memitem:abc40292fdca02fa5ed88afee540eb5e2" id="r_abc40292fdca02fa5ed88afee540eb5e2"><td class="memItemLeft" align="right" valign="top"><a id="abc40292fdca02fa5ed88afee540eb5e2" name="abc40292fdca02fa5ed88afee540eb5e2"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>NofPublishers</b> () const</td></tr>
-<tr class="memitem:a0983d4444875ce8938bf938b5934e843" id="r_a0983d4444875ce8938bf938b5934e843"><td class="memItemLeft" align="right" valign="top"><a id="a0983d4444875ce8938bf938b5934e843" name="a0983d4444875ce8938bf938b5934e843"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>NofSubscribers</b> () const</td></tr>
-<tr class="memitem:a5f52ac0dd9e041c1d8acd4b779051db1" id="r_a5f52ac0dd9e041c1d8acd4b779051db1"><td class="memItemLeft" align="right" valign="top"><a id="a5f52ac0dd9e041c1d8acd4b779051db1" name="a5f52ac0dd9e041c1d8acd4b779051db1"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>Start</b> ()</td></tr>
-<tr class="memitem:aeb5f6aa936d84f0c84f7b4af0aad808a" id="r_aeb5f6aa936d84f0c84f7b4af0aad808a"><td class="memItemLeft" align="right" valign="top"><a id="aeb5f6aa936d84f0c84f7b4af0aad808a" name="aeb5f6aa936d84f0c84f7b4af0aad808a"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>Stop</b> ()</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:a13c56a663ef6027d9b767a42626b6a2f" id="r_a13c56a663ef6027d9b767a42626b6a2f"><td class="memItemLeft" align="right" valign="top"><a id="a13c56a663ef6027d9b767a42626b6a2f" name="a13c56a663ef6027d9b767a42626b6a2f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Poll</b> (<a class="el" href="classbus_1_1_i_bus_message_queue.html">IBusMessageQueue</a> &amp;queue) const</td></tr>
+<tr class="memitem:ad369cbf573a9c163cd0461e9b082a8a5" id="r_ad369cbf573a9c163cd0461e9b082a8a5"><td class="memItemLeft" align="right" valign="top"><a id="ad369cbf573a9c163cd0461e9b082a8a5" name="ad369cbf573a9c163cd0461e9b082a8a5"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>IBusMessageBroker</b> ()=default</td></tr>
+<tr class="memdesc:ad369cbf573a9c163cd0461e9b082a8a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
+<tr class="memitem:a657cf4376c3e647b479cb8e7055d48b5" id="r_a657cf4376c3e647b479cb8e7055d48b5"><td class="memItemLeft" align="right" valign="top"><a id="a657cf4376c3e647b479cb8e7055d48b5" name="a657cf4376c3e647b479cb8e7055d48b5"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~IBusMessageBroker</b> ()=default</td></tr>
+<tr class="memdesc:a657cf4376c3e647b479cb8e7055d48b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor. <br /></td></tr>
+<tr class="memitem:a98a784f63b00c4a7831ad35b82e611a4" id="r_a98a784f63b00c4a7831ad35b82e611a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a98a784f63b00c4a7831ad35b82e611a4">Name</a> (std::string name)</td></tr>
+<tr class="memdesc:a98a784f63b00c4a7831ad35b82e611a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of the shared memory.  <br /></td></tr>
+<tr class="memitem:a87e1a49fd130746111fba4bbacbcf4cb" id="r_a87e1a49fd130746111fba4bbacbcf4cb"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a87e1a49fd130746111fba4bbacbcf4cb">Name</a> () const</td></tr>
+<tr class="memdesc:a87e1a49fd130746111fba4bbacbcf4cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the shared memory name.  <br /></td></tr>
+<tr class="memitem:ad99f32c5fa9d1460e6c1fc61b35cd84b" id="r_ad99f32c5fa9d1460e6c1fc61b35cd84b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad99f32c5fa9d1460e6c1fc61b35cd84b">MemorySize</a> (uint32_t size)</td></tr>
+<tr class="memdesc:ad99f32c5fa9d1460e6c1fc61b35cd84b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the internal memory size.  <br /></td></tr>
+<tr class="memitem:ae37f0eb9fa20d0c24bf053a2240cfa79" id="r_ae37f0eb9fa20d0c24bf053a2240cfa79"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae37f0eb9fa20d0c24bf053a2240cfa79">MemorySize</a> () const</td></tr>
+<tr class="memdesc:ae37f0eb9fa20d0c24bf053a2240cfa79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the internal memory size.  <br /></td></tr>
+<tr class="memitem:a7800d80bffc1507e5b5f99c2dc01527a" id="r_a7800d80bffc1507e5b5f99c2dc01527a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7800d80bffc1507e5b5f99c2dc01527a">Address</a> (std::string address)</td></tr>
+<tr class="memdesc:a7800d80bffc1507e5b5f99c2dc01527a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the TCP/IP host address.  <br /></td></tr>
+<tr class="memitem:a5529534b58a1171c1ede704716e10385" id="r_a5529534b58a1171c1ede704716e10385"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5529534b58a1171c1ede704716e10385">Address</a> () const</td></tr>
+<tr class="memdesc:a5529534b58a1171c1ede704716e10385"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the TCP/IP address.  <br /></td></tr>
+<tr class="memitem:aa1cab095cabb19304504d726379fe60f" id="r_aa1cab095cabb19304504d726379fe60f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa1cab095cabb19304504d726379fe60f">Port</a> (uint16_t port)</td></tr>
+<tr class="memdesc:aa1cab095cabb19304504d726379fe60f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the TCP/IP port.  <br /></td></tr>
+<tr class="memitem:ad0be3ab4d0528173e58ea90dc17addda" id="r_ad0be3ab4d0528173e58ea90dc17addda"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad0be3ab4d0528173e58ea90dc17addda">Port</a> () const</td></tr>
+<tr class="memdesc:ad0be3ab4d0528173e58ea90dc17addda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the TCP/IP port.  <br /></td></tr>
+<tr class="memitem:ad2761c146a2f42afb5392f458dc5ec7a" id="r_ad2761c146a2f42afb5392f458dc5ec7a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad2761c146a2f42afb5392f458dc5ec7a">IsConnected</a> () const</td></tr>
+<tr class="memdesc:ad2761c146a2f42afb5392f458dc5ec7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true if the client is connected.  <br /></td></tr>
+<tr class="memitem:a954ac1ba7817daef47b2254ef0b8c2d2" id="r_a954ac1ba7817daef47b2254ef0b8c2d2"><td class="memItemLeft" align="right" valign="top">virtual std::shared_ptr&lt; <a class="el" href="classbus_1_1_i_bus_message_queue.html">IBusMessageQueue</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a954ac1ba7817daef47b2254ef0b8c2d2">CreatePublisher</a> ()</td></tr>
+<tr class="memdesc:a954ac1ba7817daef47b2254ef0b8c2d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a publisker queue.  <br /></td></tr>
+<tr class="memitem:a2078e0ee7febf22bbcf838ffa880beab" id="r_a2078e0ee7febf22bbcf838ffa880beab"><td class="memItemLeft" align="right" valign="top">virtual std::shared_ptr&lt; <a class="el" href="classbus_1_1_i_bus_message_queue.html">IBusMessageQueue</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2078e0ee7febf22bbcf838ffa880beab">CreateSubscriber</a> ()</td></tr>
+<tr class="memdesc:a2078e0ee7febf22bbcf838ffa880beab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a subscriber queue.  <br /></td></tr>
+<tr class="memitem:a24062c02c8245407e9bf099598b67414" id="r_a24062c02c8245407e9bf099598b67414"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a24062c02c8245407e9bf099598b67414">DetachPublisher</a> (const std::shared_ptr&lt; <a class="el" href="classbus_1_1_i_bus_message_queue.html">IBusMessageQueue</a> &gt; &amp;publisher)</td></tr>
+<tr class="memdesc:a24062c02c8245407e9bf099598b67414"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detach a publisher from its broker.  <br /></td></tr>
+<tr class="memitem:a74ada6d8bfdc0409a62374e9113bcff1" id="r_a74ada6d8bfdc0409a62374e9113bcff1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a74ada6d8bfdc0409a62374e9113bcff1">DetachSubscriber</a> (const std::shared_ptr&lt; <a class="el" href="classbus_1_1_i_bus_message_queue.html">IBusMessageQueue</a> &gt; &amp;subscriber)</td></tr>
+<tr class="memdesc:a74ada6d8bfdc0409a62374e9113bcff1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detach a subscriber from its broker.  <br /></td></tr>
+<tr class="memitem:abc40292fdca02fa5ed88afee540eb5e2" id="r_abc40292fdca02fa5ed88afee540eb5e2"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abc40292fdca02fa5ed88afee540eb5e2">NofPublishers</a> () const</td></tr>
+<tr class="memdesc:abc40292fdca02fa5ed88afee540eb5e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns number of attached publishers.  <br /></td></tr>
+<tr class="memitem:a0983d4444875ce8938bf938b5934e843" id="r_a0983d4444875ce8938bf938b5934e843"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0983d4444875ce8938bf938b5934e843">NofSubscribers</a> () const</td></tr>
+<tr class="memdesc:a0983d4444875ce8938bf938b5934e843"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns number of attached subscribers.  <br /></td></tr>
+<tr class="memitem:a5f52ac0dd9e041c1d8acd4b779051db1" id="r_a5f52ac0dd9e041c1d8acd4b779051db1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5f52ac0dd9e041c1d8acd4b779051db1">Start</a> ()</td></tr>
+<tr class="memdesc:a5f52ac0dd9e041c1d8acd4b779051db1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the broker.  <br /></td></tr>
+<tr class="memitem:aeb5f6aa936d84f0c84f7b4af0aad808a" id="r_aeb5f6aa936d84f0c84f7b4af0aad808a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeb5f6aa936d84f0c84f7b4af0aad808a">Stop</a> ()</td></tr>
+<tr class="memdesc:aeb5f6aa936d84f0c84f7b4af0aad808a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the broker.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a9c91d4e1eef6a50ad306c0c876e1d6f1" id="r_a9c91d4e1eef6a50ad306c0c876e1d6f1"><td class="memItemLeft" align="right" valign="top"><a id="a9c91d4e1eef6a50ad306c0c876e1d6f1" name="a9c91d4e1eef6a50ad306c0c876e1d6f1"></a>
 std::atomic&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>connected_</b> = false</td></tr>
+<tr class="memdesc:a9c91d4e1eef6a50ad306c0c876e1d6f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the broker is connected. <br /></td></tr>
 <tr class="memitem:af91d7e91daec4fafb3487d9193df203a" id="r_af91d7e91daec4fafb3487d9193df203a"><td class="memItemLeft" align="right" valign="top"><a id="af91d7e91daec4fafb3487d9193df203a" name="af91d7e91daec4fafb3487d9193df203a"></a>
 std::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>queue_mutex_</b></td></tr>
+<tr class="memdesc:af91d7e91daec4fafb3487d9193df203a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queue (lock) mutex. <br /></td></tr>
 <tr class="memitem:a12e8519c2a7b1216b786bbc59e1f435c" id="r_a12e8519c2a7b1216b786bbc59e1f435c"><td class="memItemLeft" align="right" valign="top"><a id="a12e8519c2a7b1216b786bbc59e1f435c" name="a12e8519c2a7b1216b786bbc59e1f435c"></a>
 std::vector&lt; std::shared_ptr&lt; <a class="el" href="classbus_1_1_i_bus_message_queue.html">IBusMessageQueue</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>publishers_</b></td></tr>
+<tr class="memdesc:a12e8519c2a7b1216b786bbc59e1f435c"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of attached publishers. <br /></td></tr>
 <tr class="memitem:a9b7d1258060fea10f52ebfdfe0982561" id="r_a9b7d1258060fea10f52ebfdfe0982561"><td class="memItemLeft" align="right" valign="top"><a id="a9b7d1258060fea10f52ebfdfe0982561" name="a9b7d1258060fea10f52ebfdfe0982561"></a>
 std::vector&lt; std::shared_ptr&lt; <a class="el" href="classbus_1_1_i_bus_message_queue.html">IBusMessageQueue</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>subscribers_</b></td></tr>
+<tr class="memdesc:a9b7d1258060fea10f52ebfdfe0982561"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of attached subscribers. <br /></td></tr>
 <tr class="memitem:ae31567774322571ac0459a53f18bcb2a" id="r_ae31567774322571ac0459a53f18bcb2a"><td class="memItemLeft" align="right" valign="top"><a id="ae31567774322571ac0459a53f18bcb2a" name="ae31567774322571ac0459a53f18bcb2a"></a>
 std::atomic&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>stop_thread_</b> = false</td></tr>
+<tr class="memdesc:ae31567774322571ac0459a53f18bcb2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the thread shall stop. <br /></td></tr>
 <tr class="memitem:ab8bb260041e91f5f4f2bfc06bab00cae" id="r_ab8bb260041e91f5f4f2bfc06bab00cae"><td class="memItemLeft" align="right" valign="top"><a id="ab8bb260041e91f5f4f2bfc06bab00cae" name="ab8bb260041e91f5f4f2bfc06bab00cae"></a>
 std::thread&#160;</td><td class="memItemRight" valign="bottom"><b>thread_</b></td></tr>
+<tr class="memdesc:ab8bb260041e91f5f4f2bfc06bab00cae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Working thread. <br /></td></tr>
 </table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The user should use the BusInterFaceFactory::CreateBroker() function when creating an object. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a5529534b58a1171c1ede704716e10385" name="a5529534b58a1171c1ede704716e10385"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5529534b58a1171c1ede704716e10385">&#9670;&#160;</a></span>Address() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string &amp; bus::IBusMessageBroker::Address </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>TCP/IP address. </dd></dl>
+
+</div>
+</div>
+<a id="a7800d80bffc1507e5b5f99c2dc01527a" name="a7800d80bffc1507e5b5f99c2dc01527a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7800d80bffc1507e5b5f99c2dc01527a">&#9670;&#160;</a></span>Address() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bus::IBusMessageBroker::Address </td>
+          <td>(</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>address</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The function set the TCP/IP address. TCP/IP server uses only 2 addresses. The address '127.0.0.1' means that only applications on this computer can coonects to this server. The address '0.0.0.0.' means that any computer on the network can connect to this server. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">address</td><td>TCP/IP host address. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a954ac1ba7817daef47b2254ef0b8c2d2" name="a954ac1ba7817daef47b2254ef0b8c2d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a954ac1ba7817daef47b2254ef0b8c2d2">&#9670;&#160;</a></span>CreatePublisher()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::shared_ptr&lt; <a class="el" href="classbus_1_1_i_bus_message_queue.html">IBusMessageQueue</a> &gt; bus::IBusMessageBroker::CreatePublisher </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Create a publisher queue. A publisher send (push) messages while a subscriber receive (pop) messages. </p><dl class="section return"><dt>Returns</dt><dd>Smart pointer to a message queue. </dd></dl>
+
+</div>
+</div>
+<a id="a2078e0ee7febf22bbcf838ffa880beab" name="a2078e0ee7febf22bbcf838ffa880beab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2078e0ee7febf22bbcf838ffa880beab">&#9670;&#160;</a></span>CreateSubscriber()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::shared_ptr&lt; <a class="el" href="classbus_1_1_i_bus_message_queue.html">IBusMessageQueue</a> &gt; bus::IBusMessageBroker::CreateSubscriber </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Create a subscriber queue. A publisher send (push) messages while a subscriber receive (pop) messages. </p><dl class="section return"><dt>Returns</dt><dd>Smart pointer to a message queue. </dd></dl>
+
+</div>
+</div>
+<a id="a24062c02c8245407e9bf099598b67414" name="a24062c02c8245407e9bf099598b67414"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24062c02c8245407e9bf099598b67414">&#9670;&#160;</a></span>DetachPublisher()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bus::IBusMessageBroker::DetachPublisher </td>
+          <td>(</td>
+          <td class="paramtype">const std::shared_ptr&lt; <a class="el" href="classbus_1_1_i_bus_message_queue.html">IBusMessageQueue</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>publisher</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Detach the publisher from its broker. This function is rarely used when using smart pointers. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">publisher</td><td>Smart pointer to a publisher. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a74ada6d8bfdc0409a62374e9113bcff1" name="a74ada6d8bfdc0409a62374e9113bcff1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74ada6d8bfdc0409a62374e9113bcff1">&#9670;&#160;</a></span>DetachSubscriber()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bus::IBusMessageBroker::DetachSubscriber </td>
+          <td>(</td>
+          <td class="paramtype">const std::shared_ptr&lt; <a class="el" href="classbus_1_1_i_bus_message_queue.html">IBusMessageQueue</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>subscriber</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Detach the subscriber from its broker. This function is rarely used when using smart pointers. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">subscriber</td><td>Smart pointer to a publisher. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad2761c146a2f42afb5392f458dc5ec7a" name="ad2761c146a2f42afb5392f458dc5ec7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2761c146a2f42afb5392f458dc5ec7a">&#9670;&#160;</a></span>IsConnected()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool bus::IBusMessageBroker::IsConnected </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>This function is normally only used for client objects and indicate if the client is connected to the server. A client should wait until it is connected to send messages. </p><dl class="section return"><dt>Returns</dt><dd>True if it is connected. </dd></dl>
+
+</div>
+</div>
+<a id="ae37f0eb9fa20d0c24bf053a2240cfa79" name="ae37f0eb9fa20d0c24bf053a2240cfa79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae37f0eb9fa20d0c24bf053a2240cfa79">&#9670;&#160;</a></span>MemorySize() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t bus::IBusMessageBroker::MemorySize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Internal memory size; </dd></dl>
+
+</div>
+</div>
+<a id="ad99f32c5fa9d1460e6c1fc61b35cd84b" name="ad99f32c5fa9d1460e6c1fc61b35cd84b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad99f32c5fa9d1460e6c1fc61b35cd84b">&#9670;&#160;</a></span>MemorySize() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bus::IBusMessageBroker::MemorySize </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>This function is deprecated as the shared memory is fixed to 16kB. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>Size of internal memory. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a87e1a49fd130746111fba4bbacbcf4cb" name="a87e1a49fd130746111fba4bbacbcf4cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87e1a49fd130746111fba4bbacbcf4cb">&#9670;&#160;</a></span>Name() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string &amp; bus::IBusMessageBroker::Name </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Shared memory name. </dd></dl>
+
+</div>
+</div>
+<a id="a98a784f63b00c4a7831ad35b82e611a4" name="a98a784f63b00c4a7831ad35b82e611a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98a784f63b00c4a7831ad35b82e611a4">&#9670;&#160;</a></span>Name() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bus::IBusMessageBroker::Name </td>
+          <td>(</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Name of the brokers shared memory. This is also used when referencing the broker in log messages. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Shared memory name. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abc40292fdca02fa5ed88afee540eb5e2" name="abc40292fdca02fa5ed88afee540eb5e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc40292fdca02fa5ed88afee540eb5e2">&#9670;&#160;</a></span>NofPublishers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t bus::IBusMessageBroker::NofPublishers </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Number of publishers </dd></dl>
+
+</div>
+</div>
+<a id="a0983d4444875ce8938bf938b5934e843" name="a0983d4444875ce8938bf938b5934e843"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0983d4444875ce8938bf938b5934e843">&#9670;&#160;</a></span>NofSubscribers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t bus::IBusMessageBroker::NofSubscribers </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Number of subscribers. </dd></dl>
+
+</div>
+</div>
+<a id="ad0be3ab4d0528173e58ea90dc17addda" name="ad0be3ab4d0528173e58ea90dc17addda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0be3ab4d0528173e58ea90dc17addda">&#9670;&#160;</a></span>Port() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t bus::IBusMessageBroker::Port </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>TCP/IP port. </dd></dl>
+
+</div>
+</div>
+<a id="aa1cab095cabb19304504d726379fe60f" name="aa1cab095cabb19304504d726379fe60f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1cab095cabb19304504d726379fe60f">&#9670;&#160;</a></span>Port() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bus::IBusMessageBroker::Port </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>port</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The port number should be between 1024 and 49151. The internal standard is to use port numbers 42511 - 42998. The util library uses the port range 42511 - 42610 This library uses the port range 42611 - 42710 </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">port</td><td>TCP/IP port. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5f52ac0dd9e041c1d8acd4b779051db1" name="a5f52ac0dd9e041c1d8acd4b779051db1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f52ac0dd9e041c1d8acd4b779051db1">&#9670;&#160;</a></span>Start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void bus::IBusMessageBroker::Start </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>This function is called to start the broker. This start any needed working thread and creating shared memory. </p>
+
+</div>
+</div>
+<a id="aeb5f6aa936d84f0c84f7b4af0aad808a" name="aeb5f6aa936d84f0c84f7b4af0aad808a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb5f6aa936d84f0c84f7b4af0aad808a">&#9670;&#160;</a></span>Stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void bus::IBusMessageBroker::Stop </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The function stop any working thread and removes any shared memory. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/bus/<a class="el" href="ibusmessagebroker_8h_source.html">ibusmessagebroker.h</a></li>
 </ul>
@@ -183,7 +630,7 @@ std::thread&#160;</td><td class="memItemRight" valign="bottom"><b>thread_</b></t
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>bus</b></li><li class="navelem"><a href="classbus_1_1_i_bus_message_broker.html">IBusMessageBroker</a></li>
+    <li class="navelem"><a href="namespacebus.html">bus</a></li><li class="navelem"><a href="classbus_1_1_i_bus_message_broker.html">IBusMessageBroker</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
   </ul>
 </div>

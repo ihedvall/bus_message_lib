@@ -65,7 +65,7 @@ add_library(bus-message-lib
         src/ibusmessagebroker.cpp
         include/bus/ibusmessagebroker.h
         src/simulatebroker.cpp
-        include/bus/simulatebroker.h
+        src/simulatebroker.h
         src/simulatequeue.cpp
         src/simulatequeue.h
         src/buslogstream.cpp
@@ -103,8 +103,8 @@ if (BUS_DOC)
     set(DOXYGEN_REPEAT_BRIEF NO)
     set(DOXYGEN_PROJECT_NAME "Bus Messages")
     set(DOXYGEN_PROJECT_BRIEF "Bus Message Serialization Library")
-    set(DOXYGEN_PROJECT_LOGO img/bus.png)
-    set(DOXYGEN_PROJECT_ICON img/bus.ico)
+    set(DOXYGEN_PROJECT_LOGO mkdocs/img/logo.png)
+    set(DOXYGEN_PROJECT_ICON mkdocs/img/favicon.ico)
     set(DOXYGEN_VERSION "1.0")
     set(DOXYGEN_DISABLE_INDEX YES)
     set(DOXYGEN_GENERATE_TREEVIEW YES)

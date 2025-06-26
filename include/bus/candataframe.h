@@ -60,9 +60,12 @@ enum class CanErrorType : uint8_t {
  */
 class CanDataFrame : public IBusMessage  {
  public:
-    CanDataFrame();
+    CanDataFrame(); ///< Deafult constructor.
     explicit CanDataFrame(CanErrorType type) = delete;
+
+    /** \brief Create a message from a raw byte array.*/
     explicit CanDataFrame(const std::shared_ptr<IBusMessage>& message);
+
   /** \brief DBC message ID. Note that bit 31 indicate extended ID.
    *
    * The message ID is the CAN ID + highest bit 31 set if the CAN ID
@@ -80,6 +83,7 @@ class CanDataFrame : public IBusMessage  {
    */
   [[nodiscard]] uint32_t MessageId() const;
 
+  /** \brief Returns the 11/27 bit CAN ID. */
   void CanId(uint32_t can_id);
 
   /** \brief 29/11 bit CAN message ID. Note that bit 31 is not used.
@@ -122,7 +126,10 @@ class CanDataFrame : public IBusMessage  {
    */
   [[nodiscard]] uint8_t Dlc() const { return dlc_;};
 
+  /** \brief Sets the CRC code. */
   void Crc(uint32_t crc) { crc_ = crc;};
+
+  /** \brief Returns the CRC code. */
   [[nodiscard]] uint32_t Crc() const { return crc_;};
 
   /** \brief Sets number of data bytes.
@@ -189,8 +196,19 @@ class CanDataFrame : public IBusMessage  {
 
   static size_t DlcToLength(uint8_t dlc); ///< Return the data length by DLC.
 
-  /** \brief Creates an MDF sample record. Used primarily internally. */
+  /** \brief Serialize the message.
+   *
+   * Serialize the message to a destination byte array.
+   * The destination array size is set by the function.
+   * @param dest Destination buffer.
+   */
   void ToRaw(std::vector<uint8_t>& dest) const override;
+
+  /** \brief Deserialize the message.
+   *
+   * Reads in the byte array and desrialize the message.
+   * @param source Source buffer.
+   */
   void FromRaw(const std::vector<uint8_t>& source) override;
  private:
   uint32_t message_id_ = 0; ///< Message ID with bit 31 set if extended ID.

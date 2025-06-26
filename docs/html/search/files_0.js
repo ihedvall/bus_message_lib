@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['candataframe_2eh_0',['candataframe.h',['../candataframe_8h.html',1,'']]]
+  ['businterfacefactory_2eh_0',['businterfacefactory.h',['../businterfacefactory_8h.html',1,'']]],
+  ['buslogstream_2eh_1',['buslogstream.h',['../buslogstream_8h.html',1,'']]]
 ];

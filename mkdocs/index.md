@@ -1,30 +1,45 @@
-# Welcome to MkDocs
-``` mermaid
-graph TB
-  A[Start] --> B{Error?};
-  B -->|Yes| C[Hmm...];
-  C --> D[Debug];
-  D --> B;
-  B ---->|No| E[Yay!];
-```
-```c++
-class A {
-}
-```
+# Summary
+The Bus Message Library is mainly a serialization library of bus messages. 
+Optionally, it also includes basic inter-process communication libraries 
+for shared memory and TCP/IP communications.
+The main purpose is to isolate the bus driver software from the rest of
+the application as the driver software normally is dependent on operating
+system and manufacturer.
 
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+## Serialization of Bus Messages
+The library supports the following buses:
 
-## Commands
+- **_CAN including CAN-FD_**.
+- **_LIN_**.
+- **_FlexRay_**.
+- **_MOST_**.
+- **_Ethernet (ETH)_**.
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+## Communication Interfaces
+The library supports the following communication interfaces:
 
-## Project layout
+- **_Shared Memory Broker_**. Single shared memory message bus.
+- **_Shared Memory Server_**. Tx/Rx shared memory message bus.
+- **_Shared Memory Client_**. Tx/Rx shared memory message client.
+- **_TCP/IP Message Broker._** Single shared memory with a TCP/IP server.
+- **_TCP/IP Message Client_**. Client for TCP/IP servers and brokers.
+- **_TCP/IP Message Server_**. Tx/Rx message TCP/IP client.
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+A broker is used by applications that have one or more publishers and 
+one or more subscribers, typical in logger applications. 
+A server is used in applications where bidirectional traffic is needed,
+typical when running against bus drivers.
+
+## Applications
+A number of applications use this library. 
+Some of them are hosted inside this repository or have their own repository.
+The following applications are based upon this library:
+
+- **_Bus to MQTT_**. Subscribe to bus messages, parse the message to engineering values and forward to an MQTT broker.
+- **_Bus to MDF_**. Subscribe to bus messages and log them onto an MDF file.
+- **_Bus to Listen_**. Subscribe to bus messages and display the messages on a Listen Window.
+- **_Bus Daemon_**. Simple executable that starts various communication interfaces.
+- **_Bus Simulator_**. Simple GUI application that generates bus messages from an MDF file.
+
+

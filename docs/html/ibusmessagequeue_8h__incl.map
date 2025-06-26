@@ -1,0 +1,24 @@
+<map id="include/bus/ibusmessagequeue.h" name="include/bus/ibusmessagequeue.h">
+<area shape="rect" id="Node000001" title="Defines an interface against a message queue." alt="" coords="216,5,431,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,155,66,181"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="226,35,131,55,92,67,67,82,56,94,49,109,40,140,35,139,44,107,52,92,63,78,90,62,130,49,225,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="295,80,352,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="326,33,326,64,321,64,321,33"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="107,155,164,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="217,35,132,54,98,67,78,82,72,97,77,113,90,129,106,143,102,147,86,132,73,115,67,97,73,78,96,62,130,49,216,30"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="205,155,274,181"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="317,34,286,81,254,142,249,139,281,79,312,31"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="376,80,434,107"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="339,31,381,68,378,72,336,35"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="457,80,518,107"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="353,30,446,71,444,76,351,35"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="541,80,602,107"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="367,30,527,76,526,81,366,35"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="626,80,752,107"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="388,30,612,74,611,79,387,35"/>
+<area shape="rect" id="Node000010" href="$ibusmessage_8h.html" title="Defines an interface against a bus message." alt="" coords="87,80,221,107"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="295,35,199,76,197,71,293,30"/>
+<area shape="poly" id="edge10_Node000010_Node000002" title=" " alt="" coords="135,109,70,149,68,144,132,105"/>
+<area shape="poly" id="edge12_Node000010_Node000004" title=" " alt="" coords="153,108,145,140,140,139,148,107"/>
+<area shape="poly" id="edge11_Node000010_Node000005" title=" " alt="" coords="171,105,215,143,212,147,167,109"/>
+</map>

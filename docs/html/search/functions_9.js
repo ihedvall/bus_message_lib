@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['wakeup_0',['WakeUp',['../classbus_1_1_can_data_frame.html#a17d24ad3337d8ba0748278364d9552ec',1,'bus::CanDataFrame::WakeUp(bool wake_up)'],['../classbus_1_1_can_data_frame.html#aab417e02d1d2744ca06093e31d049c64',1,'bus::CanDataFrame::WakeUp() const']]]
+  ['name_0',['Name',['../classbus_1_1_i_bus_message_broker.html#a98a784f63b00c4a7831ad35b82e611a4',1,'bus::IBusMessageBroker::Name(std::string name)'],['../classbus_1_1_i_bus_message_broker.html#a87e1a49fd130746111fba4bbacbcf4cb',1,'bus::IBusMessageBroker::Name() const']]],
+  ['nofpublishers_1',['NofPublishers',['../classbus_1_1_i_bus_message_broker.html#abc40292fdca02fa5ed88afee540eb5e2',1,'bus::IBusMessageBroker']]],
+  ['nofsubscribers_2',['NofSubscribers',['../classbus_1_1_i_bus_message_broker.html#a0983d4444875ce8938bf938b5934e843',1,'bus::IBusMessageBroker']]]
 ];

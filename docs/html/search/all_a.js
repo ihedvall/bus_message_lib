@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['simulatebroker_0',['SimulateBroker',['../classbus_1_1_simulate_broker.html',1,'bus']]],
-  ['singlewire_1',['SingleWire',['../classbus_1_1_can_data_frame.html#a4463252f1dd8f1b5d9499cc7c7bfb2ce',1,'bus::CanDataFrame::SingleWire(bool single_wire)'],['../classbus_1_1_can_data_frame.html#a0cc65291c3d428a26105c33f29fb953c',1,'bus::CanDataFrame::SingleWire() const']]],
-  ['srr_2',['Srr',['../classbus_1_1_can_data_frame.html#a5ad2b7a70e713f25e1f1221779990ed0',1,'bus::CanDataFrame::Srr(bool srr)'],['../classbus_1_1_can_data_frame.html#a8f4538c231c3cf3024857658580602b9',1,'bus::CanDataFrame::Srr() const']]],
-  ['summary_3',['Summary',['../index.html#autotoc_md0',1,'']]]
+  ['name_0',['Name',['../classbus_1_1_i_bus_message_broker.html#a98a784f63b00c4a7831ad35b82e611a4',1,'bus::IBusMessageBroker::Name(std::string name)'],['../classbus_1_1_i_bus_message_broker.html#a87e1a49fd130746111fba4bbacbcf4cb',1,'bus::IBusMessageBroker::Name() const']]],
+  ['nofpublishers_1',['NofPublishers',['../classbus_1_1_i_bus_message_broker.html#abc40292fdca02fa5ed88afee540eb5e2',1,'bus::IBusMessageBroker']]],
+  ['nofsubscribers_2',['NofSubscribers',['../classbus_1_1_i_bus_message_broker.html#a0983d4444875ce8938bf938b5934e843',1,'bus::IBusMessageBroker']]]
 ];

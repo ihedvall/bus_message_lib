@@ -57,15 +57,26 @@ extra:
           name: Ingemar Hedvall Linkedin Page
 
 markdown_extensions:
-    - pymdownx.superfences:
-          custom_fences:
-              - name: mermaid
-                class: mermaid
-                format: !!python/name:pymdownx.superfences.fence_code_format
+  - admonition
+  - pymdownx.superfences:
+      custom_fences:
+         - name: mermaid
+           class: mermaid
+           format: !!python/name:pymdownx.superfences.fence_code_format
 
 nav:
     - Home: index.md
-    - Reference: html/index.html
-    - About: 
-        - about.md
-        - about/license.md
+    - Bus Messages:
+        - Message Header: message/message_header.md
+        - Control Messages: message/control_message.md
+        - CAN Messages: message/can_message.md
+    - Communication Interfaces:
+        - Brokers or Servers: interface/broker_and_server.md
+        - Shared Memory Broker: interface/shared_memory_broker.md
+        - TCP/IP Broker: interface/tcp_broker.md
+        - Shared Memory Server: interface/shared_memory_server.md
+        - Shared Memory Client: interface/shared_memory_client.md
+        - TCP/IP Server: interface/tcp_server.md
+        - TCP/IP Client: interface/tcp_client.md
+    - API Reference: html/index.html
+    - License: license.md

@@ -2,12 +2,12 @@
 * Copyright 2025 Ingemar Hedvall
 * SPDX-License-Identifier: MIT
  */
-#include <chrono>
-#include <algorithm>
-
 #include <gtest/gtest.h>
 
-#include "bus/simulatebroker.h"
+#include <algorithm>
+#include <chrono>
+
+#include "../../src/simulatebroker.h"
 #include "bus/buslogstream.h"
 #include "bus/candataframe.h"
 

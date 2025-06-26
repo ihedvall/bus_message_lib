@@ -1,8 +1,13 @@
 var classbus_1_1_can_data_frame =
 [
+    [ "CanDataFrame", "classbus_1_1_can_data_frame.html#aa170ce8aec8754f45d44847ce659edd4", null ],
+    [ "CanDataFrame", "classbus_1_1_can_data_frame.html#a42654ea28303f48b7b0a5197482ef69d", null ],
     [ "Brs", "classbus_1_1_can_data_frame.html#a64044961759bec7e58f09e444d83412f", null ],
     [ "Brs", "classbus_1_1_can_data_frame.html#a3067fc55aa85f22fb1c9347d47d638a5", null ],
     [ "CanId", "classbus_1_1_can_data_frame.html#a21ebe79db1f1e3e6933c907c7ef1b7f3", null ],
+    [ "CanId", "classbus_1_1_can_data_frame.html#a1516ad59d18cb9e64aa7d38fe65988cd", null ],
+    [ "Crc", "classbus_1_1_can_data_frame.html#a1aa17ebb28d019e0cb8f15610a402e37", null ],
+    [ "Crc", "classbus_1_1_can_data_frame.html#a3fdbb21365da3d113a1884c3c8f07b17", null ],
     [ "DataBytes", "classbus_1_1_can_data_frame.html#a600dcb18149f79aa5e9e0252f48aabcd", null ],
     [ "DataBytes", "classbus_1_1_can_data_frame.html#a7f871183d9565e6080d95494492998fa", null ],
     [ "DataLength", "classbus_1_1_can_data_frame.html#a1b2a8fccc08ff8d3cdfb2707bd4d7644", null ],
@@ -19,6 +24,7 @@ var classbus_1_1_can_data_frame =
     [ "ExtendedId", "classbus_1_1_can_data_frame.html#a62cae9d8cceb41e3de2206fe2925225a", null ],
     [ "FrameDuration", "classbus_1_1_can_data_frame.html#a2aa5cceb1ce7c9dd6aeac3ff83e15cdb", null ],
     [ "FrameDuration", "classbus_1_1_can_data_frame.html#aaece2901ecb02190b6b0c2b3f35c7ca7", null ],
+    [ "FromRaw", "classbus_1_1_can_data_frame.html#ae50c32647a0fd4018ccee2460edf5978", null ],
     [ "MessageId", "classbus_1_1_can_data_frame.html#a3af01b34063d2ae4369e671d1e250590", null ],
     [ "MessageId", "classbus_1_1_can_data_frame.html#a662bb1275c6654834a92d00c179a9590", null ],
     [ "R0", "classbus_1_1_can_data_frame.html#a13d937b401f28dfd12b990f984582009", null ],

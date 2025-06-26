@@ -6,6 +6,7 @@
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Bus Messages: include/bus/interface/businterfacefactory.h Source File</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
@@ -30,6 +31,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
    <div id="projectname">Bus Messages<span id="projectnumber">&#160;1.0</span>
    </div>
@@ -99,47 +101,60 @@ $(function(){initNavTree('businterfacefactory_8h_source.html','',''); });
   <div class="headertitle"><div class="title">businterfacefactory.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
+<a href="businterfacefactory_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">* Copyright 2025 Ingemar Hedvall</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">* SPDX-License-Identifier: MIT</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">*/</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;bus/ibusmessagebroker.h&quot;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span>bus {</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">enum class</span> BrokerType : <span class="keywordtype">int</span> {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  SimulateBrokerType,</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  SharedMemoryBrokerType,</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  SharedMemoryServerType,</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  SharedMemoryClientType,</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  TcpBrokerType,</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  TcpServerType,</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  TcpClientType,</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>};</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="foldopen" id="foldopen00024" data-start="{" data-end="};">
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classbus_1_1_bus_interface_factory.html">   24</a></span><span class="keyword">class </span><a class="code hl_class" href="classbus_1_1_bus_interface_factory.html">BusInterfaceFactory</a> {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <span class="keyword">static</span> std::unique_ptr&lt;IBusMessageBroker&gt; CreateBroker(BrokerType type);</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>};</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="ibusmessagebroker_8h.html">bus/ibusmessagebroker.h</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacebus.html">bus</a> {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span></div>
+<div class="foldopen" id="foldopen00021" data-start="{" data-end="};">
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="namespacebus.html#a0f5c4398307af4863ff7d70052acdd57">   21</a></span><span class="keyword">enum class</span> <a class="code hl_enumeration" href="namespacebus.html#a0f5c4398307af4863ff7d70052acdd57">BrokerType</a> : <span class="keywordtype">int</span> {</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="namespacebus.html#a0f5c4398307af4863ff7d70052acdd57ae7f341d1f3dd32285888509cabe5b563">   22</a></span>  <a class="code hl_enumvalue" href="namespacebus.html#a0f5c4398307af4863ff7d70052acdd57ae7f341d1f3dd32285888509cabe5b563">SimulateBrokerType</a>, </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="namespacebus.html#a0f5c4398307af4863ff7d70052acdd57a5dce8118db1a6dbe1a45bcb3b9d81c60">   23</a></span>  <a class="code hl_enumvalue" href="namespacebus.html#a0f5c4398307af4863ff7d70052acdd57a5dce8118db1a6dbe1a45bcb3b9d81c60">SharedMemoryBrokerType</a>, </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="namespacebus.html#a0f5c4398307af4863ff7d70052acdd57a8f8509b6a817d2a1ff40610930a86976">   24</a></span>  <a class="code hl_enumvalue" href="namespacebus.html#a0f5c4398307af4863ff7d70052acdd57a8f8509b6a817d2a1ff40610930a86976">SharedMemoryServerType</a>, </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="namespacebus.html#a0f5c4398307af4863ff7d70052acdd57aa63c75f76bd730dad8d00da0976af578">   25</a></span>  <a class="code hl_enumvalue" href="namespacebus.html#a0f5c4398307af4863ff7d70052acdd57aa63c75f76bd730dad8d00da0976af578">SharedMemoryClientType</a>, </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="namespacebus.html#a0f5c4398307af4863ff7d70052acdd57a92f949803eb5b745ecece70152018656">   26</a></span>  <a class="code hl_enumvalue" href="namespacebus.html#a0f5c4398307af4863ff7d70052acdd57a92f949803eb5b745ecece70152018656">TcpBrokerType</a>, </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="namespacebus.html#a0f5c4398307af4863ff7d70052acdd57aa23242ea53162dbde1236c4d5367e986">   27</a></span>  <a class="code hl_enumvalue" href="namespacebus.html#a0f5c4398307af4863ff7d70052acdd57aa23242ea53162dbde1236c4d5367e986">TcpServerType</a>, </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="namespacebus.html#a0f5c4398307af4863ff7d70052acdd57ab0eaccb4465b3b00f9505acc26152d44">   28</a></span>  <a class="code hl_enumvalue" href="namespacebus.html#a0f5c4398307af4863ff7d70052acdd57ab0eaccb4465b3b00f9505acc26152d44">TcpClientType</a>, </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>};</div>
 </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>} <span class="comment">// bus::interface</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="ttc" id="aclassbus_1_1_bus_interface_factory_html"><div class="ttname"><a href="classbus_1_1_bus_interface_factory.html">bus::BusInterfaceFactory</a></div><div class="ttdef"><b>Definition</b> businterfacefactory.h:24</div></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span></div>
+<div class="foldopen" id="foldopen00036" data-start="{" data-end="};">
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classbus_1_1_bus_interface_factory.html">   36</a></span><span class="keyword">class </span><a class="code hl_class" href="classbus_1_1_bus_interface_factory.html">BusInterfaceFactory</a> {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classbus_1_1_bus_interface_factory.html#acfd98d88981a1abffa1f1bb94a0f3119">   46</a></span>  <span class="keyword">static</span> std::unique_ptr&lt;IBusMessageBroker&gt; <a class="code hl_function" href="classbus_1_1_bus_interface_factory.html#acfd98d88981a1abffa1f1bb94a0f3119">CreateBroker</a>(<a class="code hl_enumeration" href="namespacebus.html#a0f5c4398307af4863ff7d70052acdd57">BrokerType</a> type);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>};</div>
+</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>} <span class="comment">// bus::interface</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="ttc" id="aclassbus_1_1_bus_interface_factory_html"><div class="ttname"><a href="classbus_1_1_bus_interface_factory.html">bus::BusInterfaceFactory</a></div><div class="ttdoc">Factory class that create brokers/servers and clients.</div><div class="ttdef"><b>Definition</b> businterfacefactory.h:36</div></div>
+<div class="ttc" id="aclassbus_1_1_bus_interface_factory_html_acfd98d88981a1abffa1f1bb94a0f3119"><div class="ttname"><a href="classbus_1_1_bus_interface_factory.html#acfd98d88981a1abffa1f1bb94a0f3119">bus::BusInterfaceFactory::CreateBroker</a></div><div class="ttdeci">static std::unique_ptr&lt; IBusMessageBroker &gt; CreateBroker(BrokerType type)</div><div class="ttdoc">Create a broker/server or client.</div></div>
+<div class="ttc" id="aibusmessagebroker_8h_html"><div class="ttname"><a href="ibusmessagebroker_8h.html">ibusmessagebroker.h</a></div><div class="ttdoc">Defines an interface against borkers, servers and clients.</div></div>
+<div class="ttc" id="anamespacebus_html"><div class="ttname"><a href="namespacebus.html">bus</a></div><div class="ttdoc">Main namespace for the MDF library.</div><div class="ttdef"><b>Definition</b> buslogstream.h:24</div></div>
+<div class="ttc" id="anamespacebus_html_a0f5c4398307af4863ff7d70052acdd57"><div class="ttname"><a href="namespacebus.html#a0f5c4398307af4863ff7d70052acdd57">bus::BrokerType</a></div><div class="ttdeci">BrokerType</div><div class="ttdoc">Defines the types of brokers/servers and clients the factory interface can create.</div><div class="ttdef"><b>Definition</b> businterfacefactory.h:21</div></div>
+<div class="ttc" id="anamespacebus_html_a0f5c4398307af4863ff7d70052acdd57a5dce8118db1a6dbe1a45bcb3b9d81c60"><div class="ttname"><a href="namespacebus.html#a0f5c4398307af4863ff7d70052acdd57a5dce8118db1a6dbe1a45bcb3b9d81c60">bus::BrokerType::SharedMemoryBrokerType</a></div><div class="ttdeci">@ SharedMemoryBrokerType</div><div class="ttdoc">Shared memory broker.</div><div class="ttdef"><b>Definition</b> businterfacefactory.h:23</div></div>
+<div class="ttc" id="anamespacebus_html_a0f5c4398307af4863ff7d70052acdd57a8f8509b6a817d2a1ff40610930a86976"><div class="ttname"><a href="namespacebus.html#a0f5c4398307af4863ff7d70052acdd57a8f8509b6a817d2a1ff40610930a86976">bus::BrokerType::SharedMemoryServerType</a></div><div class="ttdeci">@ SharedMemoryServerType</div><div class="ttdoc">Shared memory TX/RX server.</div><div class="ttdef"><b>Definition</b> businterfacefactory.h:24</div></div>
+<div class="ttc" id="anamespacebus_html_a0f5c4398307af4863ff7d70052acdd57a92f949803eb5b745ecece70152018656"><div class="ttname"><a href="namespacebus.html#a0f5c4398307af4863ff7d70052acdd57a92f949803eb5b745ecece70152018656">bus::BrokerType::TcpBrokerType</a></div><div class="ttdeci">@ TcpBrokerType</div><div class="ttdoc">Shared memory broker with a TCP/IP server.</div><div class="ttdef"><b>Definition</b> businterfacefactory.h:26</div></div>
+<div class="ttc" id="anamespacebus_html_a0f5c4398307af4863ff7d70052acdd57aa23242ea53162dbde1236c4d5367e986"><div class="ttname"><a href="namespacebus.html#a0f5c4398307af4863ff7d70052acdd57aa23242ea53162dbde1236c4d5367e986">bus::BrokerType::TcpServerType</a></div><div class="ttdeci">@ TcpServerType</div><div class="ttdoc">TCP/IP TX/RX server.</div><div class="ttdef"><b>Definition</b> businterfacefactory.h:27</div></div>
+<div class="ttc" id="anamespacebus_html_a0f5c4398307af4863ff7d70052acdd57aa63c75f76bd730dad8d00da0976af578"><div class="ttname"><a href="namespacebus.html#a0f5c4398307af4863ff7d70052acdd57aa63c75f76bd730dad8d00da0976af578">bus::BrokerType::SharedMemoryClientType</a></div><div class="ttdeci">@ SharedMemoryClientType</div><div class="ttdoc">Shared memory TX/RX client.</div><div class="ttdef"><b>Definition</b> businterfacefactory.h:25</div></div>
+<div class="ttc" id="anamespacebus_html_a0f5c4398307af4863ff7d70052acdd57ab0eaccb4465b3b00f9505acc26152d44"><div class="ttname"><a href="namespacebus.html#a0f5c4398307af4863ff7d70052acdd57ab0eaccb4465b3b00f9505acc26152d44">bus::BrokerType::TcpClientType</a></div><div class="ttdeci">@ TcpClientType</div><div class="ttdoc">TCP/IP TX/RX client.</div><div class="ttdef"><b>Definition</b> businterfacefactory.h:28</div></div>
+<div class="ttc" id="anamespacebus_html_a0f5c4398307af4863ff7d70052acdd57ae7f341d1f3dd32285888509cabe5b563"><div class="ttname"><a href="namespacebus.html#a0f5c4398307af4863ff7d70052acdd57ae7f341d1f3dd32285888509cabe5b563">bus::BrokerType::SimulateBrokerType</a></div><div class="ttdeci">@ SimulateBrokerType</div><div class="ttdoc">Only for internal test usage.</div><div class="ttdef"><b>Definition</b> businterfacefactory.h:22</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_89752c99dd868dcc5ac2d98009bb2a99.html">bus</a></li><li class="navelem"><a href="dir_1f624a4e9f42fe292f222bb443c5a070.html">interface</a></li><li class="navelem"><b>businterfacefactory.h</b></li>
+    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_89752c99dd868dcc5ac2d98009bb2a99.html">bus</a></li><li class="navelem"><a href="dir_1f624a4e9f42fe292f222bb443c5a070.html">interface</a></li><li class="navelem"><a href="businterfacefactory_8h.html">businterfacefactory.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
   </ul>
 </div>

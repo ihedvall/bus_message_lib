@@ -6,6 +6,7 @@
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Bus Messages: include/bus/buslogstream.h Source File</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
@@ -30,6 +31,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
    <div id="projectname">Bus Messages<span id="projectnumber">&#160;1.0</span>
    </div>
@@ -99,88 +101,118 @@ $(function(){initNavTree('buslogstream_8h_source.html','',''); });
   <div class="headertitle"><div class="title">buslogstream.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
+<a href="buslogstream_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">* Copyright 2025 Ingemar Hedvall</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">* SPDX-License-Identifier: MIT</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">*/</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;string_view&gt;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;atomic&gt;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;sstream&gt;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;source_location&gt;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;functional&gt;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">namespace </span>bus {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">enum class</span> BusLogSeverity : uint8_t {</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  kTrace = 0,      </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  kDebug = 1,      </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  kInfo = 2,       </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  kNotice = 3,     </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  kWarning = 4,    </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  kError = 5,      </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  kCritical = 6,   </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  kAlert = 7,      </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  kEmergency = 8   </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>};</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">static</span> std::string_view BusLogServerityToText(BusLogSeverity severity);</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#define BUS_TRACE() BusLogStream(std::source_location::current(), BusLogSeverity::kTrace)</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#define BUS_DEBUG() BusLogStream(std::source_location::current(), BusLogSeverity::kDebug)</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#define BUS_INFO() BusLogStream(std::source_location::current(), BusLogSeverity::kInfo)</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#define BUS_NOTICE() BusLogStream(std::source_location::current(), BusLogSeverity::kNotice)</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#define BUS_WARNING() BusLogStream(std::source_location::current(), BusLogSeverity::kWarning)</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#define BUS_ERROR() BusLogStream(std::source_location::current(), BusLogSeverity::kError)</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#define BUS_CRITICAL() BusLogStream(std::source_location::current(), BusLogSeverity::kCritical)</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#define BUS_ALERT() BusLogStream(std::source_location::current(), BusLogSeverity::kAlert)</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#define BUS_EMERGENCY() BusLogStream(std::source_location::current(), BusLogSeverity::kEmergency)</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="foldopen" id="foldopen00049" data-start="{" data-end="};">
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="classbus_1_1_bus_log_stream.html">   49</a></span><span class="keyword">class </span>BusLogStream : <span class="keyword">public</span> std::ostringstream {</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  BusLogStream() = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  BusLogStream(std::source_location location, BusLogSeverity severity);</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  ~BusLogStream() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <span class="keyword">static</span> std::function&lt;void(<span class="keyword">const</span> std::source_location&amp; location,</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                         BusLogSeverity severity,</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                         <span class="keyword">const</span> std::string&amp; text)&gt; UserLogFunction;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <span class="keyword">static</span> uint64_t ErrorCount() { <span class="keywordflow">return</span> error_count_;}</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> ResetErrorCount() { error_count_ = 0;}</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> BusConsoleLogFunction(<span class="keyword">const</span> std::source_location&amp; location,</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    BusLogSeverity severity, <span class="keyword">const</span> std::string&amp; text);</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> BusNoLogFunction(<span class="keyword">const</span> std::source_location&amp; location,</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    BusLogSeverity severity, <span class="keyword">const</span> std::string&amp; text);</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  BusLogSeverity severity_;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  std::source_location location_;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="keyword">static</span> std::atomic&lt;uint64_t&gt; error_count_;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> LogString(<span class="keyword">const</span> std::source_location&amp; location,</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                        BusLogSeverity severity,</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                        <span class="keyword">const</span> std::string&amp; text);</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>};</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;string_view&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;atomic&gt;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &lt;sstream&gt;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &lt;source_location&gt;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &lt;functional&gt;</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="}">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="namespacebus.html">   24</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacebus.html">bus</a> {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span></div>
+<div class="foldopen" id="foldopen00032" data-start="{" data-end="};">
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4">   32</a></span><span class="keyword">enum class</span> <a class="code hl_enumeration" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4">BusLogSeverity</a> : uint8_t {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4afa21506cd249f400de4a974b5a0c8e0e">   33</a></span>  <a class="code hl_enumvalue" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4afa21506cd249f400de4a974b5a0c8e0e">kTrace</a> = 0,      </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4abb53ce21b7c0b7c8a8f7860a41901d29">   34</a></span>  <a class="code hl_enumvalue" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4abb53ce21b7c0b7c8a8f7860a41901d29">kDebug</a> = 1,      </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4a176a473e63c17ccdac91640c67f149bf">   35</a></span>  <a class="code hl_enumvalue" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4a176a473e63c17ccdac91640c67f149bf">kInfo</a> = 2,       </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4a69f03ebfd6cab4eaa75fc4182f0feca9">   36</a></span>  <a class="code hl_enumvalue" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4a69f03ebfd6cab4eaa75fc4182f0feca9">kNotice</a> = 3,     </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4aec0da41f4e48b52c362303eb27ed5dee">   37</a></span>  <a class="code hl_enumvalue" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4aec0da41f4e48b52c362303eb27ed5dee">kWarning</a> = 4,    </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4ae3587c730cc1aa530fa4ddc9c4204e97">   38</a></span>  <a class="code hl_enumvalue" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4ae3587c730cc1aa530fa4ddc9c4204e97">kError</a> = 5,      </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4a5a20548c220f372fc701cae6de94040b">   39</a></span>  <a class="code hl_enumvalue" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4a5a20548c220f372fc701cae6de94040b">kCritical</a> = 6,   </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4ac0d18299609bebcba35e0e9253cb41c4">   40</a></span>  <a class="code hl_enumvalue" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4ac0d18299609bebcba35e0e9253cb41c4">kAlert</a> = 7,      </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4a1921cdd35fc6d7638aa9b2c7fc55cdef">   41</a></span>  <a class="code hl_enumvalue" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4a1921cdd35fc6d7638aa9b2c7fc55cdef">kEmergency</a> = 8   </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>};</div>
 </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>} <span class="comment">// bus</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword">static</span> std::string_view BusLogServerityToText(<a class="code hl_enumeration" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4">BusLogSeverity</a> severity);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="buslogstream_8h.html#a1c1de122ed9ca4b6778486959e266413">   48</a></span><span class="preprocessor">#define BUS_TRACE() BusLogStream(std::source_location::current(), BusLogSeverity::kTrace)</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="buslogstream_8h.html#ada36351142593f3313d8fb9067fb5216">   51</a></span><span class="preprocessor">#define BUS_DEBUG() BusLogStream(std::source_location::current(), BusLogSeverity::kDebug)</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="buslogstream_8h.html#a1f6b6867bb4cc71c01202810fd52c297">   54</a></span><span class="preprocessor">#define BUS_INFO() BusLogStream(std::source_location::current(), BusLogSeverity::kInfo)</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="buslogstream_8h.html#a30525777dce6bc9edd0b5107f58512c2">   57</a></span><span class="preprocessor">#define BUS_NOTICE() BusLogStream(std::source_location::current(), BusLogSeverity::kNotice)</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="buslogstream_8h.html#ac083f942d47ba3d8bc64abd28ad994f3">   60</a></span><span class="preprocessor">#define BUS_WARNING() BusLogStream(std::source_location::current(), BusLogSeverity::kWarning)</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="buslogstream_8h.html#a8fadfe91c5082ec42b826ba8921c7a4b">   63</a></span><span class="preprocessor">#define BUS_ERROR() BusLogStream(std::source_location::current(), BusLogSeverity::kError)</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="buslogstream_8h.html#af9384c901a6003df142cfc595610cb7b">   66</a></span><span class="preprocessor">#define BUS_CRITICAL() BusLogStream(std::source_location::current(), BusLogSeverity::kCritical)</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="buslogstream_8h.html#a1f4cb456eac9df2d8002ebacb6f5c89b">   69</a></span><span class="preprocessor">#define BUS_ALERT() BusLogStream(std::source_location::current(), BusLogSeverity::kAlert)</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="buslogstream_8h.html#ab98151420525da5776980109b70b11de">   72</a></span><span class="preprocessor">#define BUS_EMERGENCY() BusLogStream(std::source_location::current(), BusLogSeverity::kEmergency)</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span></div>
+<div class="foldopen" id="foldopen00082" data-start="{" data-end="};">
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classbus_1_1_bus_log_stream.html">   82</a></span><span class="keyword">class </span>BusLogStream : <span class="keyword">public</span> std::ostringstream {</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  BusLogStream() = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="classbus_1_1_bus_log_stream.html#a39c2f81338b74603f24477e1a41f8369">   92</a></span><a class="code hl_function" href="classbus_1_1_bus_log_stream.html#a39c2f81338b74603f24477e1a41f8369">BusLogStream</a>(std::source_location location, <a class="code hl_enumeration" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4">BusLogSeverity</a> severity);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  ~BusLogStream() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  <span class="keyword">static</span> std::function&lt;void(<span class="keyword">const</span> std::source_location&amp; location,</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                         <a class="code hl_enumeration" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4">BusLogSeverity</a> severity,</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="classbus_1_1_bus_log_stream.html#ae5e5739064e9593996edd6a3fd7b419b">  104</a></span>                         <span class="keyword">const</span> std::string&amp; text)&gt; <a class="code hl_variable" href="classbus_1_1_bus_log_stream.html#ae5e5739064e9593996edd6a3fd7b419b">UserLogFunction</a>;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="classbus_1_1_bus_log_stream.html#aabd003936fed8ab67508e5f9bb4224b8">  114</a></span>  <span class="keyword">static</span> uint64_t <a class="code hl_function" href="classbus_1_1_bus_log_stream.html#aabd003936fed8ab67508e5f9bb4224b8">ErrorCount</a>() { <span class="keywordflow">return</span> error_count_; }</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="classbus_1_1_bus_log_stream.html#aa1b355533eabbfb8c41ed71a39b7b898">  117</a></span>  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classbus_1_1_bus_log_stream.html#aa1b355533eabbfb8c41ed71a39b7b898">ResetErrorCount</a>() { error_count_ = 0;}</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="classbus_1_1_bus_log_stream.html#a04112245b038fd41471c90f1edd371bc">  120</a></span>  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classbus_1_1_bus_log_stream.html#a04112245b038fd41471c90f1edd371bc">BusConsoleLogFunction</a>(<span class="keyword">const</span> std::source_location&amp; location,</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <a class="code hl_enumeration" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4">BusLogSeverity</a> severity, <span class="keyword">const</span> std::string&amp; text);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="classbus_1_1_bus_log_stream.html#a9935d7423fc249143950a5c0a69d45c9">  123</a></span>  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classbus_1_1_bus_log_stream.html#a9935d7423fc249143950a5c0a69d45c9">BusNoLogFunction</a>(<span class="keyword">const</span> std::source_location&amp; location,</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <a class="code hl_enumeration" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4">BusLogSeverity</a> severity, <span class="keyword">const</span> std::string&amp; text);</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  <a class="code hl_enumeration" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4">BusLogSeverity</a> severity_;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  std::source_location location_;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  <span class="keyword">static</span> std::atomic&lt;uint64_t&gt; error_count_;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> LogString(<span class="keyword">const</span> std::source_location&amp; location,</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>                        <a class="code hl_enumeration" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4">BusLogSeverity</a> severity,</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>                        <span class="keyword">const</span> std::string&amp; text);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>};</div>
+</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>} <span class="comment">// bus</span></div>
+</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
+<div class="ttc" id="aclassbus_1_1_bus_log_stream_html_a04112245b038fd41471c90f1edd371bc"><div class="ttname"><a href="classbus_1_1_bus_log_stream.html#a04112245b038fd41471c90f1edd371bc">bus::BusLogStream::BusConsoleLogFunction</a></div><div class="ttdeci">static void BusConsoleLogFunction(const std::source_location &amp;location, BusLogSeverity severity, const std::string &amp;text)</div><div class="ttdoc">Simple function that sends all logs to the std::cout.</div></div>
+<div class="ttc" id="aclassbus_1_1_bus_log_stream_html_a39c2f81338b74603f24477e1a41f8369"><div class="ttname"><a href="classbus_1_1_bus_log_stream.html#a39c2f81338b74603f24477e1a41f8369">bus::BusLogStream::BusLogStream</a></div><div class="ttdeci">BusLogStream(std::source_location location, BusLogSeverity severity)</div><div class="ttdoc">Constructor that is a simple wrapper around an outpout stream.</div></div>
+<div class="ttc" id="aclassbus_1_1_bus_log_stream_html_a9935d7423fc249143950a5c0a69d45c9"><div class="ttname"><a href="classbus_1_1_bus_log_stream.html#a9935d7423fc249143950a5c0a69d45c9">bus::BusLogStream::BusNoLogFunction</a></div><div class="ttdeci">static void BusNoLogFunction(const std::source_location &amp;location, BusLogSeverity severity, const std::string &amp;text)</div><div class="ttdoc">Simple function that doesn&#39;t do anything.</div></div>
+<div class="ttc" id="aclassbus_1_1_bus_log_stream_html_aa1b355533eabbfb8c41ed71a39b7b898"><div class="ttname"><a href="classbus_1_1_bus_log_stream.html#aa1b355533eabbfb8c41ed71a39b7b898">bus::BusLogStream::ResetErrorCount</a></div><div class="ttdeci">static void ResetErrorCount()</div><div class="ttdoc">Resets the error counter.</div><div class="ttdef"><b>Definition</b> buslogstream.h:117</div></div>
+<div class="ttc" id="aclassbus_1_1_bus_log_stream_html_aabd003936fed8ab67508e5f9bb4224b8"><div class="ttname"><a href="classbus_1_1_bus_log_stream.html#aabd003936fed8ab67508e5f9bb4224b8">bus::BusLogStream::ErrorCount</a></div><div class="ttdeci">static uint64_t ErrorCount()</div><div class="ttdoc">Returns number of error messages.</div><div class="ttdef"><b>Definition</b> buslogstream.h:114</div></div>
+<div class="ttc" id="aclassbus_1_1_bus_log_stream_html_ae5e5739064e9593996edd6a3fd7b419b"><div class="ttname"><a href="classbus_1_1_bus_log_stream.html#ae5e5739064e9593996edd6a3fd7b419b">bus::BusLogStream::UserLogFunction</a></div><div class="ttdeci">static std::function&lt; void(const std::source_location &amp;location, BusLogSeverity severity, const std::string &amp;text)&gt; UserLogFunction</div><div class="ttdoc">The end-user should supply a function that redirect the logs.</div><div class="ttdef"><b>Definition</b> buslogstream.h:104</div></div>
+<div class="ttc" id="anamespacebus_html"><div class="ttname"><a href="namespacebus.html">bus</a></div><div class="ttdoc">Main namespace for the MDF library.</div><div class="ttdef"><b>Definition</b> buslogstream.h:24</div></div>
+<div class="ttc" id="anamespacebus_html_a0985041b36e70e4637a0dc2a378513d4"><div class="ttname"><a href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4">bus::BusLogSeverity</a></div><div class="ttdeci">BusLogSeverity</div><div class="ttdoc">Defines the log severity level.</div><div class="ttdef"><b>Definition</b> buslogstream.h:32</div></div>
+<div class="ttc" id="anamespacebus_html_a0985041b36e70e4637a0dc2a378513d4a176a473e63c17ccdac91640c67f149bf"><div class="ttname"><a href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4a176a473e63c17ccdac91640c67f149bf">bus::BusLogSeverity::kInfo</a></div><div class="ttdeci">@ kInfo</div><div class="ttdoc">Informational message.</div><div class="ttdef"><b>Definition</b> buslogstream.h:35</div></div>
+<div class="ttc" id="anamespacebus_html_a0985041b36e70e4637a0dc2a378513d4a1921cdd35fc6d7638aa9b2c7fc55cdef"><div class="ttname"><a href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4a1921cdd35fc6d7638aa9b2c7fc55cdef">bus::BusLogSeverity::kEmergency</a></div><div class="ttdeci">@ kEmergency</div><div class="ttdoc">Fatal error message.</div><div class="ttdef"><b>Definition</b> buslogstream.h:41</div></div>
+<div class="ttc" id="anamespacebus_html_a0985041b36e70e4637a0dc2a378513d4a5a20548c220f372fc701cae6de94040b"><div class="ttname"><a href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4a5a20548c220f372fc701cae6de94040b">bus::BusLogSeverity::kCritical</a></div><div class="ttdeci">@ kCritical</div><div class="ttdoc">Critical message (device error)</div><div class="ttdef"><b>Definition</b> buslogstream.h:39</div></div>
+<div class="ttc" id="anamespacebus_html_a0985041b36e70e4637a0dc2a378513d4a69f03ebfd6cab4eaa75fc4182f0feca9"><div class="ttname"><a href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4a69f03ebfd6cab4eaa75fc4182f0feca9">bus::BusLogSeverity::kNotice</a></div><div class="ttdeci">@ kNotice</div><div class="ttdoc">Notice message. Notify the user.</div><div class="ttdef"><b>Definition</b> buslogstream.h:36</div></div>
+<div class="ttc" id="anamespacebus_html_a0985041b36e70e4637a0dc2a378513d4abb53ce21b7c0b7c8a8f7860a41901d29"><div class="ttname"><a href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4abb53ce21b7c0b7c8a8f7860a41901d29">bus::BusLogSeverity::kDebug</a></div><div class="ttdeci">@ kDebug</div><div class="ttdoc">Debug message.</div><div class="ttdef"><b>Definition</b> buslogstream.h:34</div></div>
+<div class="ttc" id="anamespacebus_html_a0985041b36e70e4637a0dc2a378513d4ac0d18299609bebcba35e0e9253cb41c4"><div class="ttname"><a href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4ac0d18299609bebcba35e0e9253cb41c4">bus::BusLogSeverity::kAlert</a></div><div class="ttdeci">@ kAlert</div><div class="ttdoc">Alert or alarm message.</div><div class="ttdef"><b>Definition</b> buslogstream.h:40</div></div>
+<div class="ttc" id="anamespacebus_html_a0985041b36e70e4637a0dc2a378513d4ae3587c730cc1aa530fa4ddc9c4204e97"><div class="ttname"><a href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4ae3587c730cc1aa530fa4ddc9c4204e97">bus::BusLogSeverity::kError</a></div><div class="ttdeci">@ kError</div><div class="ttdoc">Error message.</div><div class="ttdef"><b>Definition</b> buslogstream.h:38</div></div>
+<div class="ttc" id="anamespacebus_html_a0985041b36e70e4637a0dc2a378513d4aec0da41f4e48b52c362303eb27ed5dee"><div class="ttname"><a href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4aec0da41f4e48b52c362303eb27ed5dee">bus::BusLogSeverity::kWarning</a></div><div class="ttdeci">@ kWarning</div><div class="ttdoc">Warning message.</div><div class="ttdef"><b>Definition</b> buslogstream.h:37</div></div>
+<div class="ttc" id="anamespacebus_html_a0985041b36e70e4637a0dc2a378513d4afa21506cd249f400de4a974b5a0c8e0e"><div class="ttname"><a href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4afa21506cd249f400de4a974b5a0c8e0e">bus::BusLogSeverity::kTrace</a></div><div class="ttdeci">@ kTrace</div><div class="ttdoc">Trace or listen message.</div><div class="ttdef"><b>Definition</b> buslogstream.h:33</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_89752c99dd868dcc5ac2d98009bb2a99.html">bus</a></li><li class="navelem"><b>buslogstream.h</b></li>
+    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_89752c99dd868dcc5ac2d98009bb2a99.html">bus</a></li><li class="navelem"><a href="buslogstream_8h.html">buslogstream.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
   </ul>
 </div>

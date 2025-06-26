@@ -1,0 +1,5 @@
+<map id="include/bus/ibusmessagebroker.h" name="include/bus/ibusmessagebroker.h">
+<area shape="rect" id="Node000001" title="Defines an interface against borkers, servers and clients." alt="" coords="5,5,221,32"/>
+<area shape="rect" id="Node000002" href="$businterfacefactory_8h.html" title="The file implement a factory class for this library." alt="" coords="40,80,186,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="116,48,116,80,110,80,110,48"/>
+</map>

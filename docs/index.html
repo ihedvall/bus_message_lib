@@ -14,7 +14,7 @@
       
       
       
-        <link rel="next" href="about/">
+        <link rel="next" href="message/message_header/">
       
       
       <link rel="icon" href="img/favicon.ico">
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#welcome-to-mkdocs" class="md-skip">
+        <a href="#summary" class="md-skip">
           Skip to content
         </a>
       
@@ -314,18 +314,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
+  <a href="#serialization-of-bus-messages" class="md-nav__link">
     <span class="md-ellipsis">
-      Commands
+      Serialization of Bus Messages
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
+  <a href="#communication-interfaces" class="md-nav__link">
     <span class="md-ellipsis">
-      Project layout
+      Communication Interfaces
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Applications
     </span>
   </a>
   
@@ -345,18 +354,110 @@
   
   
   
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bus Messages
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Bus Messages
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
-      <a href="html/index.html" class="md-nav__link">
+      <a href="message/message_header/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Reference
+    Message Header
     
   </span>
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="message/control_message/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Control Messages
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="message/can_message/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CAN Messages
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -384,7 +485,7 @@
   
   
   <span class="md-ellipsis">
-    About
+    Communication Interfaces
     
   </span>
   
@@ -395,7 +496,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            About
+            Communication Interfaces
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -406,12 +507,12 @@
   
   
     <li class="md-nav__item">
-      <a href="about/" class="md-nav__link">
+      <a href="interface/broker_and_server/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    About
+    Brokers or Servers
     
   </span>
   
@@ -429,12 +530,127 @@
   
   
     <li class="md-nav__item">
-      <a href="about/license.md" class="md-nav__link">
+      <a href="interface/shared_memory_broker/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    None
+    Shared Memory Broker
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="interface/tcp_broker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TCP/IP Broker
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="interface/shared_memory_server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Shared Memory Server
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="interface/shared_memory_client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Shared Memory Client
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="interface/tcp_server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TCP/IP Server
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="interface/tcp_client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TCP/IP Client
     
   </span>
   
@@ -448,6 +664,50 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="html/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API Reference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="license/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    License
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -479,18 +739,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
+  <a href="#serialization-of-bus-messages" class="md-nav__link">
     <span class="md-ellipsis">
-      Commands
+      Serialization of Bus Messages
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
+  <a href="#communication-interfaces" class="md-nav__link">
     <span class="md-ellipsis">
-      Project layout
+      Communication Interfaces
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Applications
     </span>
   </a>
   
@@ -515,30 +784,47 @@
   
 
 
-<h1 id="welcome-to-mkdocs">Welcome to MkDocs</h1>
-<p><pre class="mermaid"><code>graph TB
-  A[Start] --&gt; B{Error?};
-  B --&gt;|Yes| C[Hmm...];
-  C --&gt; D[Debug];
-  D --&gt; B;
-  B ----&gt;|No| E[Yay!];</code></pre>
-<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">A</span><span class="w"> </span><span class="p">{</span>
-<span class="p">}</span>
-</code></pre></div></p>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands</h2>
+<h1 id="summary">Summary</h1>
+<p>The Bus Message Library is mainly a serialization library of bus messages. 
+Optionally, it also includes basic inter-process communication libraries 
+for shared memory and TCP/IP communications.
+The main purpose is to isolate the bus driver software from the rest of
+the application as the driver software normally is dependent on operating
+system and manufacturer.</p>
+<h2 id="serialization-of-bus-messages">Serialization of Bus Messages</h2>
+<p>The library supports the following buses:</p>
 <ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
+<li><strong><em>CAN including CAN-FD</em></strong>.</li>
+<li><strong><em>LIN</em></strong>.</li>
+<li><strong><em>FlexRay</em></strong>.</li>
+<li><strong><em>MOST</em></strong>.</li>
+<li><strong><em>Ethernet (ETH)</em></strong>.</li>
 </ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
-</code></pre>
+<h2 id="communication-interfaces">Communication Interfaces</h2>
+<p>The library supports the following communication interfaces:</p>
+<ul>
+<li><strong><em>Shared Memory Broker</em></strong>. Single shared memory message bus.</li>
+<li><strong><em>Shared Memory Server</em></strong>. Tx/Rx shared memory message bus.</li>
+<li><strong><em>Shared Memory Client</em></strong>. Tx/Rx shared memory message client.</li>
+<li><strong><em>TCP/IP Message Broker.</em></strong> Single shared memory with a TCP/IP server.</li>
+<li><strong><em>TCP/IP Message Client</em></strong>. Client for TCP/IP servers and brokers.</li>
+<li><strong><em>TCP/IP Message Server</em></strong>. Tx/Rx message TCP/IP client.</li>
+</ul>
+<p>A broker is used by applications that have one or more publishers and 
+one or more subscribers, typical in logger applications. 
+A server is used in applications where bidirectional traffic is needed,
+typical when running against bus drivers.</p>
+<h2 id="applications">Applications</h2>
+<p>A number of applications use this library. 
+Some of them are hosted inside this repository or have their own repository.
+The following applications are based upon this library:</p>
+<ul>
+<li><strong><em>Bus to MQTT</em></strong>. Subscribe to bus messages, parse the message to engineering values and forward to an MQTT broker.</li>
+<li><strong><em>Bus to MDF</em></strong>. Subscribe to bus messages and log them onto an MDF file.</li>
+<li><strong><em>Bus to Listen</em></strong>. Subscribe to bus messages and display the messages on a Listen Window.</li>
+<li><strong><em>Bus Daemon</em></strong>. Simple executable that starts various communication interfaces.</li>
+<li><strong><em>Bus Simulator</em></strong>. Simple GUI application that generates bus messages from an MDF file.</li>
+</ul>
 
 
 

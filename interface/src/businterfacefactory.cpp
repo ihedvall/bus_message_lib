@@ -5,14 +5,14 @@
 
 #include "bus/interface/businterfacefactory.h"
 
-#include "bus/simulatebroker.h"
+#include "../../src/simulatebroker.h"
 #include "bus/buslogstream.h"
 #include "sharedmemorybroker.h"
-#include "sharedmemoryserver.h"
 #include "sharedmemoryclient.h"
+#include "sharedmemoryserver.h"
 #include "tcpmessagebroker.h"
-#include "tcpmessageserver.h"
 #include "tcpmessageclient.h"
+#include "tcpmessageserver.h"
 
 namespace bus {
 

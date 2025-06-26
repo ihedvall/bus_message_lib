@@ -5,9 +5,7 @@ var hierarchy =
     [ "bus::IBusMessage", "classbus_1_1_i_bus_message.html", [
       [ "bus::CanDataFrame", "classbus_1_1_can_data_frame.html", null ]
     ] ],
-    [ "bus::IBusMessageBroker", "classbus_1_1_i_bus_message_broker.html", [
-      [ "bus::SimulateBroker", "classbus_1_1_simulate_broker.html", null ]
-    ] ],
+    [ "bus::IBusMessageBroker", "classbus_1_1_i_bus_message_broker.html", null ],
     [ "bus::IBusMessageQueue", "classbus_1_1_i_bus_message_queue.html", null ],
     [ "bus::LittleBuffer< T >", "classbus_1_1_little_buffer.html", null ],
     [ "std::ostringstream", null, [

@@ -6,6 +6,7 @@
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Bus Messages: bus::BusLogStream Class Reference</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
@@ -30,6 +31,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
    <div id="projectname">Bus Messages<span id="projectnumber">&#160;1.0</span>
    </div>
@@ -99,12 +101,17 @@ $(function(){initNavTree('classbus_1_1_bus_log_stream.html','','classbus_1_1_bus
   <div class="headertitle"><div class="title">bus::BusLogStream Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Simple interface against a logging system.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="buslogstream_8h_source.html">buslogstream.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for bus::BusLogStream:</div>
 <div class="dyncontent">
 <div class="center"><img src="classbus_1_1_bus_log_stream__inherit__graph.png" border="0" usemap="#abus_1_1_bus_log_stream_inherit__map" loading="lazy" alt="Inheritance graph"/></div>
 <map name="abus_1_1_bus_log_stream_inherit__map" id="abus_1_1_bus_log_stream_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,80,142,107"/>
+<area shape="rect" title="Simple interface against a logging system." alt="" coords="5,80,142,107"/>
 <area shape="rect" title=" " alt="" coords="10,5,137,32"/>
 <area shape="poly" title=" " alt="" coords="76,48,76,80,71,80,71,48"/>
 </map>
@@ -114,7 +121,7 @@ Collaboration diagram for bus::BusLogStream:</div>
 <div class="dyncontent">
 <div class="center"><img src="classbus_1_1_bus_log_stream__coll__graph.png" border="0" usemap="#abus_1_1_bus_log_stream_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="abus_1_1_bus_log_stream_coll__map" id="abus_1_1_bus_log_stream_coll__map">
-<area shape="rect" title=" " alt="" coords="5,80,142,107"/>
+<area shape="rect" title="Simple interface against a logging system." alt="" coords="5,80,142,107"/>
 <area shape="rect" title=" " alt="" coords="10,5,137,32"/>
 <area shape="poly" title=" " alt="" coords="76,48,76,80,71,80,71,48"/>
 </map>
@@ -122,25 +129,110 @@ Collaboration diagram for bus::BusLogStream:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a39c2f81338b74603f24477e1a41f8369" id="r_a39c2f81338b74603f24477e1a41f8369"><td class="memItemLeft" align="right" valign="top"><a id="a39c2f81338b74603f24477e1a41f8369" name="a39c2f81338b74603f24477e1a41f8369"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BusLogStream</b> (std::source_location location, BusLogSeverity severity)</td></tr>
+<tr class="memitem:a39c2f81338b74603f24477e1a41f8369" id="r_a39c2f81338b74603f24477e1a41f8369"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a39c2f81338b74603f24477e1a41f8369">BusLogStream</a> (std::source_location location, <a class="el" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4">BusLogSeverity</a> severity)</td></tr>
+<tr class="memdesc:a39c2f81338b74603f24477e1a41f8369"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor that is a simple wrapper around an outpout stream.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aabd003936fed8ab67508e5f9bb4224b8" id="r_aabd003936fed8ab67508e5f9bb4224b8"><td class="memItemLeft" align="right" valign="top"><a id="aabd003936fed8ab67508e5f9bb4224b8" name="aabd003936fed8ab67508e5f9bb4224b8"></a>
-static uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>ErrorCount</b> ()</td></tr>
+<tr class="memitem:aabd003936fed8ab67508e5f9bb4224b8" id="r_aabd003936fed8ab67508e5f9bb4224b8"><td class="memItemLeft" align="right" valign="top">static uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aabd003936fed8ab67508e5f9bb4224b8">ErrorCount</a> ()</td></tr>
+<tr class="memdesc:aabd003936fed8ab67508e5f9bb4224b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns number of error messages.  <br /></td></tr>
 <tr class="memitem:aa1b355533eabbfb8c41ed71a39b7b898" id="r_aa1b355533eabbfb8c41ed71a39b7b898"><td class="memItemLeft" align="right" valign="top"><a id="aa1b355533eabbfb8c41ed71a39b7b898" name="aa1b355533eabbfb8c41ed71a39b7b898"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>ResetErrorCount</b> ()</td></tr>
+<tr class="memdesc:aa1b355533eabbfb8c41ed71a39b7b898"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the error counter. <br /></td></tr>
 <tr class="memitem:a04112245b038fd41471c90f1edd371bc" id="r_a04112245b038fd41471c90f1edd371bc"><td class="memItemLeft" align="right" valign="top"><a id="a04112245b038fd41471c90f1edd371bc" name="a04112245b038fd41471c90f1edd371bc"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>BusConsoleLogFunction</b> (const std::source_location &amp;location, BusLogSeverity severity, const std::string &amp;text)</td></tr>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>BusConsoleLogFunction</b> (const std::source_location &amp;location, <a class="el" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4">BusLogSeverity</a> severity, const std::string &amp;text)</td></tr>
+<tr class="memdesc:a04112245b038fd41471c90f1edd371bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple function that sends all logs to the std::cout. <br /></td></tr>
 <tr class="memitem:a9935d7423fc249143950a5c0a69d45c9" id="r_a9935d7423fc249143950a5c0a69d45c9"><td class="memItemLeft" align="right" valign="top"><a id="a9935d7423fc249143950a5c0a69d45c9" name="a9935d7423fc249143950a5c0a69d45c9"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>BusNoLogFunction</b> (const std::source_location &amp;location, BusLogSeverity severity, const std::string &amp;text)</td></tr>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>BusNoLogFunction</b> (const std::source_location &amp;location, <a class="el" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4">BusLogSeverity</a> severity, const std::string &amp;text)</td></tr>
+<tr class="memdesc:a9935d7423fc249143950a5c0a69d45c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple function that doesn't do anything. <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:ae5e5739064e9593996edd6a3fd7b419b" id="r_ae5e5739064e9593996edd6a3fd7b419b"><td class="memItemLeft" align="right" valign="top"><a id="ae5e5739064e9593996edd6a3fd7b419b" name="ae5e5739064e9593996edd6a3fd7b419b"></a>
-static std::function&lt; void(const std::source_location &amp;location, BusLogSeverity severity, const std::string &amp;text)&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>UserLogFunction</b></td></tr>
+<tr class="memitem:ae5e5739064e9593996edd6a3fd7b419b" id="r_ae5e5739064e9593996edd6a3fd7b419b"><td class="memItemLeft" align="right" valign="top">static std::function&lt; void(const std::source_location &amp;location, <a class="el" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4">BusLogSeverity</a> severity, const std::string &amp;text)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae5e5739064e9593996edd6a3fd7b419b">UserLogFunction</a></td></tr>
+<tr class="memdesc:ae5e5739064e9593996edd6a3fd7b419b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The end-user should supply a function that redirect the logs.  <br /></td></tr>
 </table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The class defines an API against a text logging system. It doesn't implement the logging system itself. Instead the end-user need to write some adpater code that redirect the messages to their logging system. The 'ihedvall/utillib' GitHub repository implements a logging system. </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a39c2f81338b74603f24477e1a41f8369" name="a39c2f81338b74603f24477e1a41f8369"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39c2f81338b74603f24477e1a41f8369">&#9670;&#160;</a></span>BusLogStream()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bus::BusLogStream::BusLogStream </td>
+          <td>(</td>
+          <td class="paramtype">std::source_location</td>          <td class="paramname"><span class="paramname"><em>location</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4">BusLogSeverity</a></td>          <td class="paramname"><span class="paramname"><em>severity</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The end-user doesn't use this class directly. Instead he/she use the log macros. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">location</td><td>Set by the macros to the current location. </td></tr>
+    <tr><td class="paramname">severity</td><td>Sets the severity level (syslog severity levels). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="aabd003936fed8ab67508e5f9bb4224b8" name="aabd003936fed8ab67508e5f9bb4224b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabd003936fed8ab67508e5f9bb4224b8">&#9670;&#160;</a></span>ErrorCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t bus::BusLogStream::ErrorCount </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns number of error messages generated. More correctly it counts all severity code large or equal to error. This is typical used in test situations. </p><dl class="section return"><dt>Returns</dt><dd>Number of severe error logs. </dd></dl>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<a id="ae5e5739064e9593996edd6a3fd7b419b" name="ae5e5739064e9593996edd6a3fd7b419b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5e5739064e9593996edd6a3fd7b419b">&#9670;&#160;</a></span>UserLogFunction</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt;void(const std::source_location&amp; location, <a class="el" href="namespacebus.html#a0985041b36e70e4637a0dc2a378513d4">BusLogSeverity</a> severity, const std::string&amp; text)&gt; bus::BusLogStream::UserLogFunction</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>This callback function need to be set by the end-user. If the function is used, all log messages are redirected by this function. If no function is set, no log messages are reocrded. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/bus/<a class="el" href="buslogstream_8h_source.html">buslogstream.h</a></li>
 </ul>
@@ -157,7 +249,7 @@ static std::function&lt; void(const std::source_location &amp;location, BusLogSe
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>bus</b></li><li class="navelem"><a href="classbus_1_1_bus_log_stream.html">BusLogStream</a></li>
+    <li class="navelem"><a href="namespacebus.html">bus</a></li><li class="navelem"><a href="classbus_1_1_bus_log_stream.html">BusLogStream</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
   </ul>
 </div>

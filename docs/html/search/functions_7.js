@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['singlewire_0',['SingleWire',['../classbus_1_1_can_data_frame.html#a4463252f1dd8f1b5d9499cc7c7bfb2ce',1,'bus::CanDataFrame::SingleWire(bool single_wire)'],['../classbus_1_1_can_data_frame.html#a0cc65291c3d428a26105c33f29fb953c',1,'bus::CanDataFrame::SingleWire() const']]],
-  ['srr_1',['Srr',['../classbus_1_1_can_data_frame.html#a5ad2b7a70e713f25e1f1221779990ed0',1,'bus::CanDataFrame::Srr(bool srr)'],['../classbus_1_1_can_data_frame.html#a8f4538c231c3cf3024857658580602b9',1,'bus::CanDataFrame::Srr() const']]]
+  ['littlebuffer_0',['LittleBuffer',['../classbus_1_1_little_buffer.html#a7825ae37a0613bbd30794cc581bf1ba1',1,'bus::LittleBuffer::LittleBuffer(const T &amp;value)'],['../classbus_1_1_little_buffer.html#a601d070cc9aea4f573e02d0d3f9229a8',1,'bus::LittleBuffer::LittleBuffer(const std::vector&lt; uint8_t &gt; &amp;buffer, size_t offset)'],['../classbus_1_1_little_buffer.html#a7a7c77ad27b67b5fc970f951f433c929',1,'bus::LittleBuffer::LittleBuffer(const uint8_t *buffer, size_t offset)']]]
 ];

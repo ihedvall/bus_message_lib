@@ -4,7 +4,7 @@
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,34,55,70,51,66,83,31"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="70,155,130,181"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="99,32,102,139,97,139,94,33"/>
-<area shape="rect" id="Node000004" href="$ibusmessage_8h_source.html" title=" " alt="" coords="133,80,267,107"/>
+<area shape="rect" id="Node000004" href="$ibusmessage_8h.html" title="Defines an interface against a bus message." alt="" coords="133,80,267,107"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="116,30,171,69,168,73,113,35"/>
 <area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="184,109,131,147,128,143,181,105"/>
 <area shape="rect" id="Node000005" title=" " alt="" coords="162,155,230,181"/>

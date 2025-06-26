@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['brs_0',['Brs',['../classbus_1_1_can_data_frame.html#a3067fc55aa85f22fb1c9347d47d638a5',1,'bus::CanDataFrame::Brs(bool brs)'],['../classbus_1_1_can_data_frame.html#a64044961759bec7e58f09e444d83412f',1,'bus::CanDataFrame::Brs() const']]]
+  ['address_0',['Address',['../classbus_1_1_i_bus_message_broker.html#a7800d80bffc1507e5b5f99c2dc01527a',1,'bus::IBusMessageBroker::Address(std::string address)'],['../classbus_1_1_i_bus_message_broker.html#a5529534b58a1171c1ede704716e10385',1,'bus::IBusMessageBroker::Address() const']]]
 ];

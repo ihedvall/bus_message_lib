@@ -1,0 +1,11 @@
+<map id="include/bus/ibusmessage.h" name="include/bus/ibusmessage.h">
+<area shape="rect" id="Node000001" title="Defines an interface against a bus message." alt="" coords="117,5,296,32"/>
+<area shape="rect" id="Node000002" href="$candataframe_8h.html" title="Simple wrapper around a CAN or CAN FD messages." alt="" coords="5,80,187,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="176,43,117,82,114,77,174,38"/>
+<area shape="rect" id="Node000003" href="$ibusmessagequeue_8h.html" title="Defines an interface against a message queue." alt="" coords="210,80,424,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="240,38,299,77,296,82,237,43"/>
+<area shape="rect" id="Node000004" href="$ibusmessagebroker_8h.html" title="Defines an interface against borkers, servers and clients." alt="" coords="210,155,425,181"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="320,122,320,154,315,154,315,122"/>
+<area shape="rect" id="Node000005" href="$businterfacefactory_8h.html" title="The file implement a factory class for this library." alt="" coords="244,229,390,272"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="320,197,320,229,315,229,315,197"/>
+</map>

@@ -1,5 +1,5 @@
 <map id="bus::BusLogStream" name="bus::BusLogStream">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,80,142,107"/>
+<area shape="rect" id="Node000001" title="Simple interface against a logging system." alt="" coords="5,80,142,107"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="10,5,137,32"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="76,48,76,80,71,80,71,48"/>
 </map>

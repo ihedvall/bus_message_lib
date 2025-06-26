@@ -6,6 +6,7 @@
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Bus Messages: include/bus/candataframe.h File Reference</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
@@ -30,6 +31,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
    <div id="projectname">Bus Messages<span id="projectnumber">&#160;1.0</span>
    </div>
@@ -104,7 +106,7 @@ $(function(){initNavTree('candataframe_8h.html','',''); });
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;bitset&gt;</code><br />
 <code>#include &lt;cstdint&gt;</code><br />
-<code>#include &quot;bus/ibusmessage.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="ibusmessage_8h_source.html">bus/ibusmessage.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for candataframe.h:</div>
 <div class="dyncontent">
@@ -115,7 +117,7 @@ Include dependency graph for candataframe.h:</div>
 <area shape="poly" title=" " alt="" coords="87,34,55,70,51,66,83,31"/>
 <area shape="rect" title=" " alt="" coords="70,155,130,181"/>
 <area shape="poly" title=" " alt="" coords="99,32,102,139,97,139,94,33"/>
-<area shape="rect" href="ibusmessage_8h_source.html" title=" " alt="" coords="133,80,267,107"/>
+<area shape="rect" href="ibusmessage_8h.html" title="Defines an interface against a bus message." alt="" coords="133,80,267,107"/>
 <area shape="poly" title=" " alt="" coords="116,30,171,69,168,73,113,35"/>
 <area shape="poly" title=" " alt="" coords="184,109,131,147,128,143,181,105"/>
 <area shape="rect" title=" " alt="" coords="162,155,230,181"/>
@@ -132,60 +134,28 @@ Classes</h2></td></tr>
 <tr class="memitem:bus_3A_3ACanDataFrame" id="r_bus_3A_3ACanDataFrame"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus_1_1_can_data_frame.html">bus::CanDataFrame</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implements an interface against a CAN Data Frame message.  <a href="classbus_1_1_can_data_frame.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:bus" id="r_bus"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacebus.html">bus</a></td></tr>
+<tr class="memdesc:namespacebus"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main namespace for the MDF library. <br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a2434c66ff3fdf28d46bcdc2357482e36" id="r_a2434c66ff3fdf28d46bcdc2357482e36"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2434c66ff3fdf28d46bcdc2357482e36">bus::CanErrorType</a> : uint8_t { <br />
-&#160;&#160;<a class="el" href="#a2434c66ff3fdf28d46bcdc2357482e36a9a10f345b0f755d461a8673a5e9ef6b4">UNKNOWN_ERROR</a> = 0
-, <a class="el" href="#a2434c66ff3fdf28d46bcdc2357482e36aaf6fe271d46cd80c05b7459efb29359d">BIT_ERROR</a> = 1
-, <a class="el" href="#a2434c66ff3fdf28d46bcdc2357482e36a3199db27c46bdb8ba94b9bd0559953f2">FORM_ERROR</a> = 2
-, <a class="el" href="#a2434c66ff3fdf28d46bcdc2357482e36a080cd4a46ca45d9370343762d145dfb6">BIT_STUFFING_ERROR</a> = 3
+<tr class="memitem:a2434c66ff3fdf28d46bcdc2357482e36" id="r_a2434c66ff3fdf28d46bcdc2357482e36"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacebus.html#a2434c66ff3fdf28d46bcdc2357482e36">bus::CanErrorType</a> : uint8_t { <br />
+&#160;&#160;<a class="el" href="namespacebus.html#a2434c66ff3fdf28d46bcdc2357482e36a9a10f345b0f755d461a8673a5e9ef6b4">bus::UNKNOWN_ERROR</a> = 0
+, <a class="el" href="namespacebus.html#a2434c66ff3fdf28d46bcdc2357482e36aaf6fe271d46cd80c05b7459efb29359d">bus::BIT_ERROR</a> = 1
+, <a class="el" href="namespacebus.html#a2434c66ff3fdf28d46bcdc2357482e36a3199db27c46bdb8ba94b9bd0559953f2">bus::FORM_ERROR</a> = 2
+, <a class="el" href="namespacebus.html#a2434c66ff3fdf28d46bcdc2357482e36a080cd4a46ca45d9370343762d145dfb6">bus::BIT_STUFFING_ERROR</a> = 3
 , <br />
-&#160;&#160;<a class="el" href="#a2434c66ff3fdf28d46bcdc2357482e36afde7dcbac92720d696e3ef02bf6435db">CRC_ERROR</a> = 4
-, <a class="el" href="#a2434c66ff3fdf28d46bcdc2357482e36ae803ec28bf1df16755869f36ee1bf5af">ACK_ERROR</a> = 5
+&#160;&#160;<a class="el" href="namespacebus.html#a2434c66ff3fdf28d46bcdc2357482e36afde7dcbac92720d696e3ef02bf6435db">bus::CRC_ERROR</a> = 4
+, <a class="el" href="namespacebus.html#a2434c66ff3fdf28d46bcdc2357482e36ae803ec28bf1df16755869f36ee1bf5af">bus::ACK_ERROR</a> = 5
 <br />
  }</td></tr>
-<tr class="memdesc:a2434c66ff3fdf28d46bcdc2357482e36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumerate yhat defines type of CAN bus error.  <a href="#a2434c66ff3fdf28d46bcdc2357482e36">More...</a><br /></td></tr>
+<tr class="memdesc:a2434c66ff3fdf28d46bcdc2357482e36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumerate yhat defines type of CAN bus error.  <a href="namespacebus.html#a2434c66ff3fdf28d46bcdc2357482e36">More...</a><br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The class is a simpler wrapper around a CAN message. It is used when serializing CAN messages in a general way. </p>
-</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
-<a id="a2434c66ff3fdf28d46bcdc2357482e36" name="a2434c66ff3fdf28d46bcdc2357482e36"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2434c66ff3fdf28d46bcdc2357482e36">&#9670;&#160;</a></span>CanErrorType</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum class <a class="el" href="#a2434c66ff3fdf28d46bcdc2357482e36">bus::CanErrorType</a> : uint8_t</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a2434c66ff3fdf28d46bcdc2357482e36a9a10f345b0f755d461a8673a5e9ef6b4" name="a2434c66ff3fdf28d46bcdc2357482e36a9a10f345b0f755d461a8673a5e9ef6b4"></a>UNKNOWN_ERROR&#160;</td><td class="fielddoc"><p>Unspecified error. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a2434c66ff3fdf28d46bcdc2357482e36aaf6fe271d46cd80c05b7459efb29359d" name="a2434c66ff3fdf28d46bcdc2357482e36aaf6fe271d46cd80c05b7459efb29359d"></a>BIT_ERROR&#160;</td><td class="fielddoc"><p>CAN bit error. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a2434c66ff3fdf28d46bcdc2357482e36a3199db27c46bdb8ba94b9bd0559953f2" name="a2434c66ff3fdf28d46bcdc2357482e36a3199db27c46bdb8ba94b9bd0559953f2"></a>FORM_ERROR&#160;</td><td class="fielddoc"><p>CAN format error. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a2434c66ff3fdf28d46bcdc2357482e36a080cd4a46ca45d9370343762d145dfb6" name="a2434c66ff3fdf28d46bcdc2357482e36a080cd4a46ca45d9370343762d145dfb6"></a>BIT_STUFFING_ERROR&#160;</td><td class="fielddoc"><p>Bit stuffing error. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a2434c66ff3fdf28d46bcdc2357482e36afde7dcbac92720d696e3ef02bf6435db" name="a2434c66ff3fdf28d46bcdc2357482e36afde7dcbac92720d696e3ef02bf6435db"></a>CRC_ERROR&#160;</td><td class="fielddoc"><p>Checksum error. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a2434c66ff3fdf28d46bcdc2357482e36ae803ec28bf1df16755869f36ee1bf5af" name="a2434c66ff3fdf28d46bcdc2357482e36ae803ec28bf1df16755869f36ee1bf5af"></a>ACK_ERROR&#160;</td><td class="fielddoc"><p>Acknowledgement error. </p>
-</td></tr>
-</table>
-
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>
