@@ -15,6 +15,7 @@ option(BUS_TOOLS "Building applications" OFF)
 option(BUS_TEST "Building unit test" OFF)
 option(BUS_INTERFACE "Build the interface library" ON)
 
+
 if (BUS_TOOLS OR BUS_TEST)
    set(BUS_INTERFACE ON)
 endif()
@@ -40,7 +41,8 @@ if (BUS_INTERFACE)
 endif()
 
 if (BUS_TOOLS)
-    include(script/wxwidgets.cmake)
+    include(script/utillib.cmake)
+    include(script/expat.cmake)
 endif()
 
 if (BUS_TEST)
@@ -92,6 +94,10 @@ endif ()
 if (BUS_INTERFACE)
     add_subdirectory(interface)
 endif ()
+
+if (BUS_TOOLS)
+    add_subdirectory(bustolistend)
+endif()
 
 if (DOXYGEN_FOUND AND BUS_DOC)
     set(DOXYGEN_RECURSIVE YES)

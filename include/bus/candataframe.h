@@ -192,6 +192,7 @@ class CanDataFrame : public IBusMessage  {
   /** \brief Creates an MDF sample record. Used primarily internally. */
   void ToRaw(std::vector<uint8_t>& dest) const override;
   void FromRaw(const std::vector<uint8_t>& source) override;
+  std::string ToString(uint64_t loglevel) const override;
  private:
   uint32_t message_id_ = 0; ///< Message ID with bit 31 set if extended ID.
   uint8_t  dlc_ = 0; ///< Data length code.

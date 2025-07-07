@@ -2,13 +2,14 @@
 * Copyright 2023 Ingemar Hedvall
 * SPDX-License-Identifier: MIT
  */
+#include "bus/candataframe.h"
+
 #include <array>
+#include <iomanip>
 #include <stdexcept>
 
-#include "bus/candataframe.h"
-#include "bus/buslogstream.h"
-
 #include "../include/bus/littlebuffer.h"
+#include "bus/buslogstream.h"
 
 namespace {
 
@@ -273,12 +274,11 @@ void CanDataFrame::ToRaw(std::vector<uint8_t>& dest) const {
 }
 void CanDataFrame::FromRaw(const std::vector<uint8_t>& source) {
   try {
-
     Size(source.size());
     if (Size() < kCanDataFrameSize) {
-     std::ostringstream error;
-     error << "CAN Data Frame message is to small. Size :"
-        << kCanDataFrameSize << "/" << Size();
+      std::ostringstream error;
+      error << "CAN Data Frame message is to small. Size :" << kCanDataFrameSize
+            << "/" << Size();
       throw std::runtime_error(error.str());
     }
 
@@ -315,13 +315,34 @@ void CanDataFrame::FromRaw(const std::vector<uint8_t>& source) {
     FrameDuration(duration.value());
 
     data_bytes_.resize(DataLength());
-    std::copy_n(source.cbegin() + 34, DataLength(),
-      data_bytes_.begin());
+    std::copy_n(source.cbegin() + 34, DataLength(), data_bytes_.begin());
   } catch (const std::exception& err) {
     BUS_ERROR() << "Deserialization error. Error: " << err.what();
     Valid(false);
   }
 }
+std::string CanDataFrame::ToString(uint64_t loglevel) const {
 
+  switch (loglevel) {
+    case 0:
+      break;;
+    case 1:
+      break;;
+      default:
+      return "";
+  }
+  std::ostringstream ss;
+  ss << "Type:  CanDataFrame , ";
+  ss << "CanId: " << CanId() << " ";
+
+  std::ostringstream temp;
+  for (unsigned char data_byte : data_bytes_) {
+    temp  << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(data_byte) << "  ";
+  }
+  ss << ", Data: " <<  temp.str() << " ";
+
+
+  return ss.str();
+}
 
 }  // namespace mdf  LittleBuffer<uint32_t> crc(source, 24);

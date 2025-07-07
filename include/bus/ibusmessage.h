@@ -7,7 +7,7 @@
 #include <cstdint>
 #include <memory>
 #include <vector>
-
+#include <string>
 
 namespace bus {
 
@@ -56,6 +56,8 @@ public:
 
   virtual void ToRaw(std::vector<uint8_t>& dest) const;
   virtual void FromRaw(const std::vector<uint8_t>& source);
+
+  virtual std::string ToString(uint64_t loglevel)  const;
 
   [[nodiscard]] BusMessageType Type() const { return type_; }
 
