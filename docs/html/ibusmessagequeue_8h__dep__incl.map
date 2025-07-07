@@ -1,0 +1,7 @@
+<map id="include/bus/ibusmessagequeue.h" name="include/bus/ibusmessagequeue.h">
+<area shape="rect" id="Node000001" title="Defines an interface against a message queue." alt="" coords="6,5,220,32"/>
+<area shape="rect" id="Node000002" href="$ibusmessagebroker_8h.html" title="Defines an interface against borkers, servers and clients." alt="" coords="5,80,221,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="116,48,116,80,110,80,110,48"/>
+<area shape="rect" id="Node000003" href="$businterfacefactory_8h.html" title="The file implement a factory class for this library." alt="" coords="40,155,186,197"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="116,122,116,154,110,154,110,122"/>
+</map>

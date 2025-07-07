@@ -2,11 +2,12 @@
 * Copyright 2025 Ingemar Hedvall
 * SPDX-License-Identifier: MIT
 */
+#include "simulatequeue.h"
+
 #include <chrono>
 
-#include "simulatequeue.h"
-#include "bus/simulatebroker.h"
 #include "bus/buslogstream.h"
+#include "simulatebroker.h"
 
 using namespace std::chrono_literals;
 

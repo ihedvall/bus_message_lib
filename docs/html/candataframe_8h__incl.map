@@ -1,0 +1,14 @@
+<map id="include/bus/candataframe.h" name="include/bus/candataframe.h">
+<area shape="rect" id="Node000001" title="Simple wrapper around a CAN or CAN FD messages." alt="" coords="5,5,187,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,59,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,34,55,70,51,66,83,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="70,155,130,181"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="99,32,102,139,97,139,94,33"/>
+<area shape="rect" id="Node000004" href="$ibusmessage_8h.html" title="Defines an interface against a bus message." alt="" coords="133,80,267,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="116,30,171,69,168,73,113,35"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="184,109,131,147,128,143,181,105"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="162,155,230,181"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="202,107,200,139,195,139,197,107"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="254,155,311,181"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="216,105,259,142,255,146,213,109"/>
+</map>

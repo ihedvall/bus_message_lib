@@ -3,18 +3,17 @@
 * SPDX-License-Identifier: MIT
 */
 
-#include <cstdint>
-#include <chrono>
-#include <thread>
+#include "simulatebroker.h"
+
 #include <algorithm>
+#include <chrono>
+#include <cstdint>
 #include <ctime>
+#include <thread>
 
-#include "bus/buslogstream.h"
-
-#include "bus/simulatebroker.h"
-#include "simulatequeue.h"
 #include "../include/bus/littlebuffer.h"
-
+#include "bus/buslogstream.h"
+#include "simulatequeue.h"
 
 using namespace std::chrono_literals;
 

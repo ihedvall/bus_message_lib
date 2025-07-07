@@ -3,6 +3,9 @@
  * SPDX-License-Identifier: MIT
  */
 
+/** \file littlebuffer.h
+ * \brief Support class to handle byte order of various numeric values.
+ */
 #pragma once
 
 #include <cstring>
@@ -13,24 +16,73 @@
 
 namespace bus {
 
+/**
+ * @brief Support class to handle byte order problems with numeric values.
+ * @tparam T Type of numeric
+ */
 template <typename T>
 class LittleBuffer {
  public:
   LittleBuffer() = default;
+
+  /**
+   * @brief Constructor that converts the input values.
+   * @param value Value and its type.
+   */
   explicit LittleBuffer(const T& value);
+
+  /**
+   * @brief Reads in a byte array and at an offset in that array
+   * @param buffer Byte array.
+   * @param offset Offset in that array.
+   */
   LittleBuffer(const std::vector<uint8_t>& buffer, size_t offset);
+
+  /**
+   * @brief Reads in a value from a byte array from an offset.
+   * @param buffer Pointer to the byte array.
+   * @param offset Offset in the array.
+   */
   LittleBuffer(const uint8_t* buffer, size_t offset);
 
+  /**
+   * @brief Returns an iterator to the first byte.
+   * @return Constant iterator to the first byte.
+   */
   [[nodiscard]] auto cbegin() const {
     return buffer_.cbegin();
   }
+
+  /**
+   * @brief Returns the an iterator to the last byte.
+   * @return Const iterator to the last byte.
+   */
   [[nodiscard]] auto cend() const {
     return buffer_.cend();
   }
 
+  /**
+   * @brief Returns a constant pointer to the internal byte array.
+   * @return Constant pointer to the internal buffer.
+   */
   [[nodiscard]] const uint8_t* data() const;
+
+  /**
+   * @brief Returns a pointer to the internal byte array.
+   * @return Pointer to the internal byte array.
+   */
   [[nodiscard]] uint8_t* data();
+
+  /**
+   * @brief Returns size of the value type.
+   * @return Size of the value type.
+   */
   [[nodiscard]] size_t size() const;
+
+  /**
+   * @brief Returns the value
+   * @return Returns the value.
+   */
   T value() const;
 
  private:

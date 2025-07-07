@@ -1,0 +1,17 @@
+<map id="include/bus/buslogstream.h" name="include/bus/buslogstream.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="219,5,399,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,66,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="259,35,81,82,80,76,258,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="89,80,176,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="279,35,179,76,177,71,277,30"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="201,80,254,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="296,35,254,72,251,68,293,31"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="279,80,339,107"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="312,33,312,64,306,64,306,33"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="363,80,431,107"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="326,30,372,68,368,72,322,35"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="455,80,568,107"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="345,30,463,72,461,77,343,35"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="592,80,669,107"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="368,30,577,77,575,82,366,35"/>
+</map>

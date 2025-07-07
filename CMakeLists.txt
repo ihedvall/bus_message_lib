@@ -51,6 +51,7 @@ endif()
 
 if (BUS_DOC)
     include(script/doxygen.cmake)
+    include(script/mkdocs.cmake)
 endif()
 
 set(BUS_HEADERS
@@ -66,7 +67,7 @@ add_library(bus-message-lib
         src/ibusmessagebroker.cpp
         include/bus/ibusmessagebroker.h
         src/simulatebroker.cpp
-        include/bus/simulatebroker.h
+        src/simulatebroker.h
         src/simulatequeue.cpp
         src/simulatequeue.h
         src/buslogstream.cpp
@@ -95,23 +96,31 @@ if (BUS_INTERFACE)
     add_subdirectory(interface)
 endif ()
 
+
 if (BUS_TOOLS)
     add_subdirectory(bustolistend)
 endif()
 
 if (DOXYGEN_FOUND AND BUS_DOC)
+
+if (BUS_DOC)
+
+    execute_process( COMMAND mkdocs build
+                     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+
+
     set(DOXYGEN_RECURSIVE YES)
     set(DOXYGEN_REPEAT_BRIEF NO)
     set(DOXYGEN_PROJECT_NAME "Bus Messages")
     set(DOXYGEN_PROJECT_BRIEF "Bus Message Serialization Library")
-    set(DOXYGEN_PROJECT_LOGO img/bus.png)
-    set(DOXYGEN_PROJECT_ICON img/bus.ico)
+    set(DOXYGEN_PROJECT_LOGO mkdocs/img/logo.png)
+    set(DOXYGEN_PROJECT_ICON mkdocs/img/favicon.ico)
     set(DOXYGEN_VERSION "1.0")
     set(DOXYGEN_DISABLE_INDEX YES)
     set(DOXYGEN_GENERATE_TREEVIEW YES)
     set(DOXYGEN_FULL_SIDEBAR YES)
-    set(DOXYGEN_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-    set(DOXYGEN_HTML_OUTPUT "docs")
+    set(DOXYGEN_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/docs)
+    set(DOXYGEN_HTML_OUTPUT "html")
     doxygen_add_docs(bus-message-doc ALL
             include/bus doxygen
             COMMENT "Bus Message Interface Library generating documentation")

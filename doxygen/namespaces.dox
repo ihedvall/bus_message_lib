@@ -1,13 +1,13 @@
 /*
- * Copyright 2022 Ingemar Hedvall
+ * Copyright 2025 Ingemar Hedvall
  * SPDX-License-Identifier: MIT
  */
 
 /** \brief Main namespace for the MDF library.
  *
- * Main namespace for all MDF library classes and functions.
+ * Main namespace for all Bus Message Library classes and functions.
  */
-namespace mdf {
+namespace bus {
 }
 
 

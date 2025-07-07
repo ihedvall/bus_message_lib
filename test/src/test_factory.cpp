@@ -5,9 +5,9 @@
 
 #include <gtest/gtest.h>
 
-#include "bus/candataframe.h"
+#include "../../src/simulatebroker.h"
 #include "bus/buslogstream.h"
-#include "bus/simulatebroker.h"
+#include "bus/candataframe.h"
 #include "bus/interface/businterfacefactory.h"
 
 namespace bus {

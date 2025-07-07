@@ -1,0 +1,82 @@
+site_name: Bus Message Library
+site_description: Bus messages serialization library
+site_author: Ingemar Hedvall
+copyright: Copyright &copy Ingemar Hedvall 2025
+docs_dir: mkdocs
+site_dir: docs
+
+repo_url: https://github.com/ihedvall/bus_message_lib
+repo_name: ihedvall/bus_message_lib
+
+theme:
+    name: material
+    logo: img/logo.png
+    favicon: img/favicon.ico
+    palette:
+
+        # Palette toggle for automatic mode
+        - media: "(prefers-color-scheme)"
+          toggle:
+              icon: material/brightness-auto
+              name: Switch to light mode
+
+        # Palette toggle for light mode
+        - media: "(prefers-color-scheme: light)"
+          scheme: default
+
+
+          toggle:
+              icon: material/brightness-7
+              name: Switch to dark mode
+
+        # Palette toggle for dark mode
+        - media: "(prefers-color-scheme: dark)"
+          scheme: slate
+          toggle:
+              icon: material/brightness-4
+              name: Switch to system preference
+
+
+    features:
+        - navigation.instant
+        - search.highlight
+        # - navigation.footer
+
+    plugins:
+        - search
+        - tags
+
+extra:
+    social:
+        - icon: fontawesome/brands/github
+          link: https://github.com/ihedvall
+          name: Ingemar Hedvall on GitHub
+
+        - icon: fontawesome/brands/linkedin
+          link: https://www.linkedin.com/in/ingemar-hedvall-904871258/
+          name: Ingemar Hedvall Linkedin Page
+
+markdown_extensions:
+  - admonition
+  - pymdownx.superfences:
+      custom_fences:
+         - name: mermaid
+           class: mermaid
+           format: !!python/name:pymdownx.superfences.fence_code_format
+
+nav:
+    - Home: index.md
+    - Bus Messages:
+        - Message Header: message/message_header.md
+        - Control Messages: message/control_message.md
+        - CAN Messages: message/can_message.md
+    - Communication Interfaces:
+        - Brokers or Servers: interface/broker_and_server.md
+        - Shared Memory Broker: interface/shared_memory_broker.md
+        - TCP/IP Broker: interface/tcp_broker.md
+        - Shared Memory Server: interface/shared_memory_server.md
+        - Shared Memory Client: interface/shared_memory_client.md
+        - TCP/IP Server: interface/tcp_server.md
+        - TCP/IP Client: interface/tcp_client.md
+    - API Reference: html/index.html
+    - License: license.md

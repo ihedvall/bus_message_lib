@@ -1,0 +1,28 @@
+var classbus_1_1_i_bus_message_broker =
+[
+    [ "IBusMessageBroker", "classbus_1_1_i_bus_message_broker.html#ad369cbf573a9c163cd0461e9b082a8a5", null ],
+    [ "~IBusMessageBroker", "classbus_1_1_i_bus_message_broker.html#a657cf4376c3e647b479cb8e7055d48b5", null ],
+    [ "Address", "classbus_1_1_i_bus_message_broker.html#a5529534b58a1171c1ede704716e10385", null ],
+    [ "Address", "classbus_1_1_i_bus_message_broker.html#a7800d80bffc1507e5b5f99c2dc01527a", null ],
+    [ "CreatePublisher", "classbus_1_1_i_bus_message_broker.html#a954ac1ba7817daef47b2254ef0b8c2d2", null ],
+    [ "CreateSubscriber", "classbus_1_1_i_bus_message_broker.html#a2078e0ee7febf22bbcf838ffa880beab", null ],
+    [ "DetachPublisher", "classbus_1_1_i_bus_message_broker.html#a24062c02c8245407e9bf099598b67414", null ],
+    [ "DetachSubscriber", "classbus_1_1_i_bus_message_broker.html#a74ada6d8bfdc0409a62374e9113bcff1", null ],
+    [ "IsConnected", "classbus_1_1_i_bus_message_broker.html#ad2761c146a2f42afb5392f458dc5ec7a", null ],
+    [ "MemorySize", "classbus_1_1_i_bus_message_broker.html#ae37f0eb9fa20d0c24bf053a2240cfa79", null ],
+    [ "MemorySize", "classbus_1_1_i_bus_message_broker.html#ad99f32c5fa9d1460e6c1fc61b35cd84b", null ],
+    [ "Name", "classbus_1_1_i_bus_message_broker.html#a87e1a49fd130746111fba4bbacbcf4cb", null ],
+    [ "Name", "classbus_1_1_i_bus_message_broker.html#a98a784f63b00c4a7831ad35b82e611a4", null ],
+    [ "NofPublishers", "classbus_1_1_i_bus_message_broker.html#abc40292fdca02fa5ed88afee540eb5e2", null ],
+    [ "NofSubscribers", "classbus_1_1_i_bus_message_broker.html#a0983d4444875ce8938bf938b5934e843", null ],
+    [ "Port", "classbus_1_1_i_bus_message_broker.html#ad0be3ab4d0528173e58ea90dc17addda", null ],
+    [ "Port", "classbus_1_1_i_bus_message_broker.html#aa1cab095cabb19304504d726379fe60f", null ],
+    [ "Start", "classbus_1_1_i_bus_message_broker.html#a5f52ac0dd9e041c1d8acd4b779051db1", null ],
+    [ "Stop", "classbus_1_1_i_bus_message_broker.html#aeb5f6aa936d84f0c84f7b4af0aad808a", null ],
+    [ "connected_", "classbus_1_1_i_bus_message_broker.html#a9c91d4e1eef6a50ad306c0c876e1d6f1", null ],
+    [ "publishers_", "classbus_1_1_i_bus_message_broker.html#a12e8519c2a7b1216b786bbc59e1f435c", null ],
+    [ "queue_mutex_", "classbus_1_1_i_bus_message_broker.html#af91d7e91daec4fafb3487d9193df203a", null ],
+    [ "stop_thread_", "classbus_1_1_i_bus_message_broker.html#ae31567774322571ac0459a53f18bcb2a", null ],
+    [ "subscribers_", "classbus_1_1_i_bus_message_broker.html#a9b7d1258060fea10f52ebfdfe0982561", null ],
+    [ "thread_", "classbus_1_1_i_bus_message_broker.html#ab8bb260041e91f5f4f2bfc06bab00cae", null ]
+];

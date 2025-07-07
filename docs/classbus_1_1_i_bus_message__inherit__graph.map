@@ -1,5 +1,0 @@
-<map id="bus::IBusMessage" name="bus::IBusMessage">
-<area shape="rect" id="Node000001" title="Abstract base class representing a generic bus message." alt="" coords="9,5,140,31"/>
-<area shape="rect" id="Node000002" href="$classbus_1_1_can_data_frame.html" title="Implements an interface against a CAN Data Frame message." alt="" coords="5,79,144,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="77,44,77,79,72,79,72,44"/>
-</map>
