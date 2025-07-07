@@ -23,7 +23,7 @@ target_link_libraries(bustolistend PRIVATE bus-message-lib)
 target_link_libraries(bustolistend PRIVATE EXPAT::EXPAT)
 target_link_libraries(bustolistend PRIVATE ${Boost_LIBRARIES})
 target_link_libraries(bustolistend PRIVATE bus-message-interface)
-
+target_link_libraries(bustolistend PRIVATE sago::platform_folders)
 
 if (WIN32)
     target_link_libraries(bustolistend PRIVATE bcrypt)
