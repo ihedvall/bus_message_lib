@@ -102,9 +102,6 @@ if (BUS_TOOLS)
 endif()
 
 if (DOXYGEN_FOUND AND BUS_DOC)
-
-if (BUS_DOC)
-
     execute_process( COMMAND mkdocs build
                      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 
