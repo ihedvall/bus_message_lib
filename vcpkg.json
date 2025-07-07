@@ -13,7 +13,7 @@
       },
       "tools": {
         "description": "Build GUI and driver daemons",
-        "dependencies": ["wxwidgets"]
+        "dependencies": ["wxwidgets","expat"]
       }
   }
 }
