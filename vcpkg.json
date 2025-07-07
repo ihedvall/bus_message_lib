@@ -8,7 +8,11 @@
         "dependencies": [
           "boost-headers",
           "boost-asio",
-          "boost-interprocess"
+          "boost-interprocess",
+          "boost-filesystem",
+          "boost-endian",
+          "boost-process",
+          "boost-locale"
         ]
       },
       "tools": {
