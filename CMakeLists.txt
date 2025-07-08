@@ -44,6 +44,7 @@ if (BUS_INTERFACE)
 endif()
 
 include(script/expat.cmake)
+include(script/platform_folders.cmake)
 
 if (BUS_TOOLS)
     include(script/utillib.cmake)
