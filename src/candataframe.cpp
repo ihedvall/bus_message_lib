@@ -8,7 +8,7 @@
 #include <iomanip>
 #include <stdexcept>
 
-#include "../include/bus/littlebuffer.h"
+#include "bus/littlebuffer.h"
 #include "bus/buslogstream.h"
 
 namespace {

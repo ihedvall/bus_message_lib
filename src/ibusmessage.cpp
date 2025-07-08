@@ -7,8 +7,7 @@
 #include <algorithm>
 #include <stdexcept>
 
-#include "../cmake-build-debug/_deps/utillib-src/include/util/timestamp.h"
-#include "../include/bus/littlebuffer.h"
+#include "bus/littlebuffer.h"
 #include "bus/buslogstream.h"
 #include "bus/candataframe.h"
 
