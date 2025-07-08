@@ -6,7 +6,6 @@
 #include <util/timestamp.h>
 #include <util/utilfactory.h>
 
-#include "../../cmake-build-debug/_deps/utillib-src/src/listenconsole.h"
 #include "bus/buslogstream.h"
 #include "bus/candataframe.h"
 #include "bus/interface/businterfacefactory.h"
