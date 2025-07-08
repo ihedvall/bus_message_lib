@@ -12,7 +12,8 @@
           "boost-filesystem",
           "boost-endian",
           "boost-process",
-          "boost-locale"
+          "boost-locale",
+          "expat"
         ]
       },
       "tools": {

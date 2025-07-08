@@ -43,9 +43,10 @@ if (BUS_INTERFACE)
     include(script/boost.cmake)
 endif()
 
+include(script/expat.cmake)
+
 if (BUS_TOOLS)
     include(script/utillib.cmake)
-    include(script/expat.cmake)
 endif()
 
 if (BUS_TEST)
