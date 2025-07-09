@@ -1,16 +1,15 @@
 /*
-* Copyright 2025 Ingemar Hedvall
-* SPDX-License-Identifier: MIT
-*/
+ * Copyright 2025 Ingemar Hedvall
+ * SPDX-License-Identifier: MIT
+ */
+#include "bus/ibusmessage.h"
+
 #include <algorithm>
 #include <stdexcept>
 
-
-#include "bus/ibusmessage.h"
+#include "bus/littlebuffer.h"
 #include "bus/buslogstream.h"
 #include "bus/candataframe.h"
-
-#include "../include/bus/littlebuffer.h"
 
 namespace bus {
 
@@ -32,7 +31,6 @@ std::shared_ptr<IBusMessage> IBusMessage::Create(BusMessageType type) {
 }
 
 void IBusMessage::ToRaw(std::vector<uint8_t>& dest) const {
-
   try {
     if (Size() < 18) {
       throw std::runtime_error(
@@ -81,6 +79,12 @@ void IBusMessage::FromRaw(const std::vector<uint8_t>& source) {
     Valid(false);
   }
 }
+std::string IBusMessage::ToString(uint64_t loglevel) const {
+  std::ostringstream ss;
+  ss << "Size: " << size_ << " Version: " << version_
+      << " Channel: " <<  static_cast<int>(bus_channel_);
 
+  return ss.str();
+}
 
-} // bus
+}  // namespace bus

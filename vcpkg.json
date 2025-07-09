@@ -8,12 +8,22 @@
         "dependencies": [
           "boost-headers",
           "boost-asio",
-          "boost-interprocess"
+          "boost-interprocess",
+          "boost-filesystem",
+          "boost-endian",
+          "boost-process",
+          "boost-locale",
+          "expat"
         ]
       },
       "tools": {
         "description": "Build GUI and driver daemons",
-        "dependencies": ["wxwidgets"]
+        "dependencies": ["wxwidgets","expat"]
+      },
+      "test": {
+        "description": "Building unit tests",
+        "dependencies": [
+          "expat"]
       }
   }
 }

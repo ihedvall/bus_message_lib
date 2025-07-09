@@ -11,11 +11,11 @@ if (NOT Boost_FOUND)
         cmake_policy(SET CMP0167 OLD)
     endif()
 
-    find_package(Boost COMPONENTS filesystem)
+    find_package(Boost COMPONENTS filesystem process)
 
     if (NOT Boost_FOUND)
         set(Boost_ROOT ${COMP_DIR}/boost/latest)
-        find_package(Boost REQUIRED COMPONENTS filesystem)
+        find_package(Boost REQUIRED COMPONENTS filesystem process)
     endif()
 endif()
 

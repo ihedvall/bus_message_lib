@@ -15,6 +15,7 @@ option(BUS_TOOLS "Building applications" OFF)
 option(BUS_TEST "Building unit test" OFF)
 option(BUS_INTERFACE "Build the interface library" ON)
 
+
 if (BUS_TOOLS OR BUS_TEST)
    set(BUS_INTERFACE ON)
 endif()
@@ -22,6 +23,9 @@ endif()
 if(BUS_INTERFACE AND USE_VCPKG)
     list(APPEND VCPKG_MANIFEST_FEATURES "interface")
 endif()
+if(BUS_TEST AND USE_VCPKG)
+    list(APPEND VCPKG_MANIFEST_FEATURES "test")
+endif ()
 
 if(BUS_TOOLS AND USE_VCPKG)
     list(APPEND VCPKG_MANIFEST_FEATURES "tools")
@@ -39,8 +43,11 @@ if (BUS_INTERFACE)
     include(script/boost.cmake)
 endif()
 
-if (BUS_TOOLS)
-    include(script/wxwidgets.cmake)
+include(script/expat.cmake)
+include(script/platform_folders.cmake)
+
+if (BUS_TOOLS OR BUS_TEST)
+    include(script/utillib.cmake)
 endif()
 
 if (BUS_TEST)
@@ -94,10 +101,15 @@ if (BUS_INTERFACE)
     add_subdirectory(interface)
 endif ()
 
-if (BUS_DOC)
 
+if (BUS_TOOLS)
+    add_subdirectory(bustolistend)
+endif()
+
+if (DOXYGEN_FOUND AND BUS_DOC)
     execute_process( COMMAND mkdocs build
                      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+
 
     set(DOXYGEN_RECURSIVE YES)
     set(DOXYGEN_REPEAT_BRIEF NO)

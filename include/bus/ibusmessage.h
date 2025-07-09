@@ -15,6 +15,9 @@
 #include <memory>
 #include <vector>
 
+#include <string>
+
+
 namespace bus {
 
 /** \brief Defines all message types. */
@@ -94,10 +97,15 @@ public:
    */
   virtual void FromRaw(const std::vector<uint8_t>& source);
 
+
+  virtual std::string ToString(uint64_t loglevel)  const;
+
+
   /** \brief Returns type of message.
    *
    * @return Type of message.
    */
+
   [[nodiscard]] BusMessageType Type() const { return type_; }
 
   /** \brief Sets the vewrsion number for a message.
