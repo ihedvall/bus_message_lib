@@ -6,7 +6,6 @@
 #include "bustolisten.h"
 
 #include <util/ixmlfile.h>
-#include <util/listenconfig.h>
 #include <util/logconfig.h>
 #include <util/logstream.h>
 #include <util/utilfactory.h>

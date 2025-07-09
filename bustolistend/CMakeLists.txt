@@ -11,7 +11,6 @@ add_executable(bustolistend src/main.cpp
         src/bustolisten.h)
 
 target_include_directories(bustolistend PRIVATE ${Boost_INCLUDE_DIRS})
-target_include_directories(bustolistend PRIVATE "../../utillib/include")
 target_compile_definitions(bustolistend PRIVATE XML_STATIC)
 
 if (MSVC)

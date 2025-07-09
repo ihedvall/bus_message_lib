@@ -46,7 +46,7 @@ endif()
 include(script/expat.cmake)
 include(script/platform_folders.cmake)
 
-if (BUS_TOOLS)
+if (BUS_TOOLS OR BUS_TEST)
     include(script/utillib.cmake)
 endif()
 
