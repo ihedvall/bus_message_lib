@@ -59,10 +59,7 @@ if (BUS_DOC)
     include(script/mkdocs.cmake)
 endif()
 
-set(BUS_HEADERS
-        include/bus/ibusmessage.h
-        include/bus/candataframe.h
-)
+
 
 add_library(bus-message-lib
         src/candataframe.cpp include/bus/candataframe.h
@@ -127,3 +124,20 @@ if (DOXYGEN_FOUND AND BUS_DOC)
             include/bus doxygen
             COMMENT "Bus Message Interface Library generating documentation")
 endif ()
+
+set(BUS_HEADERS
+        include/bus/buslogstream.h
+        include/bus/candataframe.h
+        include/bus/ibusmessage.h
+        include/bus/ibusmessagebroker.h
+        include/bus/ibusmessagequeue.h
+        include/bus/littlebuffer.h
+)
+
+set_target_properties(bus-message-lib PROPERTIES PUBLIC_HEADER "${BUS_HEADERS}")
+install(TARGETS bus-message-lib
+        EXPORT BusMessageTargets
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
+        RUNTIME DESTINATION bin
+        PUBLIC_HEADER DESTINATION include/bus)

@@ -81,7 +81,12 @@ void TcpMessageClient::DoLookup() {
         } else {
           socket_ = std::make_unique<ip::tcp::socket>(context_);
           endpoints_ = std::move(result);
-          DoConnect();
+          if (endpoints_.empty()) {
+            DoRetryWait();
+          } else {
+            current_endpoint_ = endpoints_.cbegin();
+            DoConnect();
+          }
         }
       });
 }
@@ -111,21 +116,26 @@ void TcpMessageClient::Close() {
 
 void TcpMessageClient::DoConnect() {
   connected_ = false;
-  for (const auto& endpoint : endpoints_) {
-    if (connected_) {
-      break;
-    }
-    socket_->async_connect(endpoint, [&](const error_code error) {
+  if (current_endpoint_ == endpoints_.cend()) {
+    DoRetryWait();
+    return;
+  }
+  socket_->async_connect(*current_endpoint_, [&](const error_code error) {
       if (error.failed() || !socket_->is_open()) {
         BUS_ERROR() << "Connect error. Error: " << error.message();
         connected_ = false;
-        DoRetryWait();
+        ++current_endpoint_;
+        if (current_endpoint_ == endpoints_.cend()) {
+          DoRetryWait();
+        } else {
+          DoConnect();
+        }
       } else {
         connected_ = true;
         DoReadSize();
       }
     });
-  }
+
 }
 
 void TcpMessageClient::DoReadSize() {

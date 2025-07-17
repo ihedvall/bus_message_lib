@@ -16,24 +16,15 @@ set(BUS_INTERFACE_HEADERS
 
 add_library(bus-message-interface
         src/businterfacefactory.cpp ../include/bus/interface/businterfacefactory.h
-        src/sharedmemorybroker.cpp
-        src/sharedmemorybroker.h
-        src/sharedmemoryqueue.cpp
-        src/sharedmemoryqueue.h
-        src/tcpmessagebroker.cpp
-        src/tcpmessagebroker.h
-        src/tcpmessageconnection.cpp
-        src/tcpmessageconnection.h
-        src/tcpmessageclient.cpp
-        src/tcpmessageclient.h
-        src/sharedmemoryserver.cpp
-        src/sharedmemoryserver.h
-        src/sharedmemorytxrxqueue.cpp
-        src/sharedmemorytxrxqueue.h
-        src/sharedmemoryclient.cpp
-        src/sharedmemoryclient.h
-        src/tcpmessageserver.cpp
-        src/tcpmessageserver.h
+        src/sharedmemorybroker.cpp src/sharedmemorybroker.h
+        src/sharedmemoryqueue.cpp  src/sharedmemoryqueue.h
+        src/tcpmessagebroker.cpp src/tcpmessagebroker.h
+        src/tcpmessageconnection.cpp src/tcpmessageconnection.h
+        src/tcpmessageclient.cpp src/tcpmessageclient.h
+        src/sharedmemoryserver.cpp src/sharedmemoryserver.h
+        src/sharedmemorytxrxqueue.cpp src/sharedmemorytxrxqueue.h
+        src/sharedmemoryclient.cpp src/sharedmemoryclient.h
+        src/tcpmessageserver.cpp src/tcpmessageserver.h
 )
 
 target_include_directories(bus-message-interface PUBLIC
@@ -46,5 +37,13 @@ if (MSVC)
   target_compile_definitions(bus-message-interface PRIVATE _WIN32_WINNT=0x0A00)
 endif ()
 
+set_target_properties(bus-message-interface PROPERTIES
+        PUBLIC_HEADER "${BUS_INTERFACE_HEADERS}")
+install(TARGETS bus-message-interface
+        EXPORT BusMessageTargets
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
+        RUNTIME DESTINATION bin
+        PUBLIC_HEADER DESTINATION include/bus/interface)
 cmake_print_properties(TARGETS bus-message-interface PROPERTIES INCLUDE_DIRECTORIES)
 cmake_print_variables(Boost_INCLUDE_DIRS Boost_INCLUDE_DIR)

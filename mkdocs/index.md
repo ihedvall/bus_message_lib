@@ -5,6 +5,7 @@ for shared memory and TCP/IP communications.
 The main purpose is to isolate the bus driver software from the rest of
 the application as the driver software normally is dependent on operating
 system and manufacturer.
+<<<<<<< Updated upstream
 
 
 ## Serialization of Bus Messages
@@ -43,3 +44,47 @@ The following applications are based upon this library:
 - **_Bus Simulator_**. Simple GUI application that generates bus messages from an MDF file.
 
 
+=======
+
+<figure markdown="span">
+    ![System Overview](img/overview.svg "System Overview")
+    <figoption>System Overview</figoption>    
+</figure>
+
+## Serialization of Bus Messages
+The library supports the following buses:
+
+- **_CAN including CAN-FD_**.
+- **_LIN_**.
+- **_FlexRay_**.
+- **_MOST_**.
+- **_Ethernet (ETH)_**.
+
+## Communication Interfaces
+The library supports the following communication interfaces:
+
+- **_[Shared Memory Broker](interface/shared_memory_broker.md)_**. Single shared memory message bus.
+- **_[Shared Memory Server](interface/shared_memory_server.md)_**. Tx/Rx shared memory message bus.
+- **_[Shared Memory Client](interface/shared_memory_client.md)_**. Tx/Rx shared memory message client.
+- **_[TCP/IP Message Broker](interface/tcp_broker.md)._** Shared memory broker with a TCP/IP server.
+- **_[TCP/IP Message Client](interface/tcp_client.md)_**. Client for TCP/IP servers and brokers.
+- **_[TCP/IP Message Server](interface/tcp_server.md)_**. Tx/Rx message TCP/IP server.
+
+A broker is used by applications that have one or more publishers and 
+one or more subscribers, typical in logger applications. 
+A server is used in applications where bidirectional traffic is needed,
+typical when running against bus drivers.
+
+## Applications
+A number of applications use this library. 
+Some of them are hosted inside this repository or have their own repository.
+The following applications are based upon this library:
+
+- **_Bus to MQTT_**. Subscribe to bus messages, parse the message to engineering values and forward to an MQTT broker.
+- **_Bus to MDF_**. Subscribe to bus messages and log them onto an MDF file.
+- **_Bus to Listen_**. Subscribe to bus messages and display the messages on a Listen Window.
+- **_Bus Daemon_**. Simple executable that starts various communication interfaces.
+- **_Bus Simulator_**. Simple GUI application that generates bus messages from an MDF file.
+
+
+>>>>>>> Stashed changes

@@ -27,7 +27,7 @@ public:
 
 private:
   /** The stop server task boolean is not used to stop the server thread.
-   *  Instead does it actually suppress error message when the ASIO context
+   *  Instead, does it actually suppress error message when the ASIO context
    *  is stopped.
    */
   std::atomic<bool> stop_client_thread_;
@@ -38,6 +38,7 @@ private:
   boost::asio::steady_timer retry_timer_;
   std::unique_ptr<boost::asio::ip::tcp::socket> socket_;
   boost::asio::ip::tcp::resolver::results_type endpoints_;
+  boost::asio::ip::tcp::resolver::results_type::const_iterator current_endpoint_;
 
   std::array<uint8_t, 4> size_data_ = {0};
   std::vector<uint8_t> message_data_;

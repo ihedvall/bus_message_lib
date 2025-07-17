@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="img/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
     
     
       
@@ -333,6 +333,33 @@
       
         <li class="md-nav__item">
   <a href="#applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Applications
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#serialization-of-bus-messages_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Serialization of Bus Messages
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#communication-interfaces_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Communication Interfaces
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications_1" class="md-nav__link">
     <span class="md-ellipsis">
       Applications
     </span>
@@ -765,6 +792,33 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#serialization-of-bus-messages_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Serialization of Bus Messages
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#communication-interfaces_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Communication Interfaces
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Applications
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -790,7 +844,8 @@ Optionally, it also includes basic inter-process communication libraries
 for shared memory and TCP/IP communications.
 The main purpose is to isolate the bus driver software from the rest of
 the application as the driver software normally is dependent on operating
-system and manufacturer.</p>
+system and manufacturer.
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream</p>
 <h2 id="serialization-of-bus-messages">Serialization of Bus Messages</h2>
 <p>The library supports the following buses:</p>
 <ul>
@@ -825,6 +880,60 @@ The following applications are based upon this library:</p>
 <li><strong><em>Bus Daemon</em></strong>. Simple executable that starts various communication interfaces.</li>
 <li><strong><em>Bus Simulator</em></strong>. Simple GUI application that generates bus messages from an MDF file.</li>
 </ul>
+<p>=======</p>
+<figure>
+    <img alt="System Overview" src="img/overview.svg" title="System Overview" />
+    <figoption>System Overview</figoption>  <br />
+</figure>
+<h2 id="serialization-of-bus-messages_1">Serialization of Bus Messages</h2>
+<p>The library supports the following buses:</p>
+<ul>
+<li><strong><em>CAN including CAN-FD</em></strong>.</li>
+<li><strong><em>LIN</em></strong>.</li>
+<li><strong><em>FlexRay</em></strong>.</li>
+<li><strong><em>MOST</em></strong>.</li>
+<li><strong><em>Ethernet (ETH)</em></strong>.</li>
+</ul>
+<h2 id="communication-interfaces_1">Communication Interfaces</h2>
+<p>The library supports the following communication interfaces:</p>
+<ul>
+<li><strong><em><a href="interface/shared_memory_broker/">Shared Memory Broker</a></em></strong>. Single shared memory message bus.</li>
+<li><strong><em><a href="interface/shared_memory_server/">Shared Memory Server</a></em></strong>. Tx/Rx shared memory message bus.</li>
+<li><strong><em><a href="interface/shared_memory_client/">Shared Memory Client</a></em></strong>. Tx/Rx shared memory message client.</li>
+<li><strong><em><a href="interface/tcp_broker/">TCP/IP Message Broker</a>.</em></strong> Shared memory broker with a TCP/IP server.</li>
+<li><strong><em><a href="interface/tcp_client/">TCP/IP Message Client</a></em></strong>. Client for TCP/IP servers and brokers.</li>
+<li><strong><em><a href="interface/tcp_server/">TCP/IP Message Server</a></em></strong>. Tx/Rx message TCP/IP server.</li>
+</ul>
+<p>A broker is used by applications that have one or more publishers and 
+one or more subscribers, typical in logger applications. 
+A server is used in applications where bidirectional traffic is needed,
+typical when running against bus drivers.</p>
+<h2 id="applications_1">Applications</h2>
+<p>A number of applications use this library. 
+Some of them are hosted inside this repository or have their own repository.
+The following applications are based upon this library:</p>
+<ul>
+<li><strong><em>Bus to MQTT</em></strong>. Subscribe to bus messages, parse the message to engineering values and forward to an MQTT broker.</li>
+<li><strong><em>Bus to MDF</em></strong>. Subscribe to bus messages and log them onto an MDF file.</li>
+<li><strong><em>Bus to Listen</em></strong>. Subscribe to bus messages and display the messages on a Listen Window.</li>
+<li><strong><em>Bus Daemon</em></strong>. Simple executable that starts various communication interfaces.</li>
+<li><strong><em>Bus Simulator</em></strong>. Simple GUI application that generates bus messages from an MDF file.</li>
+</ul>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>Stashed changes</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
 
 
 
@@ -900,7 +1009,7 @@ The following applications are based upon this library:</p>
       <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "search.highlight"], "search": "assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.13a4f30d.min.js"></script>
+      <script src="assets/javascripts/bundle.56ea9cef.min.js"></script>
       
     
   </body>
