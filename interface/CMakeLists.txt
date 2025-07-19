@@ -29,7 +29,7 @@ add_library(bus-message-interface
 
 target_include_directories(bus-message-interface PUBLIC
         $<INSTALL_INTERFACE:include>
-        $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>)
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>)
 
 target_include_directories(bus-message-interface PRIVATE ${Boost_INCLUDE_DIRS} )
 
