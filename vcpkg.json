@@ -13,7 +13,9 @@
           "boost-endian",
           "boost-process",
           "boost-locale",
-          "expat"
+          "expat",
+          "zeromq",
+          "cppzmq"
         ]
       },
       "tools": {
