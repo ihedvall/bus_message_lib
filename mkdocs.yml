@@ -54,7 +54,7 @@ extra:
 
         - icon: fontawesome/brands/linkedin
           link: https://www.linkedin.com/in/ingemar-hedvall-904871258/
-          name: Ingemar Hedvall Linkedin Page
+          name: Ingemar Hedvall LinkedIn Page
 
 markdown_extensions:
   - admonition

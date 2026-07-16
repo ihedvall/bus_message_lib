@@ -41,6 +41,7 @@ set(CMAKE_DEBUG_POSTFIX d)
 
 if (BUS_INTERFACE)
     include(script/boost.cmake)
+    include(script/zeromq.cmake)
 endif()
 
 include(script/expat.cmake)

@@ -4,7 +4,7 @@
 */
 
 /** \file ibusmessagebroker.h
- * \brief Defines an interface against borkers, servers and clients.
+ * \brief Defines an interface against brokers, servers and clients.
  *
  * Defines a generic interface against brokers, servers and clients.
  * The purpose is to hide the implementation against the end-user.
